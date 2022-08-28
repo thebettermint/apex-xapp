@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push('landing');
+    router.push('xapp');
   }, []);
   return <div className={styles.container}>{}</div>;
 };
