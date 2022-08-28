@@ -1,0 +1,41 @@
+.path0 {
+  stroke-width: 1;
+  stroke: #ffffff;
+  fill: transparent;
+  animation: dash 3s linear infinite;
+  animation-fill-mode: forwards;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.path1 {
+  stroke-width: 1;
+  stroke: #ffffff;
+  fill: transparent;
+  animation: dash 3s linear 1s infinite;
+  animation-fill-mode: forwards;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.path2 {
+  stroke-width: 1;
+  stroke: #ffffff;
+  fill: transparent;
+  animation: dash 3s linear 2s infinite;
+  animation-fill-mode: forwards;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

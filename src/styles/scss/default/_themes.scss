@@ -1,0 +1,40 @@
+@mixin light {
+  background: $color-frost;
+  color: $color-black;
+  border-color: $color-black;
+  $theme-color-light: red;
+  --theme-color-dark: blue;
+
+  a {
+    color: $theme-color-3;
+    &:hover {
+      color: $color-4;
+    }
+  }
+}
+
+@mixin dark {
+  background: $color-charcoal;
+  color: $color-white;
+  border-color: $color-white;
+  $theme-color-dark: blue;
+  --theme-color-dark: #75eef2;
+
+  $theme-color-dark-hover: #2bff00;
+  --theme-color-dark-hover: #8956e2;
+
+  a {
+    color: $color-2;
+    &:hover {
+      color: $theme-color-dark-hover;
+    }
+  }
+}
+
+.light {
+  @include light;
+}
+
+.dark {
+  @include dark;
+}

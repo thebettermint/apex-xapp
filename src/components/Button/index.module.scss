@@ -1,0 +1,221 @@
+/* @import "../Styles/index.scss";
+ */
+.primary {
+  position: relative;
+  width: 100%;
+  height: 48px;
+
+  font-size: 0.8em;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: Montserrat;
+  font-variation-settings: 'wght' 600;
+
+  background: var(--button-primary-main-color);
+  color: var(--button-primary-accent-color);
+  border-style: solid;
+  border-color: var(--button-primary-main-color);
+  border-width: 1px;
+  border-radius: 6px;
+
+  user-select: none;
+
+  &:hover {
+    letter-spacing: 0.1em;
+    cursor: pointer;
+  }
+}
+
+.secondary {
+  position: relative;
+  width: 100%;
+  height: 48px;
+
+  font-size: 0.8em;
+
+  font-family: Montserrat;
+  font-variation-settings: 'wght' 600;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--button-secondary-main-color);
+  /*   color: var(--button-secondary-accent-color); */
+  color: #6e30d7ff;
+  border-style: solid;
+  /* border-color: var(--button-secondary-accent-color); */
+  border-color: #6e30d7ff;
+  border-width: 1px;
+  border-radius: 6px;
+
+  user-select: none;
+
+  &:hover {
+    letter-spacing: 0.05em;
+    cursor: pointer;
+
+    color: white;
+    border-color: transparent;
+    background: #6e30d7ff;
+  }
+}
+
+.dropdown {
+  position: relative;
+  width: 100%;
+  height: 48px;
+
+  font-family: Montserrat;
+  font-variation-settings: 'wght' 600;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  background: #6e30d7ff;
+  /*   color: var(--button-secondary-accent-color); */
+  color: white;
+  border-style: solid;
+  /* border-color: var(--button-secondary-accent-color); */
+  border-color: #6e30d7ff;
+  border-width: 1px;
+  border-radius: 4px;
+
+  user-select: none;
+  letter-spacing: 0.5px;
+
+  .children {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+
+    &:hover {
+      letter-spacing: 0.05em;
+      cursor: pointer;
+
+      color: white;
+      border-color: transparent;
+      background: #6e30d7ff;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      height: 100%;
+      flex-grow: 1;
+    }
+  }
+
+  .drop {
+    right: 0;
+    height: 100%;
+    width: 24px;
+    background-color: rgb(80, 32, 163);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      transform: rotate(90deg);
+    }
+
+    &.active {
+      svg {
+        transform: rotate(-90deg);
+      }
+    }
+
+    &:hover {
+      letter-spacing: 0.05em;
+      cursor: pointer;
+
+      color: white;
+      border-color: transparent;
+      background: #6e30d7ff;
+    }
+  }
+
+  .list {
+    position: absolute;
+    top: 22px;
+    right: -1px;
+
+    z-index: 5;
+
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: fit-content;
+
+    padding: 20px;
+
+    background-color: rgb(255, 255, 255);
+    border: rgb(214, 214, 214) solid 1.5px;
+    border-radius: 8px;
+    border-top-right-radius: 0px;
+
+    color: rgb(184, 184, 184);
+    font-family: Montserrat;
+    font-size: 0.9em;
+
+    .item {
+      display: flex;
+      width: 100%;
+
+      padding: 10px 10px;
+      font-family: Montserrat;
+      letter-spacing: none;
+      font-size: 12px;
+      border-bottom: solid 1px rgb(209, 209, 209);
+
+      &:first-child {
+        border-top: solid 1px rgb(209, 209, 209);
+      }
+
+      &:hover {
+        background-color: rgb(238, 238, 238);
+        letter-spacing: none;
+        cursor: pointer;
+        color: #6e30d7ff;
+      }
+    }
+  }
+}
+
+.menu {
+  position: relative;
+  width: 270px;
+  height: 48px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--menu-button-color);
+  color: var(--menu-accent-color);
+  border-style: solid;
+  border-color: none;
+  border-width: 0px;
+  border-radius: 6px;
+
+  user-select: none;
+
+  &:hover {
+    letter-spacing: 0.025em;
+    cursor: pointer;
+  }
+}

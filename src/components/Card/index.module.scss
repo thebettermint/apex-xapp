@@ -1,0 +1,130 @@
+@import '../../styles/scss/default/variables';
+@import '../../styles/scss/default/themes';
+
+.card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+
+  border-color: #6e30d7ff;
+
+  padding: 1.5rem;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+
+  max-width: 300px;
+  background-color: white;
+  position: relative;
+
+  height: 125px;
+
+  min-width: 200px;
+  width: 30%;
+  max-width: 250px;
+
+  border: solid 0.125em #6e30d7ff;
+  border-radius: 10px;
+
+  font-family: Montserrat;
+  color: #6e30d7ff;
+
+  font-size: 0.9em;
+
+  overflow: hidden;
+
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 10px;
+
+    height: 30px;
+
+    width: 100%;
+
+    .title {
+      flex-grow: 1;
+
+      font-size: 0.7em;
+    }
+
+    .menu {
+      display: flex;
+      height: 100%;
+      align-items: center;
+
+      svg {
+        fill: #6e30d7ff;
+      }
+    }
+  }
+
+  .subtitle {
+    font-size: 8px;
+    margin-bottom: 10px;
+  }
+
+  .value {
+    font-size: 2em;
+    font-variation-settings: 'wght' 500;
+
+    svg {
+      margin-top: 10px;
+    }
+  }
+
+  .bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 10px;
+
+    height: 22.5px;
+
+    width: 100%;
+
+    border-top: solid 0.065em #6e30d7ff;
+
+    .left {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    .right,
+    .left,
+    .go,
+    .add {
+      height: 100%;
+
+      display: flex;
+      align-items: center;
+
+      svg {
+        fill: #6e30d7ff;
+      }
+    }
+
+    .go {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

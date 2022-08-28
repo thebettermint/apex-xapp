@@ -1,0 +1,53 @@
+@import '../../styles/scss/default/variables';
+
+.header {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  height: 49px;
+
+  width: 100%;
+
+  .bg {
+    position: absolute;
+    z-index: 1;
+    transition: opacity cubic-bezier(0.87, 0, 0.19, 1.44) 0.5s;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(10, 10, 10, 0.233);
+
+    &.opacity {
+      opacity: 1;
+    }
+  }
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  padding: 0 16px;
+
+  font-family: AvenirNext, sans-serif;
+
+  &.invert {
+    background-color: var(--header-invert-main-color);
+  }
+
+  .headerLeft {
+    flex-grow: 1;
+  }
+
+  .headerCenter {
+  }
+
+  .headerRight {
+    z-index: 2;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,63 @@
+//===== Colors =====//
+$theme-color: #5871ff67;
+$theme-color-2: #9e9d9d83;
+$theme-color-3: #677eaf;
+$body-color: #1d1d24;
+$heading-color: #1f1f25;
+$border-color: #4b4b4b;
+$white: #4b4b4b;
+$color-frost: #dadada;
+$color-charcoal: #252525;
+
+$color-white: #ffffff;
+$color-black: #000000;
+
+/*===============================
+    Font Family 
+=================================*/
+$body-font: 'Poppins', sans-serif;
+$heading-font: 'Poppins', sans-serif;
+
+// Heading Font List
+$font-1: 'Poppins', sans-serif;
+
+$fontList: $font-1;
+
+/*===============================
+    Color Variation 
+=================================*/
+$color-1: $theme-color;
+$color-2: #75eef2;
+$color-3: #2f21b3;
+$color-4: #8956e2;
+$colorList: $color-1, $color-2, $color-3, $color-4;
+
+//===== Line Height =====//
+$body-line-height: 1.714286;
+//==== Font size =====//
+$body-font-size: 14px;
+$h1: 64px;
+$h2: 54px;
+$h3: 24px;
+$h4: 20px;
+$h5: 18px;
+$h6: 16px;
+$h7: 10px;
+
+//===== Button Colors =====//
+$button-color: #5871ff67;
+$button-diabled: #b8b8b883;
+$util-button-color: #3350f5e3;
+$util-button-diabled: #b8b8b883;
+
+// Layouts
+$smlg-device: 'only screen and (max-width: 1199px)';
+$extra-device: 'only screen and (min-width: 1600px) and (max-width: 1919px)';
+$laptop-device: 'only screen and (min-width: 1200px) and (max-width: 1599px)';
+$xlg-layout: 'only screen and (min-width: 1300px)';
+$lg-layout: 'only screen and (min-width: 992px) and (max-width: 1199px)';
+$md-layout: 'only screen and (min-width: 768px) and (max-width: 991px)';
+$sm-layout: 'only screen and (max-width: 767px)';
+$xsm-layout: 'only screen and (max-width: 500px)';
+$large-mobile: 'only screen and (max-width: 575px)';
+$small-mobile: 'only screen and (max-width: 479px)';

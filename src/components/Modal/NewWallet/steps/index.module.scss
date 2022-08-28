@@ -1,0 +1,133 @@
+.start {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  flex-basis: 0;
+
+  padding: 40px;
+
+  font-family: Montserrat;
+
+  .container {
+    display: flex;
+    flex-direction: row;
+
+    width: 80%;
+    max-width: 350px;
+
+    margin: 4px 0;
+    padding: 20px;
+
+    &:hover {
+      background-color: rgb(236, 236, 236);
+      border: #6e30d7ff solid 1.5px;
+      border-radius: 8px;
+      cursor: pointer;
+      padding: 18.5px;
+
+      .wrapper {
+        .title {
+          color: #6e30d7ff;
+        }
+      }
+    }
+
+    .logo {
+      margin-right: 20px;
+
+      svg {
+        stroke-width: 2px;
+      }
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+
+      width: 100%;
+
+      .title {
+        color: rgb(43, 43, 43);
+        font-variation-settings: 'wght' 600;
+        width: fit-content;
+      }
+
+      .description {
+        font-size: 11px;
+        color: rgb(197, 197, 197);
+        font-variation-settings: 'wght' 500;
+        letter-spacing: 0.3px;
+      }
+    }
+  }
+}
+
+.walletInputModal {
+  padding: 0 40px;
+
+  .fullButtonContainer {
+    margin: 8px 0;
+    margin-bottom: 20px;
+  }
+
+  .inputFullContainer {
+    margin: 8px 0;
+
+    font-family: Montserrat;
+    font-variation-settings: 'wght' 600;
+    font-size: 11px;
+
+    justify-content: center;
+
+    .inputFullTitle {
+      width: 100%;
+      font-family: Montserrat;
+      font-variation-settings: 'wght' 600;
+      font-size: 11px;
+
+      justify-content: center;
+    }
+  }
+
+  .inputContainer {
+    padding: 0px 0px;
+
+    margin: 8px 0;
+
+    display: grid;
+    grid-template-columns: 30% 70%;
+
+    font-family: Montserrat;
+    font-variation-settings: 'wght' 600;
+    font-size: 11px;
+
+    justify-content: center;
+
+    .inputTitle {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .buttonContainer {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    margin: 20px;
+    margin-right: 0;
+
+    .button {
+      width: 150px;
+      font-size: 12px;
+      font-family: Montserrat;
+      font-variation-settings: 'wght' 700;
+    }
+  }
+}

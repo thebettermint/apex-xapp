@@ -1,0 +1,60 @@
+@import '../../styles/scss/default/variables';
+@import '../../styles/scss/default/themes';
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+
+  .tag {
+    position: absolute;
+    left: 24px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+
+    @media #{$sm-layout} {
+      width: 130px;
+    }
+
+    .imgWrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: -10px;
+      padding: 0 12px;
+      width: 110%;
+    }
+  }
+
+  .socials {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    justify-content: space-between;
+    max-width: 200px;
+    flex-wrap: wrap;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    @media #{$sm-layout} {
+      position: absolute;
+      right: 24px;
+      width: 40%;
+
+      svg {
+        margin-right: 20px;
+        margin-bottom: 10px;
+        height: 12px;
+      }
+    }
+  }
+}

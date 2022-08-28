@@ -1,0 +1,50 @@
+.inputWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+
+  height: fit-content;
+
+  .input {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+
+    display: block;
+    padding: 6px 12px;
+    border: 1.5px solid rgb(212, 212, 212);
+    transition: all 0.3s ease;
+    border-radius: 6px;
+
+    outline: none;
+    color: #1f1f25;
+    font-size: 11px;
+    text-align: left;
+    font-family: Montserrat;
+    font-variation-settings: 'wght' 700;
+
+    box-shadow: none;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+    &:focus {
+      border-color: #6e30d7ff;
+    }
+
+    &::placeholder {
+      color: rgb(196, 196, 196);
+      //font-weight: 600;
+      font-family: Montserrat;
+      font-variation-settings: 'wght' 500;
+    }
+
+    &:focus::placeholder {
+      color: transparent;
+    }
+  }
+}

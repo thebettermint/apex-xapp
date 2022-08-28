@@ -1,0 +1,100 @@
+@import '../../styles/scss/default/variables';
+
+.panel {
+  position: fixed;
+  height: 100vh;
+
+  width: calc(100% - 48px);
+
+  z-index: 10;
+
+  background-color: #313131;
+  border-right: rgb(77, 77, 77) 1px solid;
+  border-top: rgb(77, 77, 77) 1px solid;
+  border-bottom: rgb(77, 77, 77) 1px solid;
+  border-bottom-right-radius: 12px;
+  border-top-right-radius: 12px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  flex-basis: none;
+  flex-shrink: 0;
+
+  transition: left cubic-bezier(0.87, 0, 0.19, 1) 0.5s;
+  left: -100%;
+
+  &.show {
+    left: 0px;
+  }
+
+  .pageHeader {
+    color: whitesmoke;
+    width: 100%;
+    padding: 5px 20px;
+    padding-top: 16px;
+
+    font-weight: 900;
+    font-family: Montserrat;
+    letter-spacing: 0.1em;
+    font-size: 0.9em;
+
+    border-top: whitesmoke 1px solid;
+
+    :last-child {
+      font-size: 0.8em;
+    }
+  }
+
+  .navCategories {
+    position: relative;
+
+    flex-grow: 1;
+
+    color: whitesmoke;
+    width: 100%;
+    padding: 5px 20px;
+
+    margin-bottom: 20%;
+
+    font-weight: 900;
+    font-family: Montserrat;
+    letter-spacing: 0.1em;
+    font-size: 1.2em;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    div {
+      margin-bottom: 20px;
+    }
+  }
+
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-weight: 900;
+    font-family: Montserrat;
+    letter-spacing: 0.1em;
+    font-size: 0.9em;
+    padding: 10px;
+    //border-bottom: whitesmoke 1px solid;
+    //border-top: whitesmoke 1px solid;
+
+    width: 100%;
+    height: calc(100% - 63px);
+    opacity: 0.1;
+
+    background-image: url(../Assets/images/png/brand/ImageHero.png);
+    filter: grayscale(1);
+
+    background-position: cover;
+  }
+}

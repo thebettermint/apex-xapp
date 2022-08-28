@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/prisma": ["src/lib/prisma/index.ts"],
+      "@/lib/*": ["src/lib/*"],
+      "@/controller/*": ["api/controller/*"],
+      "@/api/*": ["api/*"]
+    },
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "preserveConstEnums": true,
+    "allowSyntheticDefaultImports": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "jsx": "preserve",
+    "incremental": true,
+    "declaration": true,
+    "composite": false,
+    "preserveSymlinks": true
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,17 @@
+@media (prefers-color-scheme: dark) {
+  body {
+    @include dark;
+  }
+}
+
+@media #{$large-mobile} {
+  .container {
+    width: 450px;
+  }
+}
+
+@media #{$small-mobile} {
+  .container {
+    width: 320px;
+  }
+}

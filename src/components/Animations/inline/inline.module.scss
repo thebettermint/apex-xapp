@@ -1,0 +1,49 @@
+.inlineLoader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 30%;
+  width: 50%;
+  max-width: 80px;
+
+  .primary {
+    fill: var(--button-primary-accent-color);
+  }
+
+  .secondary {
+    fill: var(--button-secondary-accent-color);
+  }
+
+  :nth-child(1) {
+    animation: pulseLoader 2s ease-in-out 0.33s infinite forwards;
+  }
+  :nth-child(2) {
+    animation: pulseLoader 2s ease-in-out 0.66s infinite forwards;
+  }
+  :nth-child(3) {
+    animation: pulseLoader 2s ease-in-out 0.99s infinite forwards;
+  }
+
+  @keyframes pulseLoader {
+    from {
+      height: 100%;
+      opacity: 0.75;
+    }
+
+    25% {
+      height: 140%;
+      opacity: 1;
+    }
+
+    75% {
+      height: 100%;
+      opacity: 0.75;
+    }
+
+    to {
+      height: 100%;
+      opacity: 0.75;
+    }
+  }
+}

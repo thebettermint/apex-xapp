@@ -1,0 +1,154 @@
+.start {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  flex-basis: 0;
+
+  padding: 40px 0px;
+
+  font-family: Montserrat;
+
+  .container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    border-top: rgb(238, 238, 238) solid 1px;
+    border-bottom: rgb(238, 238, 238) solid 1px;
+
+    .flagContainer {
+      z-index: 1;
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      opacity: 0.2;
+
+      .flag {
+        position: relative;
+
+        transform-origin: center;
+
+        transform: translateY(-25%) translateX(-10%) rotate(-27deg);
+
+        width: 100%;
+      }
+    }
+
+    .slider {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+
+      align-items: center;
+
+      width: 100%;
+      height: 200px;
+
+      margin: 4px 0;
+      padding: 0 20px;
+      z-index: 2;
+
+      user-select: none;
+
+      .left {
+        svg {
+          transform: rotate(180deg);
+        }
+      }
+
+      .left,
+      .right {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .content {
+        position: relative;
+        flex-grow: 1;
+        height: 100%;
+
+        padding: 20px;
+
+        .title {
+          font-variation-settings: 'wght' 700;
+          letter-spacing: 0.3px;
+          font-size: 18px;
+          margin-bottom: 2px;
+          margin-top: 6px;
+        }
+
+        .currency {
+          font-size: 14px;
+          margin-bottom: 20px;
+        }
+
+        .issuer {
+          margin: 4px 0;
+          font-size: 12px;
+          letter-spacing: 1px;
+        }
+
+        .desc {
+          letter-spacing: 2px;
+        }
+
+        .ticker {
+          position: absolute;
+          bottom: 12px;
+          right: 0px;
+          font-variation-settings: 'wght' 700;
+
+          width: 56px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          margin-right: 20px;
+        }
+
+        .logo {
+          position: absolute;
+          bottom: 32px;
+          right: 0px;
+          transform-origin: center;
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+
+  .buttonContainer {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    margin-top: 20px;
+
+    .button {
+      width: 150px;
+      font-size: 12px;
+      font-family: Montserrat;
+      font-variation-settings: 'wght' 700;
+    }
+  }
+
+  .inputContainer {
+    width: 100%;
+
+    .inputTitle {
+      width: 100%;
+    }
+  }
+}

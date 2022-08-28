@@ -1,0 +1,52 @@
+@import '../../styles/scss/default/variables';
+@import '../../styles/scss/default/themes';
+
+.panel {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  height: 100vh;
+  width: 100%;
+
+  .close {
+    font-family: MontserratAlt;
+    z-index: 10;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    user-select: none;
+    &:hover {
+      cursor: pointer;
+      letter-spacing: 0.1em;
+    }
+  }
+
+  .items {
+    background-color: var(--theme-panel-color);
+
+    font-family: MontserratAlt;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100%;
+    max-width: 400px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .nav {
+      margin-bottom: 24px;
+      user-select: none;
+      &:hover {
+        cursor: pointer;
+        letter-spacing: 0.1em;
+        border-bottom: solid var(--theme-border-color) 1px;
+      }
+    }
+  }
+}
