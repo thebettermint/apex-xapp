@@ -15,8 +15,8 @@ const LogIn: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>checksum</title>
-        <meta name="description" content="check your sum" />
+        <title>apex-xapp</title>
+        <meta name="description" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
