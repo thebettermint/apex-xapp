@@ -2,11 +2,6 @@ import React from 'react';
 
 import style from './index.module.scss';
 
-import Image from 'next/image';
-import Background from 'src/components/Assets/images/png/checksum/background-13.png';
-import Title from 'src/components/Assets/images/png/checksum/checksum_title_purple.png';
-import Logo from 'src/components/Assets/images/png/checksum/logo_purple.png';
-
 import Button from '../Button';
 
 import Router from 'next/router';
@@ -17,7 +12,7 @@ interface Props {
 
 const Error = ({ routes }: Props) => {
   const handleBack = () => {
-    Router.push('/landing');
+    Router.push('/xapp');
   };
 
   return (

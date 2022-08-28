@@ -5,11 +5,6 @@ import style from './index.module.scss';
 import { useStoreContext } from '../../context/store';
 import { useRouter } from 'next/router';
 
-import Image from 'next/image';
-import Background from 'src/components/Assets/images/png/checksum/background-13.png';
-import Title from 'src/components/Assets/images/png/checksum/checksum_title_purple.png';
-import Logo from 'src/components/Assets/images/png/checksum/logo_purple.png';
-
 import Link from 'next/link';
 
 import Input from '../Input';
@@ -68,24 +63,7 @@ const Login = ({ routes }: Props) => {
   return (
     <>
       <div className={style.container}>
-        <div className={style.left}>
-          <Image
-            placeholder="blur"
-            layout="fill"
-            objectFit="cover"
-            alt="Checksum Background"
-            src={Background}></Image>
-        </div>
         <div className={style.right}>
-          <div className={style.logoContainer}>
-            <div className={style.logo}>
-              <Image alt="Checksum Logo" src={Logo}></Image>
-            </div>
-            <div className={style.title}>
-              <Image alt="Checksum Title" src={Title}></Image>
-            </div>
-          </div>
-
           <form className={style.form} action="">
             <div className={style.title}>WELCOME BACK</div>
             <div className={style.subtitle}>Welcome back. Please enter your details.</div>
