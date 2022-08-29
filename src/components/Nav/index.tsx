@@ -35,6 +35,10 @@ const Nav = ({ show, setShow }: Props) => {
     setPage(page);
   };
 
+  useEffect(() => {
+    setPage(router.pathname.split('/')[1]);
+  }, [router.pathname]);
+
   return (
     <>
       <div className={`${style.panel} ${show ? style.show : null}`}>
