@@ -70,7 +70,7 @@ const Header = ({ routes }: Props) => {
         </div>
       </div>
 
-      <Nav show={active ? true : false} />
+      <Nav show={active ? true : false} setShow={setActive} />
     </>
   );
 };

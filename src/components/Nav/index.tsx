@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react';
 import style from './index.module.scss';
 import { categories } from './categories';
 import Link from 'next/link';
@@ -13,16 +13,27 @@ import { axiosPrivate } from '@/lib/axios/axiosPrivate';
 
 import { useStoreContext } from '../../context/store';
 
+import { useRouter } from 'next/router';
+
 interface Props {
   show: boolean;
+  setShow: Dispatch<SetStateAction<boolean>>;
 }
 
-const Nav = ({ show }: Props) => {
+const Nav = ({ show, setShow }: Props) => {
+  const router = useRouter();
   const hamRef = useRef<HTMLDivElement>(null);
   const storeContext = useStoreContext();
   const [user, setUser] = useState<undefined | string>(undefined);
+  const [page, setPage] = useState<string>(router.pathname.split('/')[1]);
 
-  const handleCollapse = () => storeContext.collapse[1](!storeContext.collapse[0]);
+  //const [isOpen, setIsOpen] = useState<boolean>(show);
+
+  const handleNavClick = (page: string) => {
+    router.push(`/${page}`);
+    setShow(!show);
+    setPage(page);
+  };
 
   return (
     <>
@@ -33,11 +44,29 @@ const Nav = ({ show }: Props) => {
           }
         </div>
         <div className={style.navCategories}>
-          <div>home</div>
-          <div>wallet</div>
-          <div>visualize</div>
-          <div>share</div>
-          <div>contact</div>
+          <div onClick={() => handleNavClick('')} className={page == '' ? style.active : 'null'}>
+            home
+          </div>
+          <div
+            onClick={() => handleNavClick('wallet')}
+            className={page == 'wallet' ? style.active : 'null'}>
+            wallet
+          </div>
+          <div
+            onClick={() => handleNavClick('visualize')}
+            className={page == 'visualize' ? style.active : 'null'}>
+            visualize
+          </div>
+          <div
+            onClick={() => handleNavClick('share')}
+            className={page == 'share' ? style.active : 'null'}>
+            share
+          </div>
+          <div
+            onClick={() => handleNavClick('contact')}
+            className={page == 'contact' ? style.active : 'null'}>
+            contact
+          </div>
         </div>
         <div className={style.pageHeader}>
           <div>APEX DEVELOPER SUMMIT</div>
