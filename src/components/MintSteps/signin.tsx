@@ -12,19 +12,16 @@ interface Props {
   page?: any;
 }
 
-const View = ({ page }: Props) => {
+const SignIn = ({ page }: Props) => {
   const storeContext = useStoreContext();
 
   return (
     <>
       <div className={style.page}>
         <div className={style.descWrapper}>
-          <div className={style.title}>VIEW YOUR NFT</div>
-          <div className={style.description}>
-            open up our visualizer to view your newly claimed nft
-          </div>
+          <div className={style.title}>SIGN IN</div>
+          <div className={style.description}>sign in using a wallet on the xls20d network</div>
         </div>
-
         <div className={style.buttonContainer}>
           <Button
             className={style.button}
@@ -32,7 +29,7 @@ const View = ({ page }: Props) => {
             theme="light"
             height={40}
             onClick={() => console.log('clicked')}>
-            VIEW
+            SIGN IN
           </Button>
         </div>
       </div>
@@ -40,4 +37,4 @@ const View = ({ page }: Props) => {
   );
 };
 
-export default View;
+export default SignIn;

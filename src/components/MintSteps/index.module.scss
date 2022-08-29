@@ -53,6 +53,7 @@
       font-family: Montserrat;
       font-size: 1.5em;
       margin-bottom: 60px;
+      max-width: 300px;
     }
 
     .subtitle {
@@ -74,6 +75,28 @@
     width: 50%;
 
     .button {
+    }
+  }
+
+  .descWrapper {
+    color: whitesmoke;
+    width: 50%;
+    padding: 5px 0px;
+
+    font-family: Montserrat;
+    letter-spacing: 0.1em;
+
+    margin-bottom: 5px;
+
+    .title {
+      font-size: 0.9em;
+      margin-bottom: 5px;
+      //font-variation-settings: 'wght' 700;
+    }
+
+    .description {
+      font-size: 0.6em;
+      margin-bottom: 5px;
     }
   }
 }

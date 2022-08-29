@@ -18,6 +18,10 @@ const Claim = ({ page }: Props) => {
   return (
     <>
       <div className={style.page}>
+        <div className={style.descWrapper}>
+          <div className={style.title}>CLAIM YOUR NFT</div>
+          <div className={style.description}>claim your very first nft</div>
+        </div>
         <div className={style.buttonContainer}>
           <Button
             className={style.button}
