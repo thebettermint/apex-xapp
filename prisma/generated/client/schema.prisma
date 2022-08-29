@@ -1,0 +1,283 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "generated/client"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model InvoiceItem {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  number      Int?
+  name        String?
+  description String
+  token       String?
+  amount      String
+  Invoice     Invoice? @relation(fields: [invoiceId], references: [id])
+  invoiceId   String?  @db.ObjectId
+}
+
+model Invoice {
+  id        String        @id @default(auto()) @map("_id") @db.ObjectId
+  invoiceId String        
+  uuid      String        @default(uuid())
+  email     String
+  title     String?
+  from      Json?
+  number    String
+  token     String?
+  issuer    String?
+  due       DateTime?
+  receiveto String
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  Items     InvoiceItem[]
+  sender    User?         @relation(fields: [senderId], references: [id])
+  senderId  String?       @db.ObjectId
+}
+
+model Account {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  address        String
+  name           String?
+  description    String?
+  preferredToken Json?
+  tag            String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  Wallet         Wallet?  @relation(fields: [walletId], references: [id])
+  walletId       String?  @db.ObjectId
+}
+
+model Wallet {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  key            String
+  name           String?
+  description    String?
+  preferredToken Json?
+  method         Json
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  Accounts       Account[]
+  User           User?     @relation(fields: [userId], references: [id])
+  userId         String?   @db.ObjectId
+}
+
+model User {
+  id                String       @id @default(auto()) @map("_id") @db.ObjectId
+  username          String       @unique
+  email             String       @unique
+  passwordHash      String
+  lastName          String?
+  role              Role         @default(USER)
+  verificationToken String?
+  verified          Boolean      @default(false)
+  acceptTerms       Boolean      @default(false)
+  resetToken        String?
+  passwordReset     DateTime?
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+  Invoices          Invoice[]
+  Wallets           Wallet[]
+  AuditEvents       AuditEvent[]
+  Profile           Profile[]
+  Refresh           Refresh[]
+  Owners            Owner[]
+  Clients           Client[]
+  Employees         Employee[]
+  Leads             Lead[]
+  Contractors       Contractor[]
+}
+
+model Client {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  email        String
+  name         String
+  firstName    String?
+  lastName     String?
+  title        String?
+  company      String?
+  type         Type          @default(CLIENT)
+  wallet       String?
+  tag          String?
+  description  String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  replacedBy   String?
+  status       Status        @default(ACTIVE)
+  User         User?         @relation(fields: [userId], references: [id])
+  userId       String?       @db.ObjectId
+  Organization Organization? @relation(fields: [orgId], references: [id])
+  orgId        String?       @db.ObjectId
+}
+
+model Employee {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  email        String
+  name         String
+  firstName    String?
+  lastName     String?
+  type         Type          @default(CLIENT)
+  wallet       String?
+  tag          String?
+  description  String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  replacedBy   String?
+  status       Status        @default(ACTIVE)
+  User         User?         @relation(fields: [userId], references: [id])
+  userId       String?       @db.ObjectId
+  Organization Organization? @relation(fields: [orgId], references: [id])
+  orgId        String?       @db.ObjectId
+}
+
+model Lead {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  email        String
+  name         String
+  firstName    String?
+  lastName     String?
+  type         Type          @default(CLIENT)
+  wallet       String?
+  tag          String?
+  description  String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  replacedBy   String?
+  status       Status        @default(ACTIVE)
+  User         User?         @relation(fields: [userId], references: [id])
+  userId       String?       @db.ObjectId
+  Organization Organization? @relation(fields: [orgId], references: [id])
+  orgId        String?       @db.ObjectId
+}
+
+model Contractor {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  email        String
+  name         String
+  firstName    String?
+  lastName     String?
+  type         Type          @default(CLIENT)
+  wallet       String?
+  tag          String?
+  description  String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  replacedBy   String?
+  status       Status        @default(ACTIVE)
+  User         User?         @relation(fields: [userId], references: [id])
+  userId       String?       @db.ObjectId
+  Organization Organization? @relation(fields: [orgId], references: [id])
+  orgId        String?       @db.ObjectId
+}
+
+model Organization {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  email       String
+  name        String
+  firstName   String?
+  lastName    String?
+  type        Type         @default(ORGANIZATION)
+  description String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  replacedBy  String?
+  status      Status       @default(ACTIVE)
+  Owner       Owner?       @relation(fields: [ownerId], references: [id])
+  ownerId     String?      @db.ObjectId
+  Clients     Client[]
+  Employees   Employee[]
+  Leads       Lead[]
+  Contractors Contractor[]
+}
+
+model Owner {
+  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  email        String
+  name         String
+  firstName    String?
+  lastName     String?
+  type         Type           @default(OWNER)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  replacedBy   String?
+  status       Status         @default(ACTIVE)
+  User         User?          @relation(fields: [userId], references: [id])
+  userId       String?        @db.ObjectId
+  Organization Organization[]
+}
+
+model Profile {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  identities    Json[]
+  firstName     String?
+  lastName      String?
+  nickname      String?
+  picture       Bytes
+  phone         String?
+  phoneVerified Boolean  @default(false)
+  blocked       Boolean  @default(false)
+  lastIP        String?
+  lastLogin     String?
+  multifactor   Json[]
+  loginCount    Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  User          User?    @relation(fields: [userId], references: [id])
+  userId        String?  @db.ObjectId
+}
+
+model AuditEvent {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  url       String?
+  method    String?
+  params    Json?
+  query     Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?  @db.ObjectId
+}
+
+model Refresh {
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  User            User      @relation(fields: [userId], references: [id])
+  userId          String    @db.ObjectId
+  token           String
+  expiresAt       DateTime
+  createdAt       DateTime  @default(now())
+  createdByIp     String?
+  revoked         DateTime?
+  revokedByIp     String?
+  replacedByToken String?
+}
+
+enum Role {
+  USER
+  ADMIN
+  PARTNER
+  DEV
+}
+
+enum Type {
+  CLIENT
+  VENDOR
+  LEAD
+  EMPLOYEE
+  CONTRACTOR
+  OWNER
+  ORGANIZATION
+}
+
+enum Status {
+  ACTIVE
+  PENDING
+  DEPRECIATED
+  REMOVED
+  WARNING
+  REVOKED
+  BANNED
+  SUSPENDED
+}

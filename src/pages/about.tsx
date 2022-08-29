@@ -44,11 +44,11 @@ const Contact: NextPage = () => {
               {`The broader XRP Ledger community has been extremely passionate about the upcoming
               XLS20d ledger amendment. Despite this fervor, many still have little to no experience
               minting & claiming nonfungible tokens on the XRP Ledger. We built this demo to enable
-              community to participate in the XLS-20d devnet through a simple step-by-step process.`}
+              the community to participate in the XLS-20d devnet through a simple step-by-step process.`}
             </p>
             <p>
-              {`Ripple's call-to-action - developers are encouraged build nft applications on the 
-              devnet to threshold test before adoption on the mainnet. In order to preserve the 
+              {`Ripple's call-to-action - developers are encouraged to build nft applications on the 
+              devnet to load test before adoption on the mainnet. In order to preserve the 
               experience that we have all come to love on the mainnet, we need to test the 
               devnet for any fatal issues or threshold limitations. We built this application 
               to stress test, the xumm application, the ripple testnet node, and the overall 
