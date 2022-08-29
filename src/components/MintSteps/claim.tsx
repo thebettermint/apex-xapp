@@ -8,6 +8,8 @@ import { useStoreContext } from '../../context/store';
 
 import Button from 'src/components/Button';
 
+import { ArrowRight, ArrowLeft, Arrowright } from 'src/components/Icons';
+
 interface Props {
   page?: any;
 }
@@ -29,7 +31,10 @@ const Claim = ({ page }: Props) => {
             theme="light"
             height={40}
             onClick={() => console.log('clicked')}>
-            CLAIM
+            <div className={style.buttonText}>CLAIM</div>
+            <div className={style.buttonLogo}>
+              <Arrowright size={16} />
+            </div>
           </Button>
         </div>
       </div>

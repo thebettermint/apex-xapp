@@ -1,6 +1,6 @@
 import React, { ReactNode, useState, useRef, useEffect } from 'react';
 import styles from './index.module.scss';
-import { AngleSmallRight } from '../Icons';
+import { AngleSmallRight, ArrowRight } from '../Icons';
 import InLineLoader from 'src/components/Animations/inline/InLineLoader';
 
 interface IBorder {
