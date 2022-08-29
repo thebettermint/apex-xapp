@@ -32,6 +32,9 @@ const authenticate = async (req: ExtendedNextApiRequest, res: NextApiResponse) =
 const refreshToken = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
   const token = req.cookies.refreshToken;
   const ipAddress = req.ip;
+
+  if (!token) return handleError({ status: 'error', message: 'Token is required' }, res);
+
   let resp = await userService.refreshToken({ token, ipAddress });
 
   if (resp?.status === 'error') return handleError(resp, res);
