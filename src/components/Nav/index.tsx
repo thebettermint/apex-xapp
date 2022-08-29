@@ -25,7 +25,7 @@ const Nav = ({ show, setShow }: Props) => {
   const hamRef = useRef<HTMLDivElement>(null);
   const storeContext = useStoreContext();
   const [user, setUser] = useState<undefined | string>(undefined);
-  const [page, setPage] = useState<string>(router.pathname.split('/')[1]);
+  const [page, setPage] = useState<string>(router.pathname.split('/')[1] || '');
 
   //const [isOpen, setIsOpen] = useState<boolean>(show);
 
@@ -46,6 +46,11 @@ const Nav = ({ show, setShow }: Props) => {
         <div className={style.navCategories}>
           <div onClick={() => handleNavClick('')} className={page == '' ? style.active : 'null'}>
             home
+          </div>
+          <div
+            onClick={() => handleNavClick('about')}
+            className={page == 'about' ? style.active : 'null'}>
+            about
           </div>
           <div
             onClick={() => handleNavClick('wallet')}

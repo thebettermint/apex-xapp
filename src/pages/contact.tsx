@@ -20,7 +20,15 @@ const Contact: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>this is the contact page</div>
+      <div className={styles.page}>
+        <div className={`${styles.pageHeader}`}>
+          <div>APEX DEVELOPER SUMMIT</div>
+          <div>Contact Us</div>
+        </div>
+        <div className={styles.heroWrapper}>
+          <div className={styles.title}></div>
+        </div>
+      </div>
     </>
   );
 };

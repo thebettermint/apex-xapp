@@ -20,7 +20,15 @@ const Wallet: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>this is your wallet</div>
+      <div className={styles.page}>
+        <div className={`${styles.pageHeader}`}>
+          <div>APEX DEVELOPER SUMMIT</div>
+          <div>Wallet</div>
+        </div>
+        <div className={styles.heroWrapper}>
+          <div className={styles.title}></div>
+        </div>
+      </div>
     </>
   );
 };
