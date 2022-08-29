@@ -1,3 +1,6 @@
+//@import 'scss/styles/variables';
+@import 'scss/default/variables';
+
 .main {
   position: relative;
   background-color: #313131;
@@ -53,6 +56,32 @@
 
     .bottomTitle {
       letter-spacing: 0.5em;
+
+      .bottomWrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 1em;
+        letter-spacing: 0.5em;
+        transition: letter-spacing cubic-bezier(0.87, 0, 0.19, 1) 0.5s;
+
+        &:hover {
+          letter-spacing: 0.9em;
+          cursor: pointer;
+        }
+
+        div {
+          margin-right: 8px;
+        }
+
+        svg {
+          transform: rotate(180deg);
+          fill: whitesmoke;
+          stroke-width: 2.2;
+        }
+      }
     }
 
     .title {
@@ -100,8 +129,40 @@
       justify-content: center;
       align-items: center;
       margin-top: 10px;
+      color: whitesmoke;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      @media #{$xsm-layout} {
+        justify-content: flex-start;
+        padding-top: 10px;
+      }
+
+      .logoContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        width: 100%;
+        margin-bottom: 36px;
+
+        svg {
+          margin-right: 24px;
+        }
+      }
+
+      .contactTitle {
+        font-family: Montserrat;
+        letter-spacing: 0.2em;
+        font-size: 1.2em;
+
+        width: 100%;
+        margin-bottom: 1em;
+        margin-top: 1em;
+      }
 
       p {
+        color: whitesmoke;
         font-family: Montserrat;
         letter-spacing: 0.2em;
         font-size: 0.8em;
@@ -112,6 +173,8 @@
     .socialWrapper {
       width: 80%;
       height: 100%;
+
+      color: whitesmoke;
 
       position: relative;
 
