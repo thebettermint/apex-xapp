@@ -9,8 +9,19 @@ import { axiosPrivate } from '@/lib/axios/axiosPrivate';
 import { useStoreContext } from '../context/store';
 import { useState, useEffect } from 'react';
 
+import { Arrowright, ArrowLeft } from 'src/components/Icons';
+
+import { useRouter } from 'next/router';
+
 const Contact: NextPage = () => {
   const storeContext = useStoreContext();
+
+  const router = useRouter();
+  //const [isOpen, setIsOpen] = useState<boolean>(show);
+
+  const handleNavClick = (page: string) => {
+    router.push(`/${page}`);
+  };
 
   return (
     <>
@@ -66,6 +77,14 @@ const Contact: NextPage = () => {
           <div className={styles.socialWrapper}>
             <div className={styles.social1}></div>
             <div className={styles.social2}></div>
+          </div>
+        </div>
+        <div className={`${styles.pageHeader}`}>
+          <div className={styles.bottomTitle}>
+            <div className={styles.bottomWrapper} onClick={() => handleNavClick('contact')}>
+              <div> get in touch</div>
+              <Arrowright size={18} stroke={'white'} />
+            </div>
           </div>
         </div>
       </div>
