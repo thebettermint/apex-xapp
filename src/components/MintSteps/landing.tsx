@@ -15,7 +15,7 @@ const Landing = ({ page }: Props) => {
 
   return (
     <>
-      <div className={`${style.page} text-red-500`}>
+      <div className={style.page}>
         <div className={`${style.pageHeader}`}>
           <div>APEX DEVELOPER SUMMIT</div>
           <div>NFT Workshop</div>
