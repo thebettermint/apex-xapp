@@ -20,7 +20,7 @@ const Fund = ({ page }: Props) => {
       <div className={style.page}>
         <div className={style.descWrapper}>
           <div className={style.title}>ACTIVATE YOUR WALLET</div>
-          <div className={style.description}>auto fund your wallet the public faucet</div>
+          <div className={style.description}>auto fund your wallet using the public faucet</div>
         </div>
         <div className={style.buttonContainer}>
           <Button
