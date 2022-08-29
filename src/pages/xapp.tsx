@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Router from 'next/router';
 import Button from '../components/Button';
 
+import { useEffect } from 'react';
+
 import Image from 'next/image';
 
 import Fund from 'src/components/MintSteps/fund';
@@ -13,13 +15,24 @@ import Landing from 'src/components/MintSteps/landing';
 import Steps from 'src/components/MintSteps';
 import Header from 'src/components/Header';
 
-const Complete: NextPage = () => {
+import useMobileDetect from 'src/hooks/useMobileDetect';
+//import useIsTouchDevice from 'src/hooks/useIsTouchDevice';
+
+const XApp: NextPage = () => {
+  //const isTouchDevice = useIsTouchDevice();
+  const mobileDetect = useMobileDetect();
+
   const handleSignup = () => {
     Router.push('/signup');
   };
 
+  useEffect(() => {
+    //console.log('is touch device :', isTouchDevice);
+    console.log('is mobile :', mobileDetect.isMobile());
+  }, []);
+
   return (
-    <div className={styles.main}>
+    <>
       <Head>
         <title>apex</title>
         <meta name="description" content="" />
@@ -28,11 +41,9 @@ const Complete: NextPage = () => {
 
       <div className={styles.bg}></div>
 
-      <Header></Header>
-
       <Steps></Steps>
-    </div>
+    </>
   );
 };
 
-export default Complete;
+export default XApp;
