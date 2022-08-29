@@ -53,4 +53,8 @@ export default {
       rpc: `http://${nodes.xrpl.ip}:${nodes.xrpl.port}`,
     }),
   },
+  xumm: {
+    key: env['API_KEY'] || '',
+    secret: env['API_SECRET'] || '',
+  },
 };
