@@ -14,9 +14,16 @@ import { Twitter, Github, Globe, Link } from 'src/components/Icons';
 import NLink from 'next/link';
 
 import xAppService from 'src/services/xapp.service';
+import useMobileDetect from 'src/hooks/useMobileDetect';
 
 const Contact: NextPage = () => {
   const storeContext = useStoreContext();
+  const mobileDetect = useMobileDetect();
+
+  const openExternalLink = (url: string) => {
+    if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url);
+    return window.open(url);
+  };
 
   return (
     <>
@@ -41,17 +48,17 @@ const Contact: NextPage = () => {
               <Link
                 size={24}
                 fill={'white'}
-                onClick={() => xAppService.openExternalBrowser(`https://linktr.ee/whirledlabs`)}
+                onClick={() => openExternalLink(`https://linktr.ee/whirledlabs`)}
               />
               <Github
                 size={24}
                 fill={'white'}
-                onClick={() => window.open(`https://github.com/whirledlabs`)}
+                onClick={() => openExternalLink(`https://github.com/whirledlabs`)}
               />
               <Twitter
                 size={24}
                 fill={'white'}
-                onClick={() => window.open(`https://twitter.com/whirledlabs`)}
+                onClick={() => openExternalLink(`https://twitter.com/whirledlabs`)}
               />
             </div>
             <div className={styles.contactTitle}>TheBetterMint</div>
@@ -62,17 +69,17 @@ const Contact: NextPage = () => {
               <Globe
                 size={24}
                 fill={'white'}
-                onClick={() => window.open(`https://thebettermint.vercel.app/`)}
+                onClick={() => openExternalLink(`https://thebettermint.vercel.app/`)}
               />
               <Github
                 size={24}
                 fill={'white'}
-                onClick={() => window.open(`https://github.com/thebettermint`)}
+                onClick={() => openExternalLink(`https://github.com/thebettermint`)}
               />
               <Twitter
                 size={24}
                 fill={'white'}
-                onClick={() => window.open(`https://thebettermint.vercel.app/`)}
+                onClick={() => openExternalLink(`https://thebettermint.vercel.app/`)}
               />
             </div>
           </div>
@@ -93,12 +100,12 @@ const Contact: NextPage = () => {
               <Github
                 size={24}
                 fill={'white'}
-                onClick={() => window.open(`https://github.com/interc0der`)}
+                onClick={() => openExternalLink(`https://github.com/interc0der`)}
               />
               <Twitter
                 size={24}
                 fill={'white'}
-                onClick={() => window.open(`https://twitter.com/interc0der`)}
+                onClick={() => openExternalLink(`https://twitter.com/interc0der`)}
               />
             </div>
             <div className={styles.contactTitle}>pablo padillo</div>
@@ -107,7 +114,7 @@ const Contact: NextPage = () => {
               <Twitter
                 size={24}
                 fill={'white'}
-                onClick={() => window.open(`https://twitter.com/CryptoTotalWar`)}
+                onClick={() => openExternalLink(`https://twitter.com/CryptoTotalWar`)}
               />
             </div>
           </div>
