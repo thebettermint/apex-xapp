@@ -6,6 +6,7 @@ const getMobileDetect = (userAgent: NavigatorID['userAgent']) => {
   const isOpera = () => Boolean(userAgent.match(/Opera Mini/i));
   const isWindows = () => Boolean(userAgent.match(/IEMobile/i));
   const isSSR = () => Boolean(userAgent.match(/SSR/i));
+  const isXApp = () => Boolean(userAgent.match(/xumm/i));
   const isMobile = () => Boolean(isAndroid() || isIos() || isOpera() || isWindows());
   const isDesktop = () => Boolean(!isMobile() && !isSSR());
   return {
@@ -14,6 +15,7 @@ const getMobileDetect = (userAgent: NavigatorID['userAgent']) => {
     isAndroid,
     isIos,
     isSSR,
+    isXApp,
   };
 };
 const useMobileDetect = () => {

@@ -5,6 +5,7 @@ import { axiosPublic } from '@/lib/axios/axiosPublic';
 import { axiosPrivate } from '@/lib/axios/axiosPrivate';
 
 import { useStoreContext } from '../../context/store';
+import useMobileDetect from 'src/hooks/useMobileDetect';
 
 interface Props {
   page?: any;
@@ -12,6 +13,8 @@ interface Props {
 
 const Landing = ({ page }: Props) => {
   const storeContext = useStoreContext();
+
+  const mobileDetect = useMobileDetect();
 
   return (
     <>
