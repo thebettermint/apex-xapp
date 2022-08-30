@@ -1,6 +1,9 @@
 import PKCE from 'js-pkce';
-import axios from 'axios';
+import axios, { HeadersDefaults } from 'axios';
 import { ICommand } from 'types/xApp';
+
+axios.defaults.headers.common['x-api-key'];
+axios.defaults.headers.common['Authorization'];
 
 const xummKey = process.env.NEXT_PUBLIC_XUMM_KEY || '';
 const apiEndPoint =
@@ -8,11 +11,7 @@ const apiEndPoint =
     ? 'https://apex-xapp-six.vercel.app/api'
     : 'http://localhost:3000/api';
 
-let tokenData;
-let jwt;
-let curatedAssets;
-
-const accessToken = () => {
+/* const accessToken = (jwt: string | undefined) => {
   if (jwt) return jwt;
   else {
     jwt = tokenData.token;
@@ -20,17 +19,18 @@ const accessToken = () => {
   }
 };
 
-const headers = (getJWT) => {
-  if (getJWT) return { headers: { 'x-api-key': xummKey } };
-  else return { headers: { Authorization: accessToken(), 'x-api-key': xummKey } };
+const headers = (getJWT: string | boolean) => {
+  if (getJWT) {
+    return { headers: { Authorization: null, 'x-api-key': xummKey } };
+  } else return { headers: { Authorization: accessToken(), 'x-api-key': xummKey } };
 };
 
-const getTokenData = async (ott) => {
+const getTokenData = async ({ ott, tokenData }: { ott: string; tokenData?: string }) => {
   if (!tokenData) {
     try {
       const res = await axios.get(`${apiEndPoint}/xapp/ott/${ott}`, headers(true));
       tokenData = res.data;
-      jwt = res.data.token;
+      let jwt = res.data.token;
       return tokenData;
     } catch (e) {
       throw 'Error getting Token Data';
@@ -39,8 +39,8 @@ const getTokenData = async (ott) => {
     return tokenData;
   }
 };
-
-const sendCommandtoXumm = (command: ICommand) => {
+ */
+const sendCommandtoXumm = (command: ICommand | any) => {
   if (typeof window.ReactNativeWebView === 'undefined')
     throw new Error('This is not a react native webview');
   window.ReactNativeWebView.postMessage(JSON.stringify(command));
@@ -68,7 +68,7 @@ const closeXapp = () => {
   }
 };
 
-const openExternalBrowser = (url) => {
+const openExternalBrowser = (url: string) => {
   try {
     sendCommandtoXumm({
       command: 'openBrowser',
@@ -79,7 +79,7 @@ const openExternalBrowser = (url) => {
   }
 };
 
-const openTxViewer = (tx, account) => {
+const openTxViewer = (tx: any, account: string) => {
   try {
     sendCommandtoXumm({
       command: 'txDetails',
@@ -91,7 +91,7 @@ const openTxViewer = (tx, account) => {
   }
 };
 
-const getCuratedAssets = async () => {
+/* const getCuratedAssets = async () => {
   if (
     curatedAssets &&
     Object.keys(curatedAssets).length > 0 &&
@@ -105,9 +105,9 @@ const getCuratedAssets = async () => {
   } catch (e) {
     throw e;
   }
-};
+}; */
 
-const status = () => {
+/* const status = () => {
   return new Promise((resolve, reject) => {
     function message(event) {
       window.removeEventListener('message', message);
@@ -123,9 +123,9 @@ const status = () => {
     //Android
     document.addEventListener('message', message);
   });
-};
+}; */
 
-const payload = async (payload) => {
+/* const payload = async (payload: any) => {
   try {
     const res = await axios.post(`${apiEndPoint}/payload`, payload, headers());
     openSignRequest(res.data.uuid);
@@ -136,9 +136,9 @@ const payload = async (payload) => {
     if (e === '') throw { msg: 'closed', error: false };
     throw e;
   }
-};
+}; */
 
-const event = async (payload, usertoken) => {
+/* const event = async (payload: any, usertoken: string) => {
   try {
     const res = await axios.post(`${apiEndPoint}/payload`, payload, headers());
     openSignRequest(res.data.uuid);
@@ -149,9 +149,9 @@ const event = async (payload, usertoken) => {
     if (e === '') throw { msg: 'closed', error: false };
     throw e;
   }
-};
+}; */
 
-const push = async (payload) => {
+/* const push = async (payload: any) => {
   try {
     const res = await axios.post(`${apiEndPoint}/payload`, payload, headers());
     openSignRequest(res.data.uuid);
@@ -162,14 +162,14 @@ const push = async (payload) => {
     if (e === '') throw { msg: 'closed', error: false };
     throw e;
   }
-};
+}; */
 
-const versionCheck = (v1, v2) => {
+const versionCheck = (v1: string, v2: string) => {
   var v1parts = v1.split('.');
   var v2parts = v2.split('.');
 
   // First, validate both numbers are true version numbers
-  function validateParts(parts) {
+  function validateParts(parts: string[]) {
     for (var i = 0; i < parts.length; ++i) {
       if (!/^\d+$/.test(parts[i])) {
         return false;
@@ -202,4 +202,4 @@ const versionCheck = (v1, v2) => {
   return 0;
 };
 
-export default {};
+export default { openExternalBrowser, versionCheck };

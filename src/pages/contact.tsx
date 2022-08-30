@@ -13,6 +13,8 @@ import { Twitter, Github, Globe, Link } from 'src/components/Icons';
 
 import NLink from 'next/link';
 
+import xAppService from 'src/services/xapp.service';
+
 const Contact: NextPage = () => {
   const storeContext = useStoreContext();
 
@@ -39,7 +41,7 @@ const Contact: NextPage = () => {
               <Link
                 size={24}
                 fill={'white'}
-                onClick={() => window.open(`https://linktr.ee/whirledlabs`, '_blank')}
+                onClick={() => xAppService.openExternalBrowser(`https://linktr.ee/whirledlabs`)}
               />
               <Github
                 size={24}
