@@ -11,6 +11,8 @@ import { useState, useEffect } from 'react';
 
 import { Twitter, Github, Globe, Link } from 'src/components/Icons';
 
+import NLink from 'next/link';
+
 const Contact: NextPage = () => {
   const storeContext = useStoreContext();
 
@@ -34,11 +36,9 @@ const Contact: NextPage = () => {
               {`An ideation lab specializing in technological innovation and industry collaboration.`}
             </p>
             <div className={styles.logoContainer}>
-              <Link
-                size={24}
-                fill={'white'}
-                onClick={() => window.open(`https://linktr.ee/whirledlabs`)}
-              />
+              <NLink href={`https://linktr.ee/whirledlabs`}>
+                <Link size={24} fill={'white'} />
+              </NLink>
               <Github
                 size={24}
                 fill={'white'}

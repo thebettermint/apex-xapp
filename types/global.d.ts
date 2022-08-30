@@ -10,4 +10,9 @@ declare global {
 
 declare module globalThis {
   var prisma: any;
+  interface Window {
+    request: any;
+    id: any;
+    ReactNativeWebView: any;
+  }
 }

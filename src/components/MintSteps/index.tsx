@@ -11,6 +11,7 @@ import Claim from './claim';
 import Fund from './fund';
 import View from './view';
 import SignIn from './signin';
+import useMobileDetect from 'src/hooks/useMobileDetect';
 
 interface Props {
   page?: any;
@@ -18,11 +19,12 @@ interface Props {
 
 const Index = ({ page }: Props) => {
   const storeContext = useStoreContext();
+  const mobileDetect = useMobileDetect();
 
   return (
     <>
       <Landing />
-      <SignIn />
+      {mobileDetect.isXApp() ? null : <SignIn />}
       <Fund />
       <Claim />
       <View />

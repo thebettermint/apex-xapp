@@ -33,6 +33,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     //console.log('is touch device :', isTouchDevice);
     console.log('is mobile :', mobileDetect.isMobile());
+    console.log('is xApp :', mobileDetect.isXApp());
   }, []);
 
   return (
