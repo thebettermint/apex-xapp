@@ -36,9 +36,11 @@ const Contact: NextPage = () => {
               {`An ideation lab specializing in technological innovation and industry collaboration.`}
             </p>
             <div className={styles.logoContainer}>
-              <NLink href={`https://linktr.ee/whirledlabs`}>
-                <Link size={24} fill={'white'} />
-              </NLink>
+              <Link
+                size={24}
+                fill={'white'}
+                onClick={() => window.open(`https://linktr.ee/whirledlabs`, '_blank')}
+              />
               <Github
                 size={24}
                 fill={'white'}
