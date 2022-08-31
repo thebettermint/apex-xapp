@@ -52,6 +52,42 @@
     }
   }
 
+  .tweet {
+    position: absolute;
+
+    font-family: Montserrat;
+    letter-spacing: 0.1em;
+    font-size: 1em;
+    bottom: 100px;
+    padding: 5px 20px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 100%;
+
+    .twitter {
+      margin-right: 20px;
+    }
+
+    .arrow {
+      transform: rotate(180deg);
+      stroke-width: 2.2;
+      margin-left: 20px;
+      flex-grow: 0;
+      transition: flex-grow cubic-bezier(0.87, 0, 0.19, 1) 0.5s;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      .arrow {
+        flex-grow: 1;
+      }
+    }
+  }
+
   .navCategories {
     position: relative;
 
@@ -61,7 +97,7 @@
     width: 100%;
     padding: 5px 20px;
 
-    margin-bottom: 20%;
+    margin-bottom: 10%;
 
     font-family: Montserrat;
     letter-spacing: 0.1em;
@@ -73,6 +109,10 @@
 
     div {
       margin-bottom: 20px;
+
+      &:hover {
+        cursor: pointer;
+      }
 
       &.active {
         font-variation-settings: 'wght' 600;

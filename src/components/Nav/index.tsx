@@ -13,6 +13,12 @@ import { axiosPrivate } from '@/lib/axios/axiosPrivate';
 
 import { useStoreContext } from '../../context/store';
 
+import xAppService from 'src/services/xapp.service';
+
+import useMobileDetect from 'src/hooks/useMobileDetect';
+
+import { Arrowright, Twitter } from 'src/components/Icons';
+
 import { useRouter } from 'next/router';
 
 interface Props {
@@ -27,12 +33,29 @@ const Nav = ({ show, setShow }: Props) => {
   const [user, setUser] = useState<undefined | string>(undefined);
   const [page, setPage] = useState<string>(router.pathname.split('/')[1] || '');
 
-  //const [isOpen, setIsOpen] = useState<boolean>(show);
+  const mobileDetect = useMobileDetect();
 
   const handleNavClick = (page: string) => {
     router.push(`/${page}`);
     setShow(!show);
     setPage(page);
+  };
+
+  const openExternalLink = (url: string) => {
+    if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url);
+    return window.open(url);
+  };
+
+  const handleTweet = () => {
+    const tweet =
+      'Wow, I really enjoyed the demonstration by @whirledlabs at the Apex Developer Summit https://bettermint.io/apex-demo';
+    const hashtags = `XRPLedger,ApexDevSummit`;
+    const parse = tweet.replaceAll(' ', '%20');
+
+    openExternalLink(
+      `https://twitter.com/intent/tweet?text=${parse}&hashtags=${hashtags}&via=whirledlabs`
+    );
+    setShow(!show);
   };
 
   useEffect(() => {
@@ -76,6 +99,11 @@ const Nav = ({ show, setShow }: Props) => {
             className={page == 'contact' ? style.active : 'null'}>
             contact
           </div>
+        </div>
+        <div onClick={() => handleTweet()} className={style.tweet}>
+          <Twitter className={style.twitter} size={16} fill={'white'} />
+          tweet about it
+          <Arrowright className={style.arrow} size={18} stroke={'white'} />
         </div>
         <div className={style.pageHeader}>
           <div>APEX DEVELOPER SUMMIT</div>
