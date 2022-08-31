@@ -41,26 +41,23 @@ const Nav = ({ show, setShow }: Props) => {
     setPage(page);
   };
 
-  const openExternalLink = useCallback(
-    (url: string) => {
-      if (!window) return;
+  const openExternalLink = (url: string) => {
+    if (!window) return;
 
-      console.log(Object.keys(window).length);
-      console.log('window fix:', Object.keys(window).slice(-20));
+    console.log(Object.keys(window).length);
+    console.log('window fix:', Object.keys(window).slice(-20));
 
-      let found = Object.keys(window).find((key) => {
-        if (key == 'ReactNativeWebView') return true;
-        if (key == 'ReactNativeWebview') return true;
-        if (key == 'reactnativewebview') return true;
-      });
-      console.log(found);
+    let found = Object.keys(window).find((key) => {
+      if (key == 'ReactNativeWebView') return true;
+      if (key == 'ReactNativeWebview') return true;
+      if (key == 'reactnativewebview') return true;
+    });
+    console.log(found);
 
-      if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, window);
-      if (mobileDetect.isMobile()) return window.location.assign(url);
-      return window.open(url, '_blank');
-    },
-    [window]
-  );
+    if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, window);
+    if (mobileDetect.isMobile()) return window.location.assign(url);
+    return window.open(url, '_blank');
+  };
 
   const handleTweet = () => {
     const tweet =
