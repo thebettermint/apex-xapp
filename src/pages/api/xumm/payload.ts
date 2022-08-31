@@ -6,12 +6,12 @@ import { authorizeXumm, reqApiKeyMatch } from '@/api/middleware/xumm.middleware'
 const handler = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
   const { method } = req;
 
-  if (method == 'POST' || method == 'GET') {
+  if (method == 'POST') {
     let payload = await xummController.payload(req, res);
     if (payload) return;
   }
 
-  return res.status(400).json({ success: false, message: 'Only POST/GET requests are allowed.' });
+  return res.status(400).json({ success: false, message: 'Only POST requests are allowed.' });
 };
 
-export default authorizeXumm(reqApiKeyMatch(handler));
+export default reqApiKeyMatch(handler);

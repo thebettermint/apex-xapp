@@ -37,7 +37,7 @@ const authorizeXumm = (handler: any) => {
   return async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
     try {
       let authorization = req.headers['Authorization'];
-      console.log(authorization);
+      console.log('autorization:', authorization);
       if (typeof authorization == 'object') authorization = authorization[0];
 
       if (authorization == null)

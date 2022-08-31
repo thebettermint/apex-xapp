@@ -7,7 +7,8 @@ import { ExtendedNextApiRequest } from 'types/next';
 
 const getUserToken = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    let { uuid } = req.query;
+    const query = req.query;
+    let { uuid } = query;
     if (!uuid) return handleError({ status: 'error', message: 'UUID is required' }, res);
 
     if (typeof uuid == 'object') uuid = uuid[0];
@@ -27,9 +28,12 @@ const getUserToken = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-const getPayloadMetadata = async (req: NextApiRequest, res: NextApiResponse) => {
+const getPayloadMetadata = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
   try {
-    let { uuid } = req.query;
+    const query = req.query;
+    console.log(query);
+    let { uuid } = query;
+    console.log(uuid);
     if (!uuid) return handleError({ status: 'error', message: 'UUID is required' }, res);
 
     if (typeof uuid == 'object') uuid = uuid[0];
@@ -61,7 +65,8 @@ const getQrCode = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const getTxHash = async (req: NextApiRequest, res: NextApiResponse) => {
-  let { uuid } = req.query;
+  const query = req.query;
+  let { uuid } = query;
   if (!uuid) return handleError({ status: 'error', message: 'UUID is required' }, res);
 
   if (typeof uuid == 'object') uuid = uuid[0];
@@ -93,6 +98,7 @@ const payload = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
     let baseUrl = 'https://xumm.app';
     let url = new URL(`/api/v1/platform/payload`, baseUrl);
     const response = await axios.post(url.href, req.body, req.xummAuthHeaders);
+    console.log(response);
     res.json(response.data);
     return 'success';
   } catch (e: any) {
