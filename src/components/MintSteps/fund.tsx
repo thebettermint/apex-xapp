@@ -9,6 +9,8 @@ import { useStoreContext } from '../../context/store';
 import Button from 'src/components/Button';
 
 import { ArrowRight, ArrowLeft, Arrowright } from 'src/components/Icons';
+import { useXAppContext } from 'src/context/xapp';
+import useMobileDetect from 'src/hooks/useMobileDetect';
 
 interface Props {
   page?: any;
@@ -16,6 +18,8 @@ interface Props {
 
 const Fund = ({ page }: Props) => {
   const storeContext = useStoreContext();
+  const xappContext = useXAppContext();
+  const mobileDetect = useMobileDetect();
 
   return (
     <>
@@ -23,6 +27,7 @@ const Fund = ({ page }: Props) => {
         <div className={style.descWrapper}>
           <div className={style.title}>ACTIVATE YOUR WALLET</div>
           <div className={style.description}>auto fund your wallet using the public faucet</div>
+          {mobileDetect.isXApp() ? xappContext.tokenData : null}
         </div>
         <div className={style.buttonContainer}>
           <Button
