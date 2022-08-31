@@ -30,10 +30,8 @@ const getUserToken = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const getPayloadMetadata = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
   try {
-    const query = req.query;
-    console.log(query);
-    let { uuid } = query;
-    console.log(uuid);
+    let uuid = req.body.uuid || req.query.uuid;
+
     if (!uuid) return handleError({ status: 'error', message: 'UUID is required' }, res);
 
     if (typeof uuid == 'object') uuid = uuid[0];

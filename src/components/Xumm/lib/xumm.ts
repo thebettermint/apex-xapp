@@ -54,6 +54,31 @@ const getMetadata = async ({
   route: string;
 }) => {
   try {
+    let url = new URL(`${route}/xumm/meta`, baseUrl);
+    if (!uuid || !jwt) return;
+    const res = await axios.post(url.href, { uuid: uuid }, headers({ jwt: jwt, key: key }));
+    return res;
+  } catch (e) {
+    if (e === '') throw { msg: 'closed', error: false };
+    throw e;
+  }
+};
+
+/* 
+const getMetadata = async ({
+  uuid,
+  jwt,
+  key,
+  baseUrl,
+  route,
+}: {
+  uuid?: string;
+  key: string;
+  jwt?: string | undefined;
+  baseUrl: string;
+  route: string;
+}) => {
+  try {
     let url = new URL(`${route}/xumm/meta/${uuid}`, baseUrl);
     if (!uuid || !jwt) return;
     const res = await axios.get(url.href, headers({ jwt: jwt, key: key }));
@@ -63,7 +88,7 @@ const getMetadata = async ({
     throw e;
   }
 };
-
+ */
 const openWebSocket = (url: string) => {
   const ws = new WebSocket(url);
   return ws;
