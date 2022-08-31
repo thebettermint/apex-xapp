@@ -10,6 +10,8 @@ import React, {
 import useLocalStorage from '../hooks/useLocalStorage';
 import Router from 'next/router';
 
+import xAppService from 'src/services/xapp.service';
+
 import { IUser } from 'types/next';
 
 interface IContextProps {
@@ -21,6 +23,8 @@ interface IContextProps {
   jwt: string | undefined;
   setJwt: Dispatch<SetStateAction<string | undefined>>;
   router: (path: string) => void;
+  tokenData: any;
+  init: (oneTimeToken: string) => void;
 }
 
 const StoreContext = createContext({} as IContextProps);
@@ -38,6 +42,19 @@ const StoreContextProvider = (props: any) => {
     Router.push(path);
   };
 
+  const [tokenData, setTokenData] = useState<any>(undefined);
+  const [fetched, setFetched] = useState<any>(false);
+
+  const init = async (oneTimeToken: string) => {
+    if (tokenData && !fetched) return;
+    setFetched(true);
+
+    let data = await xAppService.getTokenData({ ott: oneTimeToken });
+    console.log(data);
+
+    setTokenData(data);
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -49,6 +66,8 @@ const StoreContextProvider = (props: any) => {
         jwt: jwt,
         setJwt: setJwt,
         router: router,
+        tokenData: tokenData,
+        init: init,
       }}>
       {props.children}
     </StoreContext.Provider>
