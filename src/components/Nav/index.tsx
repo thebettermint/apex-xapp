@@ -43,7 +43,7 @@ const Nav = ({ show, setShow }: Props) => {
 
   const openExternalLink = (url: string) => {
     if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url);
-    return window.open(url);
+    return window.open(url, '_blank');
   };
 
   const handleTweet = () => {

@@ -3,6 +3,7 @@ import style from './index.module.scss';
 import Button from '../Button';
 
 import SignContextProvider, { useSignContext } from './context';
+import useMobileDetect from 'src/hooks/useMobileDetect';
 
 interface XProps {
   request: any;
@@ -16,6 +17,7 @@ interface XProps {
 
 const XButton = ({ request, xumm_api_key, baseUrl, route, className, children }: XProps) => {
   const signContext = useSignContext();
+  const mobileDetect = useMobileDetect();
 
   const open = async () => {
     let qr = await signContext.onDemand({
@@ -25,6 +27,7 @@ const XButton = ({ request, xumm_api_key, baseUrl, route, className, children }:
       key: xumm_api_key,
     });
 
+    if (mobileDetect.isMobile()) return window.location.assign(qr.url);
     window.open(qr.url, '_blank');
   };
 
