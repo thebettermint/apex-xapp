@@ -43,6 +43,7 @@ const Nav = ({ show, setShow }: Props) => {
 
   const openExternalLink = (url: string) => {
     if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url);
+    if (mobileDetect.isMobile()) return window.location.assign(url);
     return window.open(url, '_blank');
   };
 
@@ -52,10 +53,11 @@ const Nav = ({ show, setShow }: Props) => {
     const hashtags = `XRPLedger,ApexDevSummit`;
     const parse = tweet.replaceAll(' ', '%20');
 
+    setShow(!show);
+
     openExternalLink(
       `https://twitter.com/intent/tweet?text=${parse}&hashtags=${hashtags}&via=whirledlabs`
     );
-    setShow(!show);
   };
 
   useEffect(() => {
