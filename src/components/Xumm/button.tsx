@@ -10,46 +10,47 @@ interface XProps {
   route: string;
   xumm_api_key: string;
   children: any;
+  className: any;
   setState?: Dispatch<SetStateAction<any>>;
 }
 
-const XButton = ({ request, xumm_api_key, baseUrl, route, children }: XProps) => {
+const XButton = ({ request, xumm_api_key, baseUrl, route, className, children }: XProps) => {
   const signContext = useSignContext();
 
-  const open = () => {
-    window.open(signContext.qr?.url);
-  };
-
-  useEffect(() => {
-    signContext.setXummData({
+  const open = async () => {
+    let qr = await signContext.onDemand({
       request: request,
       baseUrl: baseUrl,
       route: route,
       key: xumm_api_key,
     });
-  }, []);
+
+    window.open(qr.url);
+  };
 
   return (
-    <div className={style.buttonWrapper}>
-      <Button
-        className={style.button}
-        type="secondary"
-        theme="light"
-        height={40}
-        margin={0}
-        border={{ radius: 12 }}
-        onClick={open}>
+    <div className={style.onButtonContainer}>
+      <Button className={className} type="primary" theme="light" height={40} onClick={open}>
         {children}
       </Button>
     </div>
   );
 };
 
-const XummButton = ({ request, xumm_api_key, baseUrl, route, children, setState }: XProps) => {
+const XummButton = ({
+  request,
+  xumm_api_key,
+  baseUrl,
+  route,
+  className,
+  children,
+  setState,
+}: XProps) => {
   return (
     <SignContextProvider setState={setState}>
       <Suspense fallback={<div>Loading...</div>}>
         <XButton
+          className={className}
           request={request}
           xumm_api_key={xumm_api_key}
           baseUrl={baseUrl}
