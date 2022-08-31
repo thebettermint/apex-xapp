@@ -46,16 +46,6 @@ const Nav = ({ show, setShow }: Props) => {
   const openExternalLink = (url: string) => {
     if (!windowObj) return;
 
-    console.log(Object.keys(windowObj).length);
-    console.log('window fix:', Object.keys(windowObj).slice(-20));
-
-    let found = Object.keys(windowObj).find((key) => {
-      if (key == 'ReactNativeWebView') return true;
-      if (key == 'ReactNativeWebview') return true;
-      if (key == 'reactnativewebview') return true;
-    });
-    console.log(found);
-
     if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, windowObj);
     if (mobileDetect.isMobile()) return window.location.assign(url);
     return window.open(url, '_blank');
@@ -64,7 +54,7 @@ const Nav = ({ show, setShow }: Props) => {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     SetWindowObj(window);
-  }, []);
+  });
 
   const handleTweet = () => {
     const tweet =
