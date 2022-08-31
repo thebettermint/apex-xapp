@@ -16,7 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <script
         data-consolejs-channel="7ec8c9da-257b-4e52-9918-453a2cef4aa4"
-        src="https://remotejs.com/agent/agent.js"></script>
+        src="https://remotejs.com/agent/agent.js"
+        defer
+      />
       <StoreProvider>
         <div className={styles.main}>
           <Header />
