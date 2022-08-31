@@ -42,19 +42,21 @@ const payload = async ({
 
 const getMetadata = async ({
   uuid,
+  jwt,
   key,
   baseUrl,
   route,
 }: {
   uuid?: string;
   key: string;
+  jwt?: string | undefined;
   baseUrl: string;
   route: string;
 }) => {
   try {
     let url = new URL(`${route}/xumm/meta/${uuid}`, baseUrl);
-    if (!uuid) return;
-    const res = await axios.get(url.href, { headers: { 'x-api-key': key } });
+    if (!uuid || !jwt) return;
+    const res = await axios.get(url.href, headers({ jwt: jwt, key: key }));
     return res;
   } catch (e) {
     if (e === '') throw { msg: 'closed', error: false };
