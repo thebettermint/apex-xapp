@@ -20,6 +20,11 @@ const SignIn = ({ page }: Props) => {
 
   const [status, setStatus] = useState<any>(undefined);
 
+  const apiEndPoint =
+    process.env.NODE_ENV == 'production'
+      ? 'https://apex-xapp-six.vercel.app'
+      : 'http://localhost:3000';
+
   const handleSignIn = async (status: any) => {
     let obj = {
       wallet: {
@@ -49,7 +54,7 @@ const SignIn = ({ page }: Props) => {
             className={style.button}
             request={{ TransactionType: 'SignIn' }}
             xumm_api_key={process.env.NEXT_PUBLIC_XUMM_KEY || ''}
-            baseUrl={'http://localhost:3001'}
+            baseUrl={apiEndPoint}
             route={'api'}
             setState={setStatus}>
             <div className={style.buttonText}>SIGN IN</div>

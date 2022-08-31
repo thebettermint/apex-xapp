@@ -16,6 +16,8 @@ const init = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
 
   const token = ott;
 
+  console.log(token);
+
   if (typeof token !== 'string') {
     console.log('No token given respond 400');
     res.status(400).json({
