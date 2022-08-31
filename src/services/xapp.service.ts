@@ -33,7 +33,8 @@ const getTokenData = async ({ ott, tokenData }: { ott: string; tokenData?: any }
     try {
       const res = await axios.post(`${apiEndPoint}/xapp/ott`, { ott: ott }, headers({}));
       return res.data;
-    } catch (e) {
+    } catch (e: any) {
+      console.log(e);
       throw 'Error getting Token Data';
     }
   } else {

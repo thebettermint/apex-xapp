@@ -106,8 +106,6 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 const verifyEmailSchema = (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.body.token && req.query['token']) req.body.token = req.query['token'];
 
-  console.log(req.body.token);
-
   if (!req.body.token) return handleError({ message: `Validation error: Token not found` }, res);
 
   const schema = Joi.object({

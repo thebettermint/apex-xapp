@@ -3,7 +3,10 @@
 .panel {
   position: fixed;
   height: 100vh;
-  min-height: -webkit-fill-available;
+
+  // Height fix on mobile
+  height: -webkit-fill-available;
+  height: -moz-available;
 
   width: calc(100% - 48px);
   max-width: 800px;

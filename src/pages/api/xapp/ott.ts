@@ -14,4 +14,4 @@ const handler = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
   return res.status(400).json({ success: false, message: 'Only GET requests are allowed.' });
 };
 
-export default authorizeXumm(reqApiKeyMatch(handler));
+export default reqApiKeyMatch(handler);
