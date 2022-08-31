@@ -12,6 +12,7 @@ export interface ExtendedNextApiRequest extends NextApiRequest {
   user: UserPayload;
   ip: string;
   xummAuthHeaders: any;
+  uuid: string;
 }
 
 export interface IUser {
