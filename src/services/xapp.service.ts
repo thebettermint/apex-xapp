@@ -59,7 +59,11 @@ const sendCommandtoXumm = (command: ICommand | any) => {
   console.log(window);
   /*   if (typeof window.ReactNativeWebView === 'undefined')
     throw new Error('This is not a react native webview'); */
-  window.ReactNativeWebView.postMessage(JSON.stringify(command));
+  try {
+    window.ReactNativeWebView.postMessage(JSON.stringify(command));
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 const openSignRequest = (uuid: string) => {
