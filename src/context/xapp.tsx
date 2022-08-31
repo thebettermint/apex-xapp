@@ -1,12 +1,4 @@
-import React, {
-  useState,
-  createContext,
-  useContext,
-  Dispatch,
-  SetStateAction,
-  ReactElement,
-  useEffect,
-} from 'react';
+import React, { useState, createContext, useContext } from 'react';
 
 import xAppService from 'src/services/xapp.service';
 
@@ -32,12 +24,6 @@ const XAppContextProvider = (props: any) => {
 
     setTokenData(data);
   };
-
-  /*   useEffect(() => {
-    if (tokenData && !fetched) return;
-    setFetched(true);
-    init();
-  }, []); */
 
   return (
     <XAppContext.Provider value={{ tokenData: tokenData, init: init }}>

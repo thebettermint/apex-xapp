@@ -30,12 +30,8 @@ const XApp: NextPage = () => {
 
   const router = useRouter();
 
-  let { xAppToken, xAppStyle } = router.query;
-  if (typeof xAppStyle == 'object') xAppStyle = xAppStyle[0];
-  if (typeof xAppToken == 'object') xAppToken = xAppToken[0];
-
-  const [token, setToken] = useState<string | undefined>(xAppToken);
-  const [style, SetStyle] = useState<string | undefined>(xAppStyle);
+  const [token, setToken] = useState<string | undefined>(undefined);
+  const [style, SetStyle] = useState<string | undefined>(undefined);
 
   const handleSignup = () => {
     Router.push('/signup');
@@ -46,6 +42,14 @@ const XApp: NextPage = () => {
     console.log('is style :', style);
     console.log('is token :', token);
     if (token) XAppContext.init(token);
+  }, [token]);
+
+  useEffect(() => {
+    let { xAppToken, xAppStyle } = router.query;
+    console.log(xAppToken, xAppStyle);
+    if (typeof xAppStyle == 'object') xAppStyle = xAppStyle[0];
+    if (typeof xAppToken == 'object') xAppToken = xAppToken[0];
+    setToken(xAppToken);
   }, []);
 
   return (
