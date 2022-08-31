@@ -12,6 +12,7 @@ import xAppService from 'src/services/xapp.service';
 
 interface IContextProps {
   tokenData: any;
+  init: (oneTimeToken: string) => void;
 }
 
 const XAppContext = createContext({} as IContextProps);
@@ -22,22 +23,23 @@ const XAppContextProvider = (props: any) => {
   const [tokenData, setTokenData] = useState<any>(undefined);
   const [fetched, setFetched] = useState<any>(false);
 
-  const init = async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const oneTimeToken = urlParams.get('xAppToken') || '';
+  const init = async (oneTimeToken: string) => {
+    if (tokenData) return;
     let data = await xAppService.getTokenData({ ott: oneTimeToken });
     console.log(data);
     setTokenData(data);
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (tokenData && !fetched) return;
     setFetched(true);
     init();
-  }, []);
+  }, []); */
 
   return (
-    <XAppContext.Provider value={{ tokenData: tokenData }}>{props.children}</XAppContext.Provider>
+    <XAppContext.Provider value={{ tokenData: tokenData, init: init }}>
+      {props.children}
+    </XAppContext.Provider>
   );
 };
 

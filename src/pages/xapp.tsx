@@ -15,20 +15,37 @@ import Landing from 'src/components/MintSteps/landing';
 import Steps from 'src/components/MintSteps';
 import Header from 'src/components/Header';
 
+import { useRouter } from 'next/router';
+
+import React, { useState } from 'react';
+
 import useMobileDetect from 'src/hooks/useMobileDetect';
+import { useXAppContext } from 'src/context/xapp';
 //import useIsTouchDevice from 'src/hooks/useIsTouchDevice';
 
 const XApp: NextPage = () => {
   //const isTouchDevice = useIsTouchDevice();
   const mobileDetect = useMobileDetect();
+  const XAppContext = useXAppContext();
+
+  const router = useRouter();
+
+  let { xAppToken, xAppStyle } = router.query;
+  if (typeof xAppStyle == 'object') xAppStyle = xAppStyle[0];
+  if (typeof xAppToken == 'object') xAppToken = xAppToken[0];
+
+  const [token, setToken] = useState<string | undefined>(xAppToken);
+  const [style, SetStyle] = useState<string | undefined>(xAppStyle);
 
   const handleSignup = () => {
     Router.push('/signup');
   };
 
   useEffect(() => {
-    //console.log('is touch device :', isTouchDevice);
     console.log('is mobile :', mobileDetect.isMobile());
+    console.log('is style :', style);
+    console.log('is token :', token);
+    if (token) XAppContext.init(token);
   }, []);
 
   return (
