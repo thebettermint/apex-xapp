@@ -61,6 +61,7 @@ const sendCommandtoXumm = (command: ICommand | any, window: Window) => {
     console.log('window:', Object.keys(window).slice(-20));
     Object.keys(window).forEach((key) => console.log(key));
     console.log(window.window);
+    Object.keys(window.window).forEach((key) => console.log(key));
     throw new Error('This is not a react native webview');
   }
   try {
