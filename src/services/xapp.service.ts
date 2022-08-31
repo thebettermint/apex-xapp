@@ -31,7 +31,7 @@ const headers = ({ tokenData }: { tokenData?: any }) => {
 const getTokenData = async ({ ott, tokenData }: { ott: string; tokenData?: any }) => {
   if (!tokenData) {
     try {
-      const res = await axios.get(`${apiEndPoint}/xapp/ott/${ott}`, headers({}));
+      const res = await axios.post(`${apiEndPoint}/xapp/ott`, { ott: ott }, headers({}));
       return res.data;
     } catch (e) {
       throw 'Error getting Token Data';
@@ -40,6 +40,19 @@ const getTokenData = async ({ ott, tokenData }: { ott: string; tokenData?: any }
     return tokenData;
   }
 };
+
+/* const getTokenData = async ({ ott, tokenData }: { ott: string; tokenData?: any }) => {
+  if (!tokenData) {
+    try {
+      const res = await axios.get(`${apiEndPoint}/xapp/ott/${ott}`, headers({}));
+      return res.data;
+    } catch (e) {
+      throw 'Error getting Token Data';
+    }
+  } else {
+    return tokenData;
+  }
+}; */
 
 const sendCommandtoXumm = (command: ICommand | any) => {
   if (typeof window.ReactNativeWebView === 'undefined')

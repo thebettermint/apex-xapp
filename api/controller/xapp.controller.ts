@@ -11,12 +11,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 const uuidv4 = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
 
 const init = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
-  const query = req.query;
-  const { ott } = query;
-
-  const token = ott;
-
-  console.log(token);
+  const token = req.body.ott || req.query.ott;
 
   if (typeof token !== 'string') {
     console.log('No token given respond 400');
