@@ -53,7 +53,7 @@ const Nav = ({ show, setShow }: Props) => {
     const hashtags = `XRPLedger,ApexDevSummit`;
     const parse = tweet.replaceAll(' ', '%20');
 
-    setShow(!show);
+    //setShow(!show);
 
     openExternalLink(
       `https://twitter.com/intent/tweet?text=${parse}&hashtags=${hashtags}&via=whirledlabs`
