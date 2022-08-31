@@ -7,6 +7,8 @@ import XAppContextProvider from 'src/context/xapp';
 
 import Header from 'src/components/Header';
 
+import Head from 'next/head';
+
 import useMobileDetect from 'src/hooks/useMobileDetect';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -14,6 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
       {mobileDetect.isXApp() ? (
         <StoreProvider>
           <XAppContextProvider>

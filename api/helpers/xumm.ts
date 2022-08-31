@@ -1,8 +1,6 @@
 import { XummSdk } from 'xumm-sdk';
 import config from 'config';
 
-console.log(config.xumm.key);
-
 const Sdk = new XummSdk(config.xumm.key, config.xumm.secret);
 
 //Open up channel with the user. Fetch and trigger a scannable QR code for signing
