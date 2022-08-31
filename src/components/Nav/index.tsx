@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react';
+import React, { useState, useRef, useEffect, Dispatch, SetStateAction, useCallback } from 'react';
 import style from './index.module.scss';
 import { categories } from './categories';
 import Link from 'next/link';
@@ -41,11 +41,19 @@ const Nav = ({ show, setShow }: Props) => {
     setPage(page);
   };
 
-  const openExternalLink = (url: string) => {
-    if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, window);
-    if (mobileDetect.isMobile()) return window.location.assign(url);
-    return window.open(url, '_blank');
-  };
+  const openExternalLink = useCallback(
+    (url: string) => {
+      if (!window) return;
+
+      console.log(Object.keys(window).length);
+      console.log('window fix::', Object.keys(window).slice(-20));
+
+      if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, window);
+      if (mobileDetect.isMobile()) return window.location.assign(url);
+      return window.open(url, '_blank');
+    },
+    [window]
+  );
 
   const handleTweet = () => {
     const tweet =
