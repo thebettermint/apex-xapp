@@ -54,7 +54,7 @@ export default {
     }),
   },
   xumm: {
-    key: env['API_KEY'] || '',
-    secret: env['API_SECRET'] || '',
+    key: env['XUMM_KEY'] || '',
+    secret: env['XUMM_SECRET'] || '',
   },
 };
