@@ -60,7 +60,7 @@ const sendCommandtoXumm = (command: ICommand | any, window: Window) => {
   /*   if (typeof window.ReactNativeWebView === 'undefined')
     throw new Error('This is not a react native webview'); */
   try {
-    if (window !== undefined) {
+    if (window !== undefined && window.ReactNativeWebView) {
       window.ReactNativeWebView.postMessage(JSON.stringify(command));
     }
   } catch (e) {
