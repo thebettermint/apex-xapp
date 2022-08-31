@@ -62,9 +62,9 @@ const Nav = ({ show, setShow }: Props) => {
   };
 
   useEffect(() => {
-    if (!window) return;
+    if (typeof window == undefined) return;
     SetWindowObj(window);
-  }, [window]);
+  }, []);
 
   const handleTweet = () => {
     const tweet =
