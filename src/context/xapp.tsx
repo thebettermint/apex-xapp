@@ -20,6 +20,7 @@ export const useXAppContext = () => useContext(XAppContext);
 
 const XAppContextProvider = (props: any) => {
   const [tokenData, setTokenData] = useState<any>(undefined);
+  const [fetched, setFetched] = useState<any>(false);
 
   const init = async () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -30,7 +31,8 @@ const XAppContextProvider = (props: any) => {
   };
 
   useEffect(() => {
-    if (tokenData) return;
+    if (tokenData && !fetched) return;
+    setFetched(true);
     init();
   }, []);
 
