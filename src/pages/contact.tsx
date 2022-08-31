@@ -33,12 +33,15 @@ const Contact: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={styles.page}>
+      <div className={`${styles.page} ${styles.contactPage}`}>
         <div className={`${styles.pageHeader}`}>
           <div>APEX DEVELOPER SUMMIT</div>
           <div>Contact Us</div>
         </div>
         <div className={styles.heroWrapper}>
+          <div className={`${styles.pageHeader}`}>
+            <div className={styles.title}>PROJECTS</div>
+          </div>
           <div className={styles.content}>
             <div className={styles.contactTitle}>whirledlabs</div>
             <p>
@@ -86,9 +89,9 @@ const Contact: NextPage = () => {
         </div>
       </div>
 
-      <div className={styles.page}>
+      <div className={`${styles.page} ${styles.contactPage}`}>
         <div className={`${styles.pageHeader}`}>
-          <div className={styles.title}>CONTACT TEAM</div>
+          <div className={styles.title}>TEAM</div>
         </div>
         <div className={styles.heroWrapper}>
           <div className={styles.content}>
@@ -109,7 +112,7 @@ const Contact: NextPage = () => {
               />
             </div>
             <div className={styles.contactTitle}>pablo padillo</div>
-            <p>{``}</p>
+            <p>{`Coming from a fintech background, I learned firsthand the challenges faced by businesses to execute cross-border payments. By offering an intermediary asset, the XRP Ledger solves the cross-border problem by eliminating the need for pooled capital in offshore accounts.`}</p>
             <div className={styles.logoContainer}>
               <Twitter
                 size={24}
