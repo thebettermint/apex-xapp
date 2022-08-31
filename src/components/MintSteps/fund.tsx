@@ -27,7 +27,7 @@ const Fund = ({ page }: Props) => {
         <div className={style.descWrapper}>
           <div className={style.title}>ACTIVATE YOUR WALLET</div>
           <div className={style.description}>auto fund your wallet using the public faucet</div>
-          {mobileDetect.isXApp() ? xappContext.tokenData : null}
+          <div>{mobileDetect.isXApp() ? xappContext.tokenData : null}</div>
         </div>
         <div className={style.buttonContainer}>
           <Button
