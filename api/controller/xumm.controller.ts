@@ -5,6 +5,41 @@ import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ExtendedNextApiRequest } from 'types/next';
 
+const init = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
+  let secret = config.xumm.secret;
+  if (!secret) return handleError({ status: 'error', message: 'XUMM Secret not found' }, res);
+  let authToken;
+  if (secret)
+    authToken = jwt.sign(
+      {
+        app: req.xummAuthHeaders.headers['X-API-Key'],
+      },
+      secret,
+      { expiresIn: '4h' }
+    );
+
+  res.json(authToken);
+  return 'success';
+};
+
+const payload = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
+  try {
+    let baseUrl = 'https://xumm.app';
+    let url = new URL(`/api/v1/platform/payload`, baseUrl);
+    const response = await axios.post(url.href, req.body, req.xummAuthHeaders);
+    console.log(response);
+    res.json(response.data);
+    return 'success';
+  } catch (e: any) {
+    console.log(`XUMM API error @ payload post: ${e.message}`);
+    res.status(400).json({
+      msg: e.message,
+      error: true,
+    });
+    return 'fail';
+  }
+};
+
 const getUserToken = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const query = req.query;
@@ -72,41 +107,6 @@ const getTxHash = async (req: NextApiRequest, res: NextApiResponse) => {
   const result: any = await xumm.getPayload(uuid);
   const hash = result.response.txid;
   res.send({ data: hash });
-};
-
-const init = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
-  let secret = config.xumm.secret;
-  if (!secret) return handleError({ status: 'error', message: 'XUMM Secret not found' }, res);
-  let authToken;
-  if (secret)
-    authToken = jwt.sign(
-      {
-        app: req.xummAuthHeaders.headers['X-API-Key'],
-      },
-      secret,
-      { expiresIn: '4h' }
-    );
-
-  res.json(authToken);
-  return 'success';
-};
-
-const payload = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
-  try {
-    let baseUrl = 'https://xumm.app';
-    let url = new URL(`/api/v1/platform/payload`, baseUrl);
-    const response = await axios.post(url.href, req.body, req.xummAuthHeaders);
-    console.log(response);
-    res.json(response.data);
-    return 'success';
-  } catch (e: any) {
-    console.log(`XUMM API error @ payload post: ${e.message}`);
-    res.status(400).json({
-      msg: e.message,
-      error: true,
-    });
-    return 'fail';
-  }
 };
 
 const ping = async (req: NextApiRequest, res: NextApiResponse) => {

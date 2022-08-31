@@ -25,6 +25,7 @@ const XAppContextProvider = (props: any) => {
     const urlParams = new URLSearchParams(window.location.search);
     const oneTimeToken = urlParams.get('xAppToken') || '';
     let data = await xAppService.getTokenData({ ott: oneTimeToken });
+    console.log(data);
     setTokenData(data);
   };
 

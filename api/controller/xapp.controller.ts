@@ -32,6 +32,7 @@ const init = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
   }
 
   try {
+    console.log(req.xummAuthHeaders);
     const response = await axios.get(`/xapp/ott/${token}`, req.xummAuthHeaders);
 
     const authToken = jwt.sign(

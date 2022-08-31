@@ -22,8 +22,8 @@ const Landing = ({ page }: Props) => {
         </div>
         <div className={`${style.heroWrapper}`}>
           <div className={`${style.hero}`}></div>
-          <div className={`${style.title}`}>EXTREMELY LOUD AND INCREDIBLY CLOSE</div>
-          <div className={`${style.subtitle}`}>YOUR FIRST XRPL NFT WORKSHOP</div>
+          <div className={`${style.title}`}>BRINGING NFTs TO LIFE ON THE XRP LEDGER</div>
+          <div className={`${style.subtitle}`}>YOUR XRPL NFT WORKSHOP</div>
         </div>
       </div>
     </>
