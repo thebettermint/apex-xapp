@@ -12,7 +12,9 @@ const uuidv4 = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{
 
 const init = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
   const query = req.query;
-  const { token } = query;
+  const { ott } = query;
+
+  const token = ott;
 
   if (typeof token !== 'string') {
     console.log('No token given respond 400');
