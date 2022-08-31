@@ -55,13 +55,11 @@ const getTokenData = async ({ ott, tokenData }: { ott: string; tokenData?: any }
   }
 }; */
 
-const sendCommandtoXumm = (command: ICommand | any, window: Window) => {
+const sendCommandtoXumm = (command: ICommand | any, window: any) => {
   if (typeof window.ReactNativeWebView === 'undefined') {
     console.log('window.ReactNativeWebview:', window.ReactNativeWebView);
 
-    Object.keys(window.window).forEach((key) => console.log(key));
     console.log('----------- break ------------');
-    Object.keys(window.window.window).forEach((key) => console.log(key));
     throw new Error('This is not a react native webview');
   }
   try {
@@ -73,7 +71,7 @@ const sendCommandtoXumm = (command: ICommand | any, window: Window) => {
   }
 };
 
-const openSignRequest = (uuid: string, window: Window) => {
+const openSignRequest = (uuid: string, window: any) => {
   try {
     sendCommandtoXumm(
       {
@@ -87,7 +85,7 @@ const openSignRequest = (uuid: string, window: Window) => {
   }
 };
 
-const closeXapp = (window: Window) => {
+const closeXapp = (window: any) => {
   try {
     sendCommandtoXumm(
       {
@@ -101,7 +99,7 @@ const closeXapp = (window: Window) => {
   }
 };
 
-const openExternalBrowser = (url: string, window: Window) => {
+const openExternalBrowser = (url: string, window: any) => {
   try {
     sendCommandtoXumm(
       {

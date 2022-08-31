@@ -62,7 +62,7 @@ const Nav = ({ show, setShow }: Props) => {
   };
 
   useEffect(() => {
-    if (typeof window == undefined) return;
+    if (typeof window === 'undefined') return;
     SetWindowObj(window);
   }, []);
 
