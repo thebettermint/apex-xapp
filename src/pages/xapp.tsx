@@ -53,11 +53,12 @@ const XApp: NextPage = () => {
 
   return (
     <>
+      {/*       
       <Head>
         <title>apex</title>
         <meta name="description" content="" />
         <link rel="icon" href="/favicon.ico" />
-      </Head>
+      </Head> */}
 
       <div className={styles.bg}></div>
 
