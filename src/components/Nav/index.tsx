@@ -42,7 +42,7 @@ const Nav = ({ show, setShow }: Props) => {
   };
 
   const openExternalLink = (url: string) => {
-    console.log(window);
+    console.log('window:', window);
     if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, window);
     if (mobileDetect.isMobile()) return window.location.assign(url);
     return window.open(url, '_blank');
