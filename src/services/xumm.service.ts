@@ -77,38 +77,6 @@ const headers = ({ jwt, key }: { jwt: boolean | string; key: string }) => {
   return { headers: { Authorization: jwt, 'x-api-key': key } };
 };
 
-const getTokenData = async (baseUrl: string, route: string, key: string, ott: string) => {
-  try {
-    let url = new URL(`${route}/xapp/ott/${ott}`, baseUrl);
-    const res = await axios.get(url.href, headers({ jwt: true, key: key }));
-    let tokenData = res.data;
-    return tokenData;
-  } catch (e) {
-    throw 'Error getting Token Data';
-  }
-};
-
-const accessToken = async ({
-  ott,
-  jwt,
-  baseUrl,
-  route,
-  key,
-}: {
-  ott: string;
-  jwt: string;
-  baseUrl: string;
-  route: string;
-  key: string;
-}) => {
-  if (jwt) return jwt;
-  else {
-    let tokenData = await getTokenData(baseUrl, route, key, ott);
-    let jwt = tokenData.token;
-    return jwt;
-  }
-};
-
 const payload = async ({
   payload,
   jwt,
@@ -202,8 +170,6 @@ export default {
   payload,
   getMetadata,
   init,
-  accessToken,
-  getTokenData,
   openWebSocket,
   scannedWebSocket,
   signedWebSocket,
