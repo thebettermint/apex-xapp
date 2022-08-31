@@ -45,9 +45,7 @@ const XApp: NextPage = () => {
   }, [token]);
 
   useEffect(() => {
-    console.log(router.query);
     let { xAppToken, xAppStyle } = router.query;
-    console.log(xAppToken, xAppStyle);
     if (typeof xAppStyle == 'object') xAppStyle = xAppStyle[0];
     if (typeof xAppToken == 'object') xAppToken = xAppToken[0];
     setToken(xAppToken);

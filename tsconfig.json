@@ -28,7 +28,8 @@
     "incremental": true,
     "declaration": true,
     "composite": false,
-    "preserveSymlinks": true
+    "preserveSymlinks": true,
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

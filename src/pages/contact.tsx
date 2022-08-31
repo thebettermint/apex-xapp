@@ -21,7 +21,7 @@ const Contact: NextPage = () => {
   const mobileDetect = useMobileDetect();
 
   const openExternalLink = (url: string) => {
-    if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url);
+    if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, window);
     return window.open(url);
   };
 

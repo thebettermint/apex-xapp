@@ -55,45 +55,56 @@ const getTokenData = async ({ ott, tokenData }: { ott: string; tokenData?: any }
   }
 }; */
 
-const sendCommandtoXumm = (command: ICommand | any) => {
+const sendCommandtoXumm = (command: ICommand | any, window: Window) => {
   console.log(window);
   /*   if (typeof window.ReactNativeWebView === 'undefined')
     throw new Error('This is not a react native webview'); */
   try {
-    window.ReactNativeWebView.postMessage(JSON.stringify(command));
+    if (window !== undefined) {
+      window.ReactNativeWebView.postMessage(JSON.stringify(command));
+    }
   } catch (e) {
     console.log(e);
   }
 };
 
-const openSignRequest = (uuid: string) => {
+const openSignRequest = (uuid: string, window: Window) => {
   try {
-    sendCommandtoXumm({
-      command: 'openSignRequest',
-      uuid: uuid,
-    });
+    sendCommandtoXumm(
+      {
+        command: 'openSignRequest',
+        uuid: uuid,
+      },
+      window
+    );
   } catch (e) {
     throw e;
   }
 };
 
-const closeXapp = () => {
+const closeXapp = (window: Window) => {
   try {
-    sendCommandtoXumm({
-      command: 'close',
-      refreshEvents: false,
-    });
+    sendCommandtoXumm(
+      {
+        command: 'close',
+        refreshEvents: false,
+      },
+      window
+    );
   } catch (e) {
     throw e;
   }
 };
 
-const openExternalBrowser = (url: string) => {
+const openExternalBrowser = (url: string, window: Window) => {
   try {
-    sendCommandtoXumm({
-      command: 'openBrowser',
-      url: url,
-    });
+    sendCommandtoXumm(
+      {
+        command: 'openBrowser',
+        url: url,
+      },
+      window
+    );
   } catch (e) {
     throw e;
   }
@@ -101,11 +112,14 @@ const openExternalBrowser = (url: string) => {
 
 const openTxViewer = (tx: any, account: string) => {
   try {
-    sendCommandtoXumm({
-      command: 'txDetails',
-      tx,
-      account,
-    });
+    sendCommandtoXumm(
+      {
+        command: 'txDetails',
+        tx,
+        account,
+      },
+      window
+    );
   } catch (e) {
     throw e;
   }
@@ -161,7 +175,7 @@ const payload = async ({ payload, tokenData }: { payload: any; tokenData?: any }
       payload,
       headers({ tokenData: tokenData })
     );
-    openSignRequest(res.data.uuid);
+    openSignRequest(res.data.uuid, window);
     await status();
     const result = await axios.get(`${apiEndPoint}/xumm/payload/${res.data.uuid}`, headers({}));
     return result;
@@ -178,7 +192,7 @@ const event = async ({ payload, tokenData }: { payload: any; tokenData?: any }) 
       payload,
       headers({ tokenData: tokenData })
     );
-    openSignRequest(res.data.uuid);
+    openSignRequest(res.data.uuid, window);
     await status();
     const result = await axios.get(
       `${apiEndPoint}/xumm/payload/${res.data.uuid}`,
@@ -198,7 +212,7 @@ const push = async ({ payload, tokenData }: { payload: any; tokenData?: any }) =
       payload,
       headers({ tokenData: tokenData })
     );
-    openSignRequest(res.data.uuid);
+    openSignRequest(res.data.uuid, window);
     await status();
     const result = await axios.get(
       `${apiEndPoint}/payload/${res.data.uuid}`,
