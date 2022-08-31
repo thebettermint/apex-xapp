@@ -33,6 +33,8 @@ const Nav = ({ show, setShow }: Props) => {
   const [user, setUser] = useState<undefined | string>(undefined);
   const [page, setPage] = useState<string>(router.pathname.split('/')[1] || '');
 
+  const [windowObj, SetWindowObj] = useState<any>(undefined);
+
   const mobileDetect = useMobileDetect();
 
   const handleNavClick = (page: string) => {
@@ -42,22 +44,27 @@ const Nav = ({ show, setShow }: Props) => {
   };
 
   const openExternalLink = (url: string) => {
-    if (!window) return;
+    if (!windowObj) return;
 
-    console.log(Object.keys(window).length);
-    console.log('window fix:', Object.keys(window).slice(-20));
+    console.log(Object.keys(windowObj).length);
+    console.log('window fix:', Object.keys(windowObj).slice(-20));
 
-    let found = Object.keys(window).find((key) => {
+    let found = Object.keys(windowObj).find((key) => {
       if (key == 'ReactNativeWebView') return true;
       if (key == 'ReactNativeWebview') return true;
       if (key == 'reactnativewebview') return true;
     });
     console.log(found);
 
-    if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, window);
+    if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, windowObj);
     if (mobileDetect.isMobile()) return window.location.assign(url);
     return window.open(url, '_blank');
   };
+
+  useEffect(() => {
+    if (!window) return;
+    SetWindowObj(window);
+  }, [window]);
 
   const handleTweet = () => {
     const tweet =

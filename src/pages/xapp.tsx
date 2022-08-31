@@ -54,23 +54,19 @@ const XApp: NextPage = () => {
     setToken(xAppToken);
   });
 
-  if (typeof window === 'undefined') {
-    return <></>;
-  } else {
-    return (
-      <>
-        <Head>
-          <title>apex</title>
-          <meta name="description" content="" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
+  return (
+    <>
+      <Head>
+        <title>apex</title>
+        <meta name="description" content="" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-        <div className={styles.bg}></div>
+      <div className={styles.bg}></div>
 
-        <Steps></Steps>
-      </>
-    );
-  }
+      <Steps></Steps>
+    </>
+  );
 };
 
 export default XApp;
