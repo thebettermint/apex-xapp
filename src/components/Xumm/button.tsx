@@ -25,7 +25,7 @@ const XButton = ({ request, xumm_api_key, baseUrl, route, className, children }:
       key: xumm_api_key,
     });
 
-    window.open(qr.url);
+    window.open(qr.url, '_blank');
   };
 
   return (
