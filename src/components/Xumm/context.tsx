@@ -124,6 +124,8 @@ const SignContextProvider = (props: any) => {
 
     const payload_data = await xumm.payload(data);
     data.uuid = payload_data ? payload_data.data.uuid : undefined;
+    console.log('this is the payload data... ', data);
+
     const payload_meta = await xumm.getMetadata(data);
 
     console.log(payload_meta?.data.data);
