@@ -57,7 +57,7 @@ const getTokenData = async ({ ott, tokenData }: { ott: string; tokenData?: any }
 
 const sendCommandtoXumm = (command: ICommand | any, window: Window) => {
   if (typeof window.ReactNativeWebView === 'undefined') {
-    console.log('window:', window);
+    console.log('window:', Object.keys(window));
     throw new Error('This is not a react native webview');
   }
   try {
