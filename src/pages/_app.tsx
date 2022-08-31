@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <script
-        data-consolejs-channel="3a865a26-d828-5f1b-4c66-4b3102c28aa7"
+        data-consolejs-channel="7ec8c9da-257b-4e52-9918-453a2cef4aa4"
         src="https://remotejs.com/agent/agent.js"></script>
       {mobileDetect.isXApp() ? (
         <StoreProvider>
