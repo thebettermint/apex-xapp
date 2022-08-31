@@ -24,9 +24,12 @@ const XAppContextProvider = (props: any) => {
   const [fetched, setFetched] = useState<any>(false);
 
   const init = async (oneTimeToken: string) => {
-    if (tokenData) return;
+    if (tokenData && !fetched) return;
+    setFetched(true);
+
     let data = await xAppService.getTokenData({ ott: oneTimeToken });
     console.log(data);
+
     setTokenData(data);
   };
 
