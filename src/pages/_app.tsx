@@ -10,10 +10,6 @@ import Head from 'next/head';
 
 import dynamic from 'next/dynamic';
 
-const DynamicHeader = dynamic(() => import('src/components/Header'), {
-  ssr: false,
-});
-
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -25,10 +21,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         src="https://remotejs.com/agent/agent.js"
         defer
       />
-      {/*       <script src="https://xumm.app/assets/cdn/xumm-xapp-sdk.min.js"></script> */}
       <StoreProvider>
         <div className={styles.main}>
-          <DynamicHeader />
+          <Header />
           <Component {...pageProps} />
         </div>
       </StoreProvider>

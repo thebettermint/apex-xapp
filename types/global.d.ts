@@ -14,5 +14,6 @@ declare module globalThis {
     request: any;
     id: any;
     ReactNativeWebView?: any;
+    sdk: any;
   }
 }

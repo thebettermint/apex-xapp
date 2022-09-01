@@ -45,6 +45,12 @@ const XApp: NextPage = () => {
     console.log('is style :', style);
     console.log('is token :', token);
     if (token) storeContext.init(token);
+
+    if (typeof window !== 'undefined') {
+      const { xApp } = require('xumm-xapp-sdk');
+      const xapp = new xApp();
+      window.sdk = xapp;
+    }
   }, [token]);
 
   useEffect(() => {
