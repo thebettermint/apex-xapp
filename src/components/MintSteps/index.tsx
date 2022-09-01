@@ -26,6 +26,7 @@ const Index = ({ page }: Props) => {
   const fundRef = useRef<any>(null);
   const claimRef = useRef<any>(null);
   const viewRef = useRef<any>(null);
+  const containerRef = useRef<any>(null);
 
   const [isXApp, setIsXApp] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -36,8 +37,12 @@ const Index = ({ page }: Props) => {
   }, []);
 
   return (
-    <div className={style.container}>
-      <Landing ref={landingRef} start={mobileDetect.isXApp() ? fundRef : signInRef} />
+    <div ref={containerRef} className={style.container}>
+      <Landing
+        refContainer={containerRef}
+        ref={landingRef}
+        start={mobileDetect.isXApp() ? fundRef : signInRef}
+      />
       {isXApp ? null : <SignIn ref={signInRef} />}
       <Fund ref={fundRef} />
       <Claim ref={claimRef} />

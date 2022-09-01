@@ -15,9 +15,10 @@ import socials from 'src/lib/sample/socials';
 
 interface Props {
   start?: any;
+  refContainer: any;
 }
 
-const Landing = React.forwardRef(({ start }: Props, ref: Ref<any> | undefined) => {
+const Landing = React.forwardRef(({ start, refContainer }: Props, ref: Ref<any> | undefined) => {
   const storeContext = useStoreContext();
   const mobileDetect = useMobileDetect();
 
@@ -31,15 +32,12 @@ const Landing = React.forwardRef(({ start }: Props, ref: Ref<any> | undefined) =
   };
 
   useEffect(() => {
-    window.onscroll = function () {
-      setShow(false);
-    };
-
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-      if (currentScroll <= 0) {
-        setShow(true);
-        return;
+    refContainer.current.addEventListener('scroll', () => {
+      const scrollTop = refContainer.current.scrollTop;
+      if (scrollTop <= 0) {
+        return setShow(true);
+      } else {
+        return setShow(false);
       }
     });
   });
