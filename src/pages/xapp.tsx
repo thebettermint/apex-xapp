@@ -70,7 +70,7 @@ const XApp: NextPage = () => {
 
       <div className={styles.bg}></div>
 
-      <DynamicSteps />
+      {storeContext.tokenData ? <DynamicSteps /> : null}
     </>
   );
 };
