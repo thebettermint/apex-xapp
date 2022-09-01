@@ -36,13 +36,13 @@ const Index = ({ page }: Props) => {
   }, []);
 
   return (
-    <>
+    <div className={style.container}>
       <Landing ref={landingRef} start={mobileDetect.isXApp() ? fundRef : signInRef} />
       {isXApp ? null : <SignIn ref={signInRef} />}
       <Fund ref={fundRef} />
       <Claim ref={claimRef} />
       <View ref={viewRef} />
-    </>
+    </div>
   );
 };
 
