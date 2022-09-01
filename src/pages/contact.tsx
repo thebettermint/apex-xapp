@@ -23,9 +23,11 @@ const Contact: NextPage = () => {
   const openExternalLink = (url: string) => {
     if (typeof window !== 'undefined') {
       console.log('window:', window);
+      console.log('gwindow:', global.window);
       console.log('webview:', window.ReactNativeWebView);
+      console.log('gwebview:', global.window.ReactNativeWebView);
       console.log(storeContext.tokenData);
-      if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, window);
+      if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, global.window);
       return window.open(url);
     }
   };
