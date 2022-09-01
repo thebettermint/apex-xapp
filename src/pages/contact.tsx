@@ -25,9 +25,9 @@ const Contact: NextPage = () => {
       console.log('window:', window);
       console.log('gwindow:', global.window);
       console.log('webview:', window.ReactNativeWebView);
-      console.log('gwebview:', global.window.ReactNativeWebView);
+      console.log('gwebview:', globalThis.window.ReactNativeWebView);
       console.log(storeContext.tokenData);
-      if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, global.window);
+      if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, globalThis.window);
       return window.open(url);
     }
   };

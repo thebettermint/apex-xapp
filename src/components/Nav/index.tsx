@@ -20,7 +20,6 @@ import useMobileDetect from 'src/hooks/useMobileDetect';
 import { Arrowright, Twitter } from 'src/components/Icons';
 
 import { useRouter } from 'next/router';
-import useWebView from 'src/hooks/useWebView';
 
 interface Props {
   show: boolean;
@@ -35,7 +34,6 @@ const Nav = ({ show, setShow }: Props) => {
   const [page, setPage] = useState<string>(router.pathname.split('/')[1] || '');
 
   const mobileDetect = useMobileDetect();
-  const webView = useWebView();
 
   const handleNavClick = (page: string) => {
     router.push(`/${page}`);
@@ -44,9 +42,8 @@ const Nav = ({ show, setShow }: Props) => {
   };
 
   const openExternalLink = (url: string) => {
-    console.log(webView);
-
-    if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, webView);
+    if (mobileDetect.isXApp())
+      return xAppService.openExternalBrowser(url, globalThis.window.ReactNativeWebView);
     if (mobileDetect.isMobile()) return window.location.assign(url);
     return window.open(url, '_blank');
   };
