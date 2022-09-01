@@ -45,7 +45,7 @@ const Fund = ({ page }: Props) => {
             type="primary"
             theme="light"
             height={40}
-            onClick={handleClick}>
+            onClick={() => handleClick()}>
             <div className={style.buttonText}>FUND</div>
             <div className={style.buttonLogo}>
               <Arrowright size={16} />
