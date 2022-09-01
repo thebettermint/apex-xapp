@@ -21,6 +21,13 @@ const Fund = ({ page }: Props) => {
   const xappContext = useXAppContext();
   const mobileDetect = useMobileDetect();
 
+  const handleClick = () => {
+    if (typeof window !== 'undefined' && typeof window.ReactNativeWebView !== 'undefined') {
+      console.log(window);
+      console.log(true);
+    }
+  };
+
   return (
     <>
       <div className={style.page}>
@@ -34,7 +41,7 @@ const Fund = ({ page }: Props) => {
             type="primary"
             theme="light"
             height={40}
-            onClick={() => console.log('clicked')}>
+            onClick={handleClick}>
             <div className={style.buttonText}>FUND</div>
             <div className={style.buttonLogo}>
               <Arrowright size={16} />
