@@ -21,15 +21,9 @@ const Contact: NextPage = () => {
   const mobileDetect = useMobileDetect();
 
   const openExternalLink = (url: string) => {
-    if (typeof window !== 'undefined') {
-      console.log('window:', window);
-      console.log('gwindow:', global.window);
-      console.log('webview:', window.ReactNativeWebView);
-      console.log('gwebview:', globalThis.window.ReactNativeWebView);
-      console.log(storeContext.tokenData);
-      if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, globalThis.window);
-      return window.open(url);
-    }
+    if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, window);
+    if (mobileDetect.isMobile()) return window.location.assign(url);
+    return window.open(url, '_blank');
   };
 
   return (
