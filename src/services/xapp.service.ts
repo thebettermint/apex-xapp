@@ -56,16 +56,17 @@ const getTokenData = async ({ ott, tokenData }: { ott: string; tokenData?: any }
 }; */
 
 const sendCommandtoXumm = (command: ICommand | any, window: any) => {
-  if (typeof window.ReactNativeWebView === 'undefined') {
+  /*   if (typeof window.ReactNativeWebView === 'undefined') {
     console.log('window.ReactNativeWebView:', window.ReactNativeWebView);
 
     console.log('----------- break ------------');
     throw new Error('This is not a react native webview');
-  }
+  } */
   try {
-    if (window !== undefined && window.ReactNativeWebView) {
+    /*     if (window !== undefined && window.ReactNativeWebView) {
       window.ReactNativeWebView.postMessage(JSON.stringify(command));
-    }
+    } */
+    (window['ReactNativeWebView'] || window).postMessage(JSON.stringify(command), '*');
   } catch (e) {
     console.log(e);
   }
