@@ -46,6 +46,16 @@ const XApp: NextPage = () => {
     Router.push('/signup');
   };
 
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return null;
+  }
+
   useEffect(() => {
     console.log('is mobile :', mobileDetect.isMobile());
     console.log('is style :', style);
