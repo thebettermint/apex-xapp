@@ -44,7 +44,11 @@ const XApp: NextPage = () => {
     console.log('is mobile :', mobileDetect.isMobile());
     console.log('is style :', style);
     console.log('is token :', token);
-    if (token) storeContext.init(token);
+    if (token) {
+      setTimeout(() => {
+        storeContext.init(token);
+      }, 10000);
+    }
   }, [token]);
 
   useEffect(() => {
