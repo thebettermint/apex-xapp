@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, Ref } from 'react';
 import style from './index.module.scss';
 
 import { axiosPublic } from '@/lib/axios/axiosPublic';
@@ -16,7 +16,7 @@ interface Props {
   page?: any;
 }
 
-const Fund = ({ page }: Props) => {
+const Fund = React.forwardRef(({ page }: Props, ref: Ref<any> | undefined) => {
   const storeContext = useStoreContext();
   const xappContext = useXAppContext();
   const mobileDetect = useMobileDetect();
@@ -34,7 +34,7 @@ const Fund = ({ page }: Props) => {
 
   return (
     <>
-      <div className={style.page}>
+      <div ref={ref} className={style.page}>
         <div className={style.descWrapper}>
           <div className={style.title}>ACTIVATE YOUR WALLET</div>
           <div className={style.description}>auto fund your wallet using the public faucet</div>
@@ -55,6 +55,6 @@ const Fund = ({ page }: Props) => {
       </div>
     </>
   );
-};
+});
 
 export default Fund;

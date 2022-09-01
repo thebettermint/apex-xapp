@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, Ref } from 'react';
 import style from './index.module.scss';
 
 import { axiosPublic } from '@/lib/axios/axiosPublic';
@@ -14,12 +14,12 @@ interface Props {
   page?: any;
 }
 
-const Claim = ({ page }: Props) => {
+const Claim = React.forwardRef(({ page }: Props, ref: Ref<any> | undefined) => {
   const storeContext = useStoreContext();
 
   return (
     <>
-      <div className={style.page}>
+      <div ref={ref} className={style.page}>
         <div className={style.descWrapper}>
           <div className={style.title}>CLAIM YOUR NFT</div>
           <div className={style.description}>claim your very first nft</div>
@@ -40,6 +40,6 @@ const Claim = ({ page }: Props) => {
       </div>
     </>
   );
-};
+});
 
 export default Claim;

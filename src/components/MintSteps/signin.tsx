@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, Ref } from 'react';
 import style from './index.module.scss';
 
 import { axiosPublic } from '@/lib/axios/axiosPublic';
@@ -15,7 +15,7 @@ interface Props {
   page?: any;
 }
 
-const SignIn = ({ page }: Props) => {
+const SignIn = React.forwardRef(({ page }: Props, ref: Ref<any> | undefined) => {
   const storeContext = useStoreContext();
 
   const [status, setStatus] = useState<any>(undefined);
@@ -44,7 +44,7 @@ const SignIn = ({ page }: Props) => {
 
   return (
     <>
-      <div className={style.page}>
+      <div ref={ref} className={style.page}>
         <div className={style.descWrapper}>
           <div className={style.title}>SIGN IN</div>
           <div className={style.description}>sign in using a wallet on the xls20d network</div>
@@ -77,6 +77,6 @@ const SignIn = ({ page }: Props) => {
       </div>
     </>
   );
-};
+});
 
 export default SignIn;

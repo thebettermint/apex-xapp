@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, createRef } from 'react';
 import style from './index.module.scss';
 
 import { axiosPublic } from '@/lib/axios/axiosPublic';
@@ -21,13 +21,27 @@ const Index = ({ page }: Props) => {
   const storeContext = useStoreContext();
   const mobileDetect = useMobileDetect();
 
+  const landingRef = useRef<any>(null);
+  const signInRef = useRef<any>(null);
+  const fundRef = useRef<any>(null);
+  const claimRef = useRef<any>(null);
+  const viewRef = useRef<any>(null);
+
+  const [isXApp, setIsXApp] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsMobile(mobileDetect.isMobile());
+    setIsXApp(mobileDetect.isXApp());
+  }, []);
+
   return (
     <>
-      <Landing />
-      {mobileDetect.isXApp() ? null : <SignIn />}
-      <Fund />
-      <Claim />
-      <View />
+      <Landing ref={landingRef} start={mobileDetect.isXApp() ? fundRef : signInRef} />
+      {isXApp ? null : <SignIn ref={signInRef} />}
+      <Fund ref={fundRef} />
+      <Claim ref={claimRef} />
+      <View ref={viewRef} />
     </>
   );
 };

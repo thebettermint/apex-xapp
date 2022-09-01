@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, forwardRef, Ref } from 'react';
 import style from './index.module.scss';
 
 import { axiosPublic } from '@/lib/axios/axiosPublic';
@@ -11,15 +11,24 @@ import { Caretdoubleright } from 'src/components/Icons';
 import Button from 'src/components/Button';
 import useMobileDetect from 'src/hooks/useMobileDetect';
 
+import socials from 'src/lib/sample/socials';
+
 interface Props {
-  page?: any;
+  start?: any;
 }
 
-const Landing = ({ page }: Props) => {
+const Landing = React.forwardRef(({ start }: Props, ref: Ref<any> | undefined) => {
   const storeContext = useStoreContext();
   const mobileDetect = useMobileDetect();
 
   const [show, setShow] = useState<boolean>(true);
+  const [isXApp, setIsXApp] = useState<boolean>(true);
+  const [isMobile, setIsMobile] = useState<boolean>(true);
+
+  const openExternalLink = (url: string) => {
+    if (mobileDetect.isMobile()) return window.location.assign(url);
+    window.open(url, '_blank');
+  };
 
   useEffect(() => {
     window.onscroll = function () {
@@ -35,9 +44,14 @@ const Landing = ({ page }: Props) => {
     });
   });
 
+  useEffect(() => {
+    setIsMobile(mobileDetect.isMobile());
+    setIsXApp(mobileDetect.isXApp());
+  }, []);
+
   return (
     <>
-      <div className={style.page}>
+      <div ref={ref} className={style.page}>
         <div className={`${style.pageHeader}`}>
           <div>APEX DEVELOPER SUMMIT</div>
           <div>NFT Workshop</div>
@@ -53,16 +67,22 @@ const Landing = ({ page }: Props) => {
               type="secondary"
               theme="light"
               height={40}
-              onClick={() => console.log('clicked')}>
+              onClick={() =>
+                start.current.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'end',
+                  inline: 'nearest',
+                })
+              }>
               <div className={style.buttonText}>START</div>
             </Button>
-            {mobileDetect.isMobile() && !mobileDetect.isXApp() ? (
+            {isMobile && !isXApp ? (
               <Button
                 className={style.button}
                 type="secondary"
                 theme="light"
                 height={40}
-                onClick={() => console.log('clicked')}>
+                onClick={() => openExternalLink(socials[2].url)}>
                 <div className={style.buttonText}>OPEN AS XAPP</div>
               </Button>
             ) : null}
@@ -79,6 +99,6 @@ const Landing = ({ page }: Props) => {
       </div>
     </>
   );
-};
+});
 
 export default Landing;

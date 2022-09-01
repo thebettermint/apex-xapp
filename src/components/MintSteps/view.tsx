@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, Ref } from 'react';
 import style from './index.module.scss';
 
 import { axiosPublic } from '@/lib/axios/axiosPublic';
@@ -14,12 +14,12 @@ interface Props {
   page?: any;
 }
 
-const View = ({ page }: Props) => {
+const View = React.forwardRef(({ page }: Props, ref: Ref<any> | undefined) => {
   const storeContext = useStoreContext();
 
   return (
     <>
-      <div className={style.page}>
+      <div ref={ref} className={style.page}>
         <div className={style.descWrapper}>
           <div className={style.title}>VIEW YOUR NFT</div>
           <div className={style.description}>
@@ -43,6 +43,6 @@ const View = ({ page }: Props) => {
       </div>
     </>
   );
-};
+});
 
 export default View;
