@@ -26,6 +26,10 @@ const Fund = ({ page }: Props) => {
       console.log(window);
       console.log(true);
     }
+    if (typeof window !== 'undefined') {
+      console.log(window);
+      console.log(Object.keys(window));
+    }
   };
 
   return (
