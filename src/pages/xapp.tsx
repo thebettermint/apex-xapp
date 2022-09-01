@@ -24,12 +24,6 @@ import useMobileDetect from 'src/hooks/useMobileDetect';
 import { useStoreContext } from 'src/context/store';
 //import useIsTouchDevice from 'src/hooks/useIsTouchDevice';
 
-import dynamic from 'next/dynamic';
-
-const DynamicSteps = dynamic(() => import('src/components/MintSteps'), {
-  ssr: false,
-});
-
 const XApp: NextPage = () => {
   //const isTouchDevice = useIsTouchDevice();
   const mobileDetect = useMobileDetect();
@@ -70,7 +64,7 @@ const XApp: NextPage = () => {
 
       <div className={styles.bg}></div>
 
-      {storeContext.tokenData ? <DynamicSteps /> : null}
+      <Steps />
     </>
   );
 };

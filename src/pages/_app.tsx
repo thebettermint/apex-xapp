@@ -25,6 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         src="https://remotejs.com/agent/agent.js"
         defer
       />
+      {/*       <script src="https://xumm.app/assets/cdn/xumm-xapp-sdk.min.js"></script> */}
       <StoreProvider>
         <div className={styles.main}>
           <DynamicHeader />

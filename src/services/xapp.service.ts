@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ICommand } from 'types/xApp';
+import { xApp } from 'xumm-xapp-sdk';
 
 const xummKey = process.env.NEXT_PUBLIC_XUMM_KEY || '';
 const apiEndPoint =
@@ -104,13 +105,15 @@ const closeXapp = (window: any) => {
 
 const openExternalBrowser = (url: string, window: any) => {
   try {
-    sendCommandtoXumm(
+    /*     sendCommandtoXumm(
       {
         command: 'openBrowser',
         url: url,
       },
       window
-    );
+    ); */
+    const xapp = new xApp();
+    xapp.openBrowser({ url: url });
   } catch (e) {
     throw e;
   }

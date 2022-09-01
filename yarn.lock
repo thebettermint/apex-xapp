@@ -14074,6 +14074,13 @@ xumm-sdk@^1.3.5:
     os-browserify "^0.3.0"
     websocket "^1.0.34"
 
+xumm-xapp-sdk@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/xumm-xapp-sdk/-/xumm-xapp-sdk-1.2.0.tgz#a065ae9049d6a8ce4d39b13c5bd323027182909d"
+  integrity sha512-HJjVmEVlA3mH2OC4dLZtzs0H4rqytZ0oT6fKhZTtZv3V7MVh5Hb+Cci/INuD5FPp1My8pF0QWQBy381N6Gr1kw==
+  dependencies:
+    debug "^4.1.1"
+
 y18n@^4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/y18n/-/y18n-4.0.3.tgz#b5f259c82cd6e336921efd7bfd8bf560de9eeedf"
