@@ -13,6 +13,6 @@ declare module globalThis {
   interface Window {
     request: any;
     id: any;
-    ReactNativeWebView: any;
+    ReactNativeWebView?: any;
   }
 }

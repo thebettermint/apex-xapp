@@ -21,6 +21,9 @@ const Contact: NextPage = () => {
   const mobileDetect = useMobileDetect();
 
   const openExternalLink = (url: string) => {
+    console.log('window:', window);
+    console.log('webview:', window.ReactNativeWebView);
+    console.log(storeContext.tokenData);
     if (mobileDetect.isXApp()) return xAppService.openExternalBrowser(url, window);
     return window.open(url);
   };
