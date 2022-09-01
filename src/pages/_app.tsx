@@ -8,6 +8,12 @@ import Header from 'src/components/Header';
 
 import Head from 'next/head';
 
+import dynamic from 'next/dynamic';
+
+const DynamicHeader = dynamic(() => import('src/components/Header'), {
+  ssr: false,
+});
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -21,7 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       <StoreProvider>
         <div className={styles.main}>
-          <Header />
+          <DynamicHeader />
           <Component {...pageProps} />
         </div>
       </StoreProvider>
