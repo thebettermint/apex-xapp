@@ -53,7 +53,11 @@ const XApp: NextPage = () => {
   }, []);
 
   if (!hasMounted) {
-    return null;
+    return (
+      <>
+        <div>Loading...</div>
+      </>
+    );
   }
 
   useEffect(() => {
