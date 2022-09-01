@@ -9,7 +9,7 @@ import { axiosPrivate } from '@/lib/axios/axiosPrivate';
 import { useStoreContext } from '../context/store';
 import { useState, useEffect } from 'react';
 
-import { Arrowright, ArrowLeft } from 'src/components/Icons';
+import { Arrowright, ArrowLeft, Caretdoubleright } from 'src/components/Icons';
 
 import { useRouter } from 'next/router';
 
@@ -42,6 +42,14 @@ const Contact: NextPage = () => {
         </div>
         <div className={`${styles.pageHeader}`}>
           <div className={styles.bottomTitle}>a whirledlabs presentation</div>
+        </div>
+        <div className={`${styles.pageFooter}`}>
+          <div className={`${styles.scrollDown}`}>
+            <div className={styles.logo}>
+              <Caretdoubleright size={24} stroke={'whitesmoke'} />
+            </div>
+            <div className={styles.text}>scroll for more</div>
+          </div>
         </div>
       </div>
 

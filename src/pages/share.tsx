@@ -124,6 +124,7 @@ const Share: NextPage = () => {
             </div>
           </div>
         </div>
+        <div className={`${styles.pageFooter}`}></div>
       </div>
     </>
   );

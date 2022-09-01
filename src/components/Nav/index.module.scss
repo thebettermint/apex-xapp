@@ -116,12 +116,38 @@
     div {
       margin-bottom: 20px;
 
+      &::after {
+        width: 0px;
+        background: whitesmoke;
+        height: 1px;
+        content: '';
+        display: block;
+        position: absolute;
+        border-bottom: whitesmoke 1px solid;
+        transition: width linear 0.2s;
+      }
+
       &:hover {
         cursor: pointer;
+
+        &::after {
+          width: 50px;
+          background: whitesmoke;
+          height: 1px;
+          content: '';
+          display: block;
+          position: absolute;
+          border-bottom: whitesmoke 1px solid;
+        }
       }
 
       &.active {
         font-variation-settings: 'wght' 600;
+
+        &::after {
+          width: 200px;
+          max-width: 80%;
+        }
       }
     }
   }

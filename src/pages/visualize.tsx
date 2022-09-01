@@ -28,6 +28,7 @@ const Visualizer: NextPage = () => {
         <div className={styles.heroWrapper}>
           <div className={styles.title}></div>
         </div>
+        <div className={`${styles.pageFooter}`}></div>
       </div>
     </>
   );

@@ -45,12 +45,12 @@
   align-items: center;
   justify-content: center;
 
-  background: var(--button-secondary-main-color);
+  background: rgba(29, 29, 29, 0.589);
   /*   color: var(--button-secondary-accent-color); */
-  color: #6e30d7ff;
+  color: rgb(255, 255, 255);
   border-style: solid;
   /* border-color: var(--button-secondary-accent-color); */
-  border-color: #6e30d7ff;
+  border-color: rgb(94, 94, 94);
   border-width: 1px;
   border-radius: 6px;
 
@@ -62,7 +62,7 @@
 
     color: white;
     border-color: transparent;
-    background: #6e30d7ff;
+    background-color: rgba(94, 94, 94, 0.8);
   }
 }
 

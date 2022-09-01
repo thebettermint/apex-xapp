@@ -40,7 +40,7 @@ const Contact: NextPage = () => {
           <div>Contact Us</div>
         </div>
         <div className={styles.heroWrapper}>
-          <div className={`${styles.pageHeader}`}>
+          <div className={`${styles.pageHeader} ${styles.contactPage}`}>
             <div className={styles.title}>PROJECTS</div>
           </div>
           <div className={styles.content}>
@@ -91,7 +91,7 @@ const Contact: NextPage = () => {
       </div>
 
       <div className={`${styles.page} ${styles.contactPage}`}>
-        <div className={`${styles.pageHeader}`}>
+        <div className={`${styles.pageHeader} ${styles.contactPage}`}>
           <div className={styles.title}>TEAM</div>
         </div>
         <div className={styles.heroWrapper}>
