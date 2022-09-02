@@ -9,7 +9,7 @@
   height: 100vh;
   scroll-behavior: smooth;
 
-  scroll-padding-top: 30vh;
+  scroll-padding-top: 20vh;
 
   // Height fix on mobile
   min-height: -webkit-fill-available;
@@ -21,11 +21,13 @@
   align-items: center;
   justify-content: center;
 
+  position: relative;
+
   scroll-snap-align: center;
   scroll-snap-stop: always;
 
   -webkit-overflow-scrolling: touch;
-  overflow-y: scroll;
+  overflow-y: visible;
 
   width: 100vw;
   height: 100vh;
@@ -39,6 +41,21 @@
   flex-shrink: 0;
 
   font-family: Arial, Helvetica, sans-serif;
+
+  .path {
+    position: absolute;
+    height: 70%;
+    width: 60%;
+
+    top: -7%;
+
+    z-index: 4;
+
+    svg {
+      transform: translateX(-12%);
+      stroke: rgb(39, 39, 39);
+    }
+  }
 
   .pageHeader {
     color: whitesmoke;
@@ -123,6 +140,8 @@
 
   .heroWrapper {
     width: 100%;
+
+    z-index: 5;
 
     flex-grow: 1;
     position: relative;
@@ -209,6 +228,8 @@
 
   .buttonContainer {
     width: 50%;
+    max-width: 300px;
+    z-index: 1;
 
     .button {
       .buttonText {
@@ -235,28 +256,56 @@
           transform: rotate(180deg);
         }
       }
+
+      .buttonLogoComplete {
+        padding-right: 20px;
+
+        svg {
+          fill: black;
+          stroke: black;
+          stroke-width: 2.5;
+          transform: rotate(270deg);
+        }
+      }
     }
   }
 
   .descWrapper {
     color: whitesmoke;
     width: 50%;
+    max-width: 300px;
     padding: 5px 0px;
+
+    z-index: 1;
 
     font-family: Montserrat;
     letter-spacing: 0.1em;
 
     margin-bottom: 5px;
 
+    position: relative;
+
+    .circleContainer {
+      position: absolute;
+      width: 100%;
+
+      top: -70px;
+
+      display: flex;
+      justify-content: center;
+    }
+
     .title {
       font-size: 0.9em;
       margin-bottom: 5px;
+      /* text-align: center; */
       //font-variation-settings: 'wght' 700;
     }
 
     .description {
       font-size: 0.6em;
       margin-bottom: 5px;
+      /* text-align: center; */
     }
   }
 }

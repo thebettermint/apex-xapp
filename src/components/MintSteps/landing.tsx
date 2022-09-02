@@ -13,6 +13,8 @@ import useMobileDetect from 'src/hooks/useMobileDetect';
 
 import socials from 'src/lib/sample/socials';
 
+import Swirl from 'src/components/Assets/images/svg/paths/swirl.svg';
+
 interface Props {
   start?: any;
   refContainer: any;

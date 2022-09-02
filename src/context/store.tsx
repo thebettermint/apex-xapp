@@ -10,6 +10,8 @@ import React, {
 import useLocalStorage from '../hooks/useLocalStorage';
 import Router from 'next/router';
 
+import { IWallet } from 'types/general';
+
 import xAppService from 'src/services/xapp.service';
 
 import { IUser } from 'types/next';
@@ -22,6 +24,8 @@ interface IContextProps {
   setUser: Dispatch<SetStateAction<IUser | undefined>>;
   jwt: string | undefined;
   setJwt: Dispatch<SetStateAction<string | undefined>>;
+  wallet: IWallet | undefined;
+  setWallet: Dispatch<SetStateAction<IWallet | undefined>>;
   router: (path: string) => void;
   tokenData: any;
   init: (oneTimeToken: string) => void;
@@ -37,6 +41,7 @@ const StoreContextProvider = (props: any) => {
   const [jwt, setJwt] = useState<string | undefined>(undefined);
   const [theme, setTheme] = useLocalStorage('theme', 'light');
   const [collapsed, toggleCollapse] = useLocalStorage('collapsed', false);
+  const [wallet, setWallet] = useState<IWallet | undefined>(undefined);
 
   const router = (path: string) => {
     Router.push(path);
@@ -68,6 +73,8 @@ const StoreContextProvider = (props: any) => {
         router: router,
         tokenData: tokenData,
         init: init,
+        wallet: wallet,
+        setWallet: setWallet,
       }}>
       {props.children}
     </StoreContext.Provider>

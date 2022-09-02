@@ -2995,6 +2995,15 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
+"@thebettermint/xrpl-auto-funder@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@thebettermint/xrpl-auto-funder/-/xrpl-auto-funder-0.0.3.tgz#1fa3ea1eb9796bc3d2edbdfd9a50a500131b7bc3"
+  integrity sha512-TyGYjflP63Hdy/vz+s50pa2u/cZZCbH58une0WA2kNvrleRKbShoGHlCusJoV3PBrUgrB2XV8rz/if/y6QwUog==
+  dependencies:
+    axios "^0.27.2"
+    ripple-address-codec "^4.2.4"
+    xrpl "^2.3.0"
+
 "@trysound/sax@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
@@ -14038,6 +14047,21 @@ x-default-browser@^0.4.0:
   integrity sha512-7LKo7RtWfoFN/rHx1UELv/2zHGMx8MkZKDq1xENmOCTkfIqZJ0zZ26NEJX8czhnPXVcqS0ARjjfJB+eJ0/5Cvw==
   optionalDependencies:
     default-browser-id "^1.0.4"
+
+xrpl@^2.3.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/xrpl/-/xrpl-2.4.0.tgz#3a160a8341e3ffde7e3fc6dcbe802842667fc744"
+  integrity sha512-/mV4vb0+ls9Rw0Qsy62m0fCcU1ZmdiPRmXBtqJidBE2EUbyA0rTjZwx/6+zxGzZ+fDcLK8T1nWC1W+d1hO71Fw==
+  dependencies:
+    bignumber.js "^9.0.0"
+    bip32 "^2.0.6"
+    bip39 "^3.0.4"
+    https-proxy-agent "^5.0.0"
+    lodash "^4.17.4"
+    ripple-address-codec "^4.2.4"
+    ripple-binary-codec "^1.4.2"
+    ripple-keypairs "^1.1.4"
+    ws "^8.2.2"
 
 xrpl@^2.3.1:
   version "2.3.1"

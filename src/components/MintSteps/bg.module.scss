@@ -1,0 +1,179 @@
+@import '../../styles/scss/default/variables';
+@import '../../styles/scss/default/animations';
+
+.anime {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  .opacity {
+    position: absolute;
+    background: linear-gradient(#313131, #31313100);
+    width: 100%;
+    height: 10%;
+    z-index: 2;
+  }
+
+  .image {
+    z-index: 1;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-image: url(../Assets/images/png/image10180.png);
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    filter: grayscale(1) opacity(0.07);
+  }
+}
+
+.dragon {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  .opacity {
+    position: absolute;
+    background: linear-gradient(#313131, #31313100);
+    width: 100%;
+    height: 20%;
+    z-index: 2;
+  }
+
+  .separator {
+    position: absolute;
+    background: #313131;
+    width: 100%;
+    height: 20px;
+    z-index: 2;
+  }
+
+  .image {
+    z-index: 1;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-image: url(../Assets/images/png/674033.jpeg);
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    filter: grayscale(1) opacity(0.05);
+  }
+}
+
+.punch {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  .opacity {
+    position: absolute;
+    background: linear-gradient(#313131, #31313100);
+    width: 100%;
+    height: 20%;
+    z-index: 2;
+  }
+
+  .separator {
+    position: absolute;
+    background: #313131;
+    width: 100%;
+    height: 20px;
+    z-index: 2;
+  }
+
+  .image {
+    z-index: 1;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-image: url(../Assets/images/png/punch.jpeg);
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    filter: grayscale(1) opacity(0.05);
+  }
+}
+
+.spark {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  .opacity {
+    position: absolute;
+    background: linear-gradient(#313131, #31313100);
+    width: 100%;
+    height: 20%;
+    z-index: 2;
+  }
+
+  .separator {
+    position: absolute;
+    background: #313131;
+    width: 100%;
+    height: 20px;
+    z-index: 2;
+  }
+
+  .image {
+    z-index: 1;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-image: url(../Assets/images/png/spark.jpg);
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    filter: grayscale(1) opacity(0.05);
+  }
+}
+
+.fly {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  .opacity {
+    position: absolute;
+    background: linear-gradient(#313131, #31313100);
+    width: 100%;
+    height: 20%;
+    z-index: 2;
+  }
+
+  .separator {
+    position: absolute;
+    background: #313131;
+    width: 100%;
+    height: 20px;
+    z-index: 2;
+  }
+
+  .image {
+    z-index: 1;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-image: url(../Assets/images/png/fly.png);
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    filter: grayscale(1) opacity(0.05);
+  }
+}

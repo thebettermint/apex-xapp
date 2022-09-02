@@ -43,9 +43,9 @@ const Index = ({ page }: Props) => {
         ref={landingRef}
         start={mobileDetect.isXApp() ? fundRef : signInRef}
       />
-      {isXApp ? null : <SignIn ref={signInRef} />}
-      <Fund ref={fundRef} />
-      <Claim ref={claimRef} />
+      {isXApp ? null : <SignIn next={fundRef} ref={signInRef} />}
+      <Fund next={claimRef} ref={fundRef} />
+      <Claim next={viewRef} ref={claimRef} />
       <View ref={viewRef} />
     </div>
   );

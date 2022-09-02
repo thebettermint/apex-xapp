@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect, Ref } from 'react';
 import style from './index.module.scss';
 
+import bg from './bg.module.scss';
+
 import { axiosPublic } from '@/lib/axios/axiosPublic';
 import { axiosPrivate } from '@/lib/axios/axiosPrivate';
 
@@ -11,15 +13,19 @@ import Button from 'src/components/Button';
 import { ArrowRight, ArrowLeft, Arrowright } from 'src/components/Icons';
 
 interface Props {
-  page?: any;
+  next?: any;
 }
 
-const View = React.forwardRef(({ page }: Props, ref: Ref<any> | undefined) => {
+const View = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
   const storeContext = useStoreContext();
 
   return (
     <>
       <div ref={ref} className={style.page}>
+        <div className={`${bg.spark}`}>
+          <div className={`${bg.image}`}></div>
+          <div className={`${bg.separator}`}></div>
+        </div>
         <div className={style.descWrapper}>
           <div className={style.title}>VIEW YOUR NFT</div>
           <div className={style.description}>

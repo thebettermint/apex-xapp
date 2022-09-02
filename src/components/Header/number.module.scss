@@ -1,0 +1,21 @@
+@import '../../styles/scss/default/variables';
+
+.circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: solid whitesmoke 4px;
+
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  font-family: Montserrat;
+  font-variation-settings: 'wght' 700;
+
+  font-size: 1.5em;
+}
