@@ -32,7 +32,21 @@ const payload = async ({
   try {
     let url = new URL(`${route}/xumm/payload`, baseUrl);
     if (!payload || !jwt) return;
-    const res = await axios.post(url.href, payload, headers({ jwt: jwt, key: key }));
+
+    let opts = {
+      options: {
+        /*         return_url: {
+          app: 'https://http://localhost:3002',
+          web: 'https://http://localhost:3002',
+        }, */
+      },
+    };
+
+    const res = await axios.post(
+      url.href,
+      Object.assign(payload, opts),
+      headers({ jwt: jwt, key: key })
+    );
     return res;
   } catch (e) {
     if (e === '') throw { msg: 'closed', error: false };

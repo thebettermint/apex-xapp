@@ -2995,10 +2995,10 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-"@thebettermint/xrpl-auto-funder@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@thebettermint/xrpl-auto-funder/-/xrpl-auto-funder-0.0.3.tgz#1fa3ea1eb9796bc3d2edbdfd9a50a500131b7bc3"
-  integrity sha512-TyGYjflP63Hdy/vz+s50pa2u/cZZCbH58une0WA2kNvrleRKbShoGHlCusJoV3PBrUgrB2XV8rz/if/y6QwUog==
+"@thebettermint/xrpl-auto-funder@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@thebettermint/xrpl-auto-funder/-/xrpl-auto-funder-0.0.4.tgz#866d42ac9b5e29afb4eb2632e1aff081df8bc50c"
+  integrity sha512-Sjyt5SyOW2Up21MNNPXoLYf09BwNYqeS5oW1CsxvFIoL6s/KBE6eb0uq8ggDElghezHHbYQ0o6FSsAN/q6zq7w==
   dependencies:
     axios "^0.27.2"
     ripple-address-codec "^4.2.4"

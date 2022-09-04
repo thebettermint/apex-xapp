@@ -43,6 +43,7 @@ export const Facebook = (props:any) => <Icon {...props} name="facebook" />;
 export const Github = (props:any) => <Icon {...props} name="github" />;
 export const Globe = (props:any) => <Icon {...props} name="globe" />;
 export const Ham = (props:any) => <Icon {...props} name="ham" />;
+export const Hex = (props:any) => <Icon {...props} name="hex" />;
 export const Home = (props:any) => <Icon {...props} name="home" />;
 export const InboxIn = (props:any) => <Icon {...props} name="inbox-in" />;
 export const InboxOut = (props:any) => <Icon {...props} name="inbox-out" />;

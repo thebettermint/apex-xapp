@@ -56,33 +56,19 @@ const getTokenData = async ({ ott, tokenData }: { ott: string; tokenData?: any }
 }; */
 
 const sendCommandtoXumm = (command: ICommand | any, window: Window) => {
-  /*   if (typeof window.ReactNativeWebView === 'undefined') {
-    console.log('window.ReactNativeWebView:', window.ReactNativeWebView);
-
-    console.log('----------- break ------------');
-    throw new Error('This is not a react native webview');
-  } */
   try {
-    /*     if (window !== undefined && window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage(JSON.stringify(command));
-    } */
-    if (typeof window !== 'undefined') {
-      window['ReactNativeWebView'].postMessage(JSON.stringify(command));
+    if (typeof window['ReactNativeWebView'] === 'undefined') {
+      throw new Error('This is not a react native webview');
     }
+    window['ReactNativeWebView'].postMessage(JSON.stringify(command));
   } catch (e) {
     console.log(e);
   }
 };
 
-const openSignRequest = (uuid: string, window: any) => {
+const openSignRequest = (uuid: string) => {
   try {
-    sendCommandtoXumm(
-      {
-        command: 'openSignRequest',
-        uuid: uuid,
-      },
-      window
-    );
+    window.sdk.openSignRequest({ uuid: uuid });
   } catch (e) {
     throw e;
   }
@@ -104,13 +90,6 @@ const closeXapp = (window: any) => {
 
 const openExternalBrowser = (url: string, window: any) => {
   try {
-    /*     sendCommandtoXumm(
-      {
-        command: 'openBrowser',
-        url: url,
-      },
-      window
-    ); */
     window.sdk.openBrowser({ url: url });
   } catch (e) {
     throw e;
@@ -182,7 +161,7 @@ const payload = async ({ payload, tokenData }: { payload: any; tokenData?: any }
       payload,
       headers({ tokenData: tokenData })
     );
-    openSignRequest(res.data.uuid, window);
+    openSignRequest(res.data.uuid);
     await status();
     const result = await axios.get(`${apiEndPoint}/xumm/payload/${res.data.uuid}`, headers({}));
     return result;
@@ -199,7 +178,7 @@ const event = async ({ payload, tokenData }: { payload: any; tokenData?: any }) 
       payload,
       headers({ tokenData: tokenData })
     );
-    openSignRequest(res.data.uuid, window);
+    openSignRequest(res.data.uuid);
     await status();
     const result = await axios.get(
       `${apiEndPoint}/xumm/payload/${res.data.uuid}`,
@@ -219,7 +198,7 @@ const push = async ({ payload, tokenData }: { payload: any; tokenData?: any }) =
       payload,
       headers({ tokenData: tokenData })
     );
-    openSignRequest(res.data.uuid, window);
+    openSignRequest(res.data.uuid);
     await status();
     const result = await axios.get(
       `${apiEndPoint}/payload/${res.data.uuid}`,

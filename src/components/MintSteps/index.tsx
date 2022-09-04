@@ -31,10 +31,17 @@ const Index = ({ page }: Props) => {
   const [isXApp, setIsXApp] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
+  const [data, setData] = useState<any>(undefined);
+  const [wallet, setWallet] = useState<any>(undefined);
+  const [validated, setValidated] = useState<any>(undefined);
+
   useEffect(() => {
     setIsMobile(mobileDetect.isMobile());
     setIsXApp(mobileDetect.isXApp());
-  }, []);
+    if (storeContext.wallet) setWallet(storeContext.wallet);
+    if (storeContext.validated) setValidated(storeContext.validated);
+    if (storeContext.data[0]) setData(storeContext.data[0]);
+  }, [storeContext.wallet, storeContext.validated, storeContext.data[0]]);
 
   return (
     <div ref={containerRef} className={style.container}>
@@ -44,9 +51,9 @@ const Index = ({ page }: Props) => {
         start={mobileDetect.isXApp() ? fundRef : signInRef}
       />
       {isXApp ? null : <SignIn next={fundRef} ref={signInRef} />}
-      <Fund next={claimRef} ref={fundRef} />
-      <Claim next={viewRef} ref={claimRef} />
-      <View ref={viewRef} />
+      {!wallet ? null : <Fund next={claimRef} ref={fundRef} />}
+      {!validated ? null : <Claim next={viewRef} ref={claimRef} />}
+      {data && data.claimedAt ? <View ref={viewRef} /> : null}
     </div>
   );
 };

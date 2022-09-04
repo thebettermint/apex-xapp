@@ -1,12 +1,12 @@
 import { NextApiResponse } from 'next';
 import { ExtendedNextApiRequest } from 'types/next';
-import xrplFunder from '@thebettermint/xrpl-auto-funder';
+import fund from '@thebettermint/xrpl-auto-funder';
 
 const handler = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
   const { method } = req;
 
   if (method == 'POST') {
-    let response = await xrplFunder({
+    let response = await fund({
       publicAddress: req.body.publicAddress,
       network: req.body.network,
     });

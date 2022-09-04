@@ -11,6 +11,7 @@ import { useStoreContext } from '../../context/store';
 import Button from 'src/components/Button';
 
 import { ArrowRight, ArrowLeft, Arrowright } from 'src/components/Icons';
+import Router, { useRouter } from 'next/router';
 
 interface Props {
   next?: any;
@@ -18,6 +19,11 @@ interface Props {
 
 const View = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
   const storeContext = useStoreContext();
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/visualize`);
+  };
 
   return (
     <>
@@ -39,7 +45,7 @@ const View = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
             type="primary"
             theme="light"
             height={40}
-            onClick={() => console.log('clicked')}>
+            onClick={handleClick}>
             <div className={style.buttonText}>VIEW</div>
             <div className={style.buttonLogo}>
               <Arrowright size={16} />

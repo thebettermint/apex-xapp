@@ -1,0 +1,206 @@
+//@import 'scss/styles/variables';
+@import 'scss/default/variables';
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  max-height: calc(100% - 88px);
+
+  flex-grow: 1;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+
+  .top,
+  .bottom {
+    width: 80%;
+    position: relative;
+    color: whitesmoke;
+    font-family: Montserrat;
+    letter-spacing: 0.2em;
+    font-size: 0.8em;
+    margin: 2em 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 1em;
+
+    .wallet {
+      flex-grow: 1;
+      word-break: break-all;
+      text-align: left;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      padding-right: 2em;
+    }
+
+    .logo {
+      right: -48px;
+
+      &:hover {
+        cursor: pointer;
+      }
+      svg {
+      }
+    }
+  }
+
+  .inner {
+    width: 80%;
+    height: 100%;
+
+    border-radius: 10px;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    color: whitesmoke;
+
+    overflow: hidden;
+    overflow-y: auto;
+    text-overflow: ellipsis;
+    background-color: rgba(128, 128, 128, 0);
+    border: rgb(131, 131, 131) 1px solid;
+
+    font-family: Montserrat;
+    letter-spacing: 0.2em;
+    font-size: 0.8em;
+
+    &.alignTop {
+      justify-content: flex-start;
+      overflow-y: auto;
+      padding: 1em 1em;
+    }
+
+    .selectorContainer {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      padding-bottom: 1em;
+      border-bottom: rgb(131, 131, 131) 1px solid;
+
+      .selector {
+        width: 50%;
+        height: 100%;
+        text-align: center;
+        color: rgb(131, 131, 131);
+
+        &:hover {
+          cursor: pointer;
+          color: whitesmoke;
+        }
+
+        &.active {
+          color: whitesmoke;
+        }
+      }
+
+      .divider {
+        border-left: rgb(131, 131, 131) 1px solid;
+      }
+    }
+
+    .assetContainer {
+      width: 100%;
+
+      overflow-y: auto;
+
+      .asset {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        min-height: 5em;
+
+        padding: 1em 0;
+
+        border-bottom: rgb(131, 131, 131) 1px solid;
+
+        .assetWrapper {
+          display: flex;
+          flex-direction: row;
+
+          color: whitesmoke;
+
+          font-family: Montserrat;
+          letter-spacing: 0.2em;
+          font-size: 1.2em;
+
+          .currency {
+            margin-right: 10px;
+          }
+
+          .id {
+            color: whitesmoke;
+
+            font-family: Montserrat;
+            letter-spacing: 0.2em;
+            font-size: 0.8em;
+          }
+        }
+
+        .issuer {
+          color: whitesmoke;
+          font-family: Montserrat;
+          letter-spacing: 0.2em;
+          font-size: 0.8em;
+        }
+      }
+    }
+
+    .msg {
+      padding: 0 20px;
+    }
+
+    .help {
+      padding: 0 20px;
+    }
+
+    .buttonContainer {
+      width: 50%;
+      max-width: 300px;
+      z-index: 1;
+      margin: 2em 0;
+
+      .button {
+        .buttonText {
+          transition: flex-grow cubic-bezier(0.87, 0, 0.19, 1) 0.5s;
+          flex-grow: 0;
+          letter-spacing: 0;
+          padding-left: 30px;
+          margin-right: 20px;
+        }
+
+        &:hover {
+          .buttonText {
+            flex-grow: 1;
+          }
+        }
+
+        .buttonLogo {
+          padding-right: 20px;
+
+          svg {
+            fill: white;
+            stroke: white;
+            stroke-width: 2.5;
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
+}

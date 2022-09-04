@@ -25,7 +25,7 @@ const SignIn = React.forwardRef(({ next, page }: Props, ref: Ref<any> | undefine
   const storeContext = useStoreContext();
 
   const [status, setStatus] = useState<any>(undefined);
-  const [wallet, setWallet] = useState<any>(storeContext.wallet?.key);
+  const [wallet, setWallet] = useState<any>(undefined);
 
   const apiEndPoint =
     process.env.NODE_ENV == 'production'
@@ -39,20 +39,18 @@ const SignIn = React.forwardRef(({ next, page }: Props, ref: Ref<any> | undefine
     )
       return;
 
-    setWallet({
-      key: status.response.response.account,
-      method: 'xumm',
-    });
-    storeContext.setWallet({
-      key: status.response.response.account,
-      method: 'xumm',
-    });
+    setWallet(status.response.response.account);
+    storeContext.setWallet(status.response.response.account);
   };
 
   useEffect(() => {
     if (status == undefined) return;
     if (status.state == 'signed') handleSignIn(status);
   }, [status]);
+
+  useEffect(() => {
+    if (storeContext.wallet) setWallet(storeContext.wallet);
+  }, [storeContext.wallet]);
 
   return (
     <>
@@ -98,17 +96,6 @@ const SignIn = React.forwardRef(({ next, page }: Props, ref: Ref<any> | undefine
               </div>
             </Button>
           )}
-          {/*           <Button
-            className={style.button}
-            type="primary"
-            theme="light"
-            height={40}
-            onClick={() => console.log('clicked')}>
-            <div className={style.buttonText}>SIGN IN</div>
-            <div className={style.buttonLogo}>
-              <Arrowright size={16} />
-            </div>
-          </Button> */}
         </div>
       </div>
     </>

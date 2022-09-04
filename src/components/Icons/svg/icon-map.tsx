@@ -40,6 +40,7 @@ import Facebook from './facebook.svg';
 import Github from './github.svg';
 import Globe from './globe.svg';
 import Ham from './ham.svg';
+import Hex from './hex.svg';
 import Home from './home.svg';
 import InboxIn from './inbox-in.svg';
 import InboxOut from './inbox-out.svg';
@@ -128,6 +129,7 @@ const map:IIcon =  {
 "github": Github, 
 "globe": Globe, 
 "ham": Ham, 
+"hex": Hex, 
 "home": Home, 
 "inbox-in": InboxIn, 
 "inbox-out": InboxOut, 

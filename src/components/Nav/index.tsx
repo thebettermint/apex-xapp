@@ -92,6 +92,16 @@ const Nav = ({ show, setShow }: Props) => {
             visualize
           </div>
           <div
+            onClick={() => handleNavClick('scan')}
+            className={page == 'scan' ? style.active : 'null'}>
+            scan
+          </div>
+          <div
+            onClick={() => handleNavClick('monitor')}
+            className={page == 'monitor' ? style.active : 'null'}>
+            monitor
+          </div>
+          <div
             onClick={() => handleNavClick('share')}
             className={page == 'share' ? style.active : 'null'}>
             share

@@ -11,7 +11,7 @@ import { useStoreContext } from '../../context/store';
 import Button from 'src/components/Button';
 
 import { ArrowRight, ArrowLeft, Arrowright } from 'src/components/Icons';
-import { useXAppContext } from 'src/context/xapp';
+
 import useMobileDetect from 'src/hooks/useMobileDetect';
 
 import walletService from 'src/services/wallet.service';
@@ -22,30 +22,32 @@ interface Props {
 
 const Fund = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
   const storeContext = useStoreContext();
-  const xappContext = useXAppContext();
   const mobileDetect = useMobileDetect();
 
   const [status, setStatus] = useState<any>(undefined);
+  const [isXApp, setIsXApp] = useState<boolean>(true);
+  const [isMobile, setIsMobile] = useState<boolean>(true);
+
+  useEffect(() => {
+    setIsMobile(mobileDetect.isMobile());
+    setIsXApp(mobileDetect.isXApp());
+    if (storeContext.validated) setStatus(true);
+  }, [storeContext.validated]);
 
   const handleClick = async () => {
-    /*     const api = new Client('wss://xls20-sandbox.rippletest.net:51233');
-    await api.connect(); */
-
-    if (storeContext.wallet?.key) {
-      /*       let Wallet = new xrpl.Wallet(storeContext.wallet?.key, '');
-      const { wallet, balance } = await api.fundWallet(Wallet);
-      console.log(wallet);
-      console.log(balance);
-    } */
-
+    if (storeContext.wallet) {
       let params = {
-        publicAddress: storeContext.wallet?.key,
+        publicAddress: storeContext.wallet,
         network: 'nft',
       };
 
       let response = await walletService.fund(params);
-      console.log(response);
-      setStatus(true);
+
+      if (response instanceof Error) return;
+      storeContext.setValidated(true);
+      return setStatus(true);
+    } else {
+      return;
     }
   };
 
@@ -54,7 +56,7 @@ const Fund = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
       <div ref={ref} className={style.page}>
         <div className={`${bg.fly}`}>
           <div className={`${bg.image}`}></div>
-          <div className={`${bg.separator}`}></div>
+          <div className={`${isXApp ? bg.opacity : bg.separator}`}></div>
         </div>
         <div className={style.descWrapper}>
           <div className={style.title}>ACTIVATE YOUR WALLET</div>

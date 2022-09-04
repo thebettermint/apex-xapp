@@ -10,6 +10,7 @@ const currencyHexToUTF8 = (code: string) => {
     return decoded.slice(0, padNull);
   } catch (error) {
     console.log(error);
+    return code;
   }
 };
 

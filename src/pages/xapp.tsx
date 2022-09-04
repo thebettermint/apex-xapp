@@ -20,15 +20,11 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 import useMobileDetect from 'src/hooks/useMobileDetect';
-/* import { useXAppContext } from 'src/context/xapp'; */
+
 import { useStoreContext } from 'src/context/store';
-//import useIsTouchDevice from 'src/hooks/useIsTouchDevice';
 
 const XApp: NextPage = () => {
-  //const isTouchDevice = useIsTouchDevice();
   const mobileDetect = useMobileDetect();
-  /*   const XAppContext = useXAppContext(); */
-
   const storeContext = useStoreContext();
 
   const router = useRouter();
@@ -43,9 +39,7 @@ const XApp: NextPage = () => {
   useEffect(() => {
     console.log('is mobile :', mobileDetect.isMobile());
     console.log('is style :', style);
-    console.log('is token :', token);
     if (token) storeContext.init(token);
-
     if (typeof window !== 'undefined') {
       const { xApp } = require('xumm-xapp-sdk');
       const xapp = new xApp();

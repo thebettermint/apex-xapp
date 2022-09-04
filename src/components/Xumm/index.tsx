@@ -13,6 +13,7 @@ interface Props {
   header: Boolean;
   showQR: Boolean;
   showButtons: Boolean;
+  show: Boolean;
   setState?: Dispatch<SetStateAction<any>>;
 }
 
@@ -27,6 +28,7 @@ const Index = ({
   header,
   showQR,
   showButtons,
+  show,
   setState,
 }: Props) => {
   return (
@@ -41,6 +43,7 @@ const Index = ({
           header={header}
           showButtons={showButtons}
           showQR={showQR}
+          show={show}
         />
       </Suspense>
     </SignContextProvider>

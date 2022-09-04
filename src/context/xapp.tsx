@@ -1,10 +1,48 @@
-import React, { useState, createContext, useContext } from 'react';
+import { AxiosResponse } from 'axios';
+import React, {
+  useState,
+  createContext,
+  useContext,
+  Dispatch,
+  SetStateAction,
+  ReactElement,
+  useEffect,
+} from 'react';
 
-import xAppService from 'src/services/xapp.service';
+import xumm from '../services/xumm.service';
+
+interface IQr {
+  url: string;
+  qrcode: string;
+  websocket: string;
+  uuid: string;
+}
+
+interface IXummData {
+  request: any;
+  baseUrl: string;
+  route: string;
+  key: string;
+  jwt?: string | undefined;
+  payload?: any;
+  uuid?: string | undefined;
+}
 
 interface IContextProps {
-  tokenData: any;
-  init: (oneTimeToken: string) => void;
+  opened: Boolean;
+  scanned: Boolean;
+  signed: Boolean;
+  error: Boolean;
+  refresh: () => void;
+  qr: IQr | undefined;
+  setQr: Dispatch<SetStateAction<IQr | undefined>>;
+  meta: any | undefined;
+  setMeta: Dispatch<SetStateAction<AxiosResponse<any, any> | undefined>>;
+  xummData: IXummData | undefined;
+  expire: undefined | number;
+  setXummData: Dispatch<SetStateAction<IXummData | undefined>>;
+  payload: (tx: any) => Promise<void>;
+  onDemand: (tx: any) => Promise<any>;
 }
 
 const XAppContext = createContext({} as IContextProps);
@@ -12,21 +50,137 @@ const XAppContext = createContext({} as IContextProps);
 export const useXAppContext = () => useContext(XAppContext);
 
 const XAppContextProvider = (props: any) => {
-  const [tokenData, setTokenData] = useState<any>(undefined);
-  const [fetched, setFetched] = useState<any>(false);
+  const [websocket, setWebsocket] = useState<undefined | WebSocket>(undefined);
+  const [opened, setOpened] = useState<boolean>(false);
+  const [scanned, setScanned] = useState<boolean>(false);
+  const [signed, setSigned] = useState<boolean>(false);
+  const [rejected, setRejected] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [qr, setQr] = useState<IQr | undefined>(undefined);
+  const [expire, setExpire] = useState<number | undefined>(undefined);
+  const [meta, setMeta] = useState<AxiosResponse | undefined>(undefined);
 
-  const init = async (oneTimeToken: string) => {
-    if (tokenData && !fetched) return;
-    setFetched(true);
+  const [xummData, setXummData] = useState<IXummData | undefined>(undefined);
 
-    let data = await xAppService.getTokenData({ ott: oneTimeToken });
-    console.log(data);
-
-    setTokenData(data);
+  const listenForExpiration = async (url: string) => {
+    let ws = await xumm.openWebSocket(url);
+    ws.onmessage = (event) => {
+      let resp = JSON.parse(event.data);
+      if (resp.signed) ws.close();
+      if (resp.expires_in_seconds) setExpire(resp.expires_in_seconds);
+    };
   };
 
+  const listenForScan = async (url: string) => {
+    console.log('listening for scan...');
+    let scanned = await xumm.scannedWebSocket(url);
+    if (scanned instanceof Error) return setError(true);
+    props.setState({ state: 'scanned', response: scanned });
+    setScanned(true);
+  };
+
+  const listenForSign = async (url: string) => {
+    console.log('listening for sign...');
+    let signed: any = await xumm.signedWebSocket(url);
+    if (signed instanceof Error) return setError(true);
+
+    if (!xummData) return;
+    const payload_meta = await xumm.getMetadata(xummData);
+
+    props.setState({ state: 'signed', response: payload_meta?.data.data });
+    setSigned(true);
+  };
+
+  const handlePayload = async () => {
+    if (xummData == undefined) return;
+    let data = xummData;
+    let jwt = await xumm.init(data);
+
+    data.jwt = jwt ? jwt : undefined;
+    data.payload = { txjson: data.request };
+
+    const payload_data = await xumm.payload(data);
+    data.uuid = payload_data ? payload_data.data.uuid : undefined;
+    const payload_meta = await xumm.getMetadata(data);
+
+    console.log(payload_meta?.data.data);
+    setMeta(payload_meta?.data.data);
+
+    let qr = {
+      url: payload_data ? payload_data.data.next.always : undefined,
+      qrcode: payload_data ? payload_data.data.refs.qr_png : undefined,
+      websocket: payload_data ? payload_data.data.refs.websocket_status : undefined,
+      uuid: payload_data ? payload_data.data.uuid : undefined,
+    };
+
+    setQr(qr);
+  };
+
+  const onDemand = async (data: IXummData) => {
+    let jwt = await xumm.init(data);
+
+    data.jwt = jwt ? jwt : undefined;
+    data.payload = { txjson: data.request };
+
+    const payload_data = await xumm.payload(data);
+    data.uuid = payload_data ? payload_data.data.uuid : undefined;
+    console.log('this is the payload data... ', data);
+
+    const payload_meta = await xumm.getMetadata(data);
+
+    console.log(payload_meta?.data.data);
+    setMeta(payload_meta?.data.data);
+
+    let qr = {
+      url: payload_data ? payload_data.data.next.always : undefined,
+      qrcode: payload_data ? payload_data.data.refs.qr_png : undefined,
+      websocket: payload_data ? payload_data.data.refs.websocket_status : undefined,
+      uuid: payload_data ? payload_data.data.uuid : undefined,
+    };
+
+    setQr(qr);
+    setXummData(data);
+    return qr;
+  };
+
+  const refresh = () => {
+    setError(false);
+    setScanned(false);
+    setSigned(false);
+    if (!xummData) return;
+    handlePayload();
+  };
+
+  useEffect(() => {
+    if (!qr) return;
+    listenForExpiration(qr.websocket);
+    listenForScan(qr.websocket);
+    listenForSign(qr.websocket);
+  }, [qr]);
+
+  useEffect(() => {
+    if (!xummData || qr) return;
+    handlePayload();
+  }, [xummData]);
+
   return (
-    <XAppContext.Provider value={{ tokenData: tokenData, init: init }}>
+    <XAppContext.Provider
+      value={{
+        opened: opened,
+        scanned: scanned,
+        signed: signed,
+        error: error,
+        refresh: refresh,
+        payload: handlePayload,
+        qr: qr,
+        setQr: setQr,
+        meta: meta,
+        setMeta: setMeta,
+        xummData: xummData,
+        setXummData: setXummData,
+        expire: expire,
+        onDemand: onDemand,
+      }}>
       {props.children}
     </XAppContext.Provider>
   );

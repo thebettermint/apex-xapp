@@ -66,8 +66,8 @@ const SignContextProvider = (props: any) => {
     let ws = await xumm.openWebSocket(url);
     ws.onmessage = (event) => {
       let resp = JSON.parse(event.data);
-      if (resp.expires_in_seconds) setExpire(resp.expires_in_seconds);
       if (resp.signed) ws.close();
+      if (resp.expires_in_seconds) setExpire(resp.expires_in_seconds);
     };
   };
 
@@ -124,11 +124,8 @@ const SignContextProvider = (props: any) => {
 
     const payload_data = await xumm.payload(data);
     data.uuid = payload_data ? payload_data.data.uuid : undefined;
-    console.log('this is the payload data... ', data);
 
     const payload_meta = await xumm.getMetadata(data);
-
-    console.log(payload_meta?.data.data);
     setMeta(payload_meta?.data.data);
 
     let qr = {

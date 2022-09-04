@@ -13,18 +13,23 @@ const getSavedValue = (key: string, initialValue: any) => {
   return;
 };
 
-const useLocalStorage = (key: string, initialValue: string | boolean) => {
+const useLocalStorage = (key: string, initialValue: string | boolean | undefined) => {
   const [value, setValue] = useState(() => {
     return getSavedValue(key, initialValue);
   });
 
   useEffect(() => {
-    let saved = getSavedValue(key, initialValue);
-    localStorage.setItem(key, JSON.stringify(saved));
+    if (typeof window !== 'undefined') {
+      let saved = getSavedValue(key, initialValue);
+      if (initialValue == undefined && !saved) return localStorage.removeItem(key);
+      localStorage.setItem(key, JSON.stringify(saved));
+    }
   }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      console.log(value);
+      if (value == undefined) return localStorage.removeItem(key);
       localStorage.setItem(key, JSON.stringify(value));
     }
     return;

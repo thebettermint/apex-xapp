@@ -7,6 +7,7 @@ import Qr from './container';
 import Title from './title';
 
 import style from './index.module.scss';
+import useMobileDetect from 'src/hooks/useMobileDetect';
 
 interface IRequest {
   name: string;
@@ -30,6 +31,7 @@ interface Props {
   header: Boolean;
   showQR: Boolean;
   showButtons: Boolean;
+  show: Boolean;
   setState?: Dispatch<SetStateAction<any>>;
 }
 
@@ -42,9 +44,17 @@ export const XummQr = ({
   header,
   showQR,
   showButtons,
+  show,
   setState,
 }: Props) => {
   const signContext = useSignContext();
+  const mobileDetect = useMobileDetect();
+
+  useEffect(() => {
+    if (!signContext.qr || show) return;
+    if (mobileDetect.isMobile()) return window.location.assign(signContext.qr.url);
+    window.open(signContext.qr.url, '_blank');
+  }, [signContext.qr]);
 
   useEffect(() => {
     signContext.setXummData({
@@ -57,11 +67,13 @@ export const XummQr = ({
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className={style.wrapper}>
-        {header ? <Title /> : null}
-        {showQR ? <Qr size={size} /> : null}
-        {showButtons ? <XummButtons /> : null}
-      </div>
+      {!show ? null : (
+        <div className={style.wrapper}>
+          {header ? <Title /> : null}
+          {showQR ? <Qr size={size} /> : null}
+          {showButtons ? <XummButtons /> : null}
+        </div>
+      )}
     </Suspense>
   );
 };

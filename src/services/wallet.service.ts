@@ -13,6 +13,58 @@ const fund = async (params: { publicAddress: string; network: string }) => {
   }
 };
 
+const mint = async (params: { publicAddress: string }) => {
+  try {
+    let response = await axios.post(`/api/wallets/mint`, {
+      address: params.publicAddress,
+    });
+
+    return response;
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+
+const getByAddress = async (params: { publicAddress: string }) => {
+  try {
+    let response = await axios.post(`/api/wallets/findByAddress`, {
+      address: params.publicAddress,
+    });
+
+    return response;
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+
+const claimed = async (params: { uuid: string }) => {
+  try {
+    let response = await axios.post(`/api/wallets/claimed`, {
+      uuid: params.uuid,
+    });
+
+    return response;
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+
+const consumed = async (params: { uuid: string }) => {
+  try {
+    let response = await axios.post(`/api/wallets/consumed`, {
+      uuid: params.uuid,
+    });
+
+    return response;
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+
 export default {
   fund,
+  mint,
+  getByAddress,
+  claimed,
+  consumed,
 };

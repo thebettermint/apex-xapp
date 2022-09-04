@@ -36,6 +36,7 @@ export default {
     secret: env['WALLET_SECRET'],
   },
   api: {
+    url: env['API_URL'],
     key: env['API_KEY'],
     secret: env['API_SECRET'],
   },
@@ -56,5 +57,8 @@ export default {
   xumm: {
     key: env['XUMM_KEY'] || '',
     secret: env['XUMM_SECRET'] || '',
+  },
+  ipfs: {
+    gateway: env['IPFS_GATEWAY'] || '',
   },
 };

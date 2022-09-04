@@ -7,7 +7,7 @@ const account_nft = async (api: Client, account: string) => {
       account: account,
     };
 
-    let response = await api.request(request);
+    let response: any = await api.request(request);
 
     return response.result;
   } catch (error: any) {
