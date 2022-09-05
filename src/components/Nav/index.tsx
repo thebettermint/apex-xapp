@@ -95,11 +95,13 @@ const Nav = ({ show, setShow }: Props) => {
             className={page == 'visualize' ? style.active : 'null'}>
             visualize
           </div>
-          <div
-            onClick={() => handleNavClick('scan')}
-            className={page == 'scan' ? style.active : 'null'}>
-            scan
-          </div>
+          {mobileDetect.isXApp() ? (
+            <div
+              onClick={() => handleNavClick('scan')}
+              className={page == 'scan' ? style.active : 'null'}>
+              scan
+            </div>
+          ) : null}
           <div
             onClick={() => handleNavClick('monitor')}
             className={page == 'monitor' ? style.active : 'null'}>

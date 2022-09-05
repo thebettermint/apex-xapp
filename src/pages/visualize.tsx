@@ -10,7 +10,7 @@ import { axiosPrivate } from '@/lib/axios/axiosPrivate';
 import { useStoreContext } from '../context/store';
 import { useState, useEffect } from 'react';
 
-import { InboxOut, Arrowright } from 'src/components/Icons';
+import { InboxOut, Arrowright, Arrowclockwiseback } from 'src/components/Icons';
 
 import account_balance from '../lib/xrpl/account_bal';
 import account_nft from '../lib/xrpl/account_nft';
@@ -41,6 +41,7 @@ const Visualizer: NextPage = () => {
   const [image, setImage] = useState<undefined | string>(undefined);
   const [balance, setBalance] = useState<any>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [data, setData] = useState<any>(undefined);
 
   const [signIn, setSignIn] = useState<any>(undefined);
 
@@ -69,7 +70,7 @@ const Visualizer: NextPage = () => {
     return token;
   };
 
-  const getAccountNFT = async (wallet: string | undefined) => {
+  const getAccountNFT = async (wallet: any) => {
     if (!storeContext.client || !storeContext.data[0]) return setBalance('error');
     if (!wallet) return setBalance('error');
     let response: any = await account_nft(storeContext.client, wallet);
@@ -95,6 +96,27 @@ const Visualizer: NextPage = () => {
     return;
   };
 
+  const checkNFTStatus = async () => {
+    if (!storeContext.wallet) return;
+    setIsLoading(true);
+
+    console.log(wallet);
+
+    let response = await walletService.getByAddress({ publicAddress: storeContext.wallet });
+    if (!(response instanceof Error)) {
+      if (response.data.response === 'address not found in database') {
+        setIsLoading(false);
+        return setData(undefined);
+      }
+      setIsLoading(false);
+      return setData(response.data.response);
+    } else {
+      setIsLoading(false);
+      setBalance('error');
+      return setData(undefined);
+    }
+  };
+
   const handleBack = () => {
     Router.push('/');
   };
@@ -108,6 +130,7 @@ const Visualizer: NextPage = () => {
     setWallet(storeContext.wallet);
     setIsLoading(true);
     getAccountNFT(storeContext.wallet);
+    setData(storeContext.data[0]);
   }, [storeContext.wallet, storeContext.client, storeContext.data[0]]);
 
   return (
@@ -165,14 +188,14 @@ const Visualizer: NextPage = () => {
             <div className={target.inner}>
               <div className={target.hero}></div>
               <div className={target.assetContainer}>
-                <div className={target.id}>{storeContext.data[0].tokenId}</div>
+                <div className={target.id}>{data.tokenId}</div>
                 <div className={target.image}>
                   <img width={'100%'} height={'100%'} src={image} />
                 </div>
-                <div
-                  className={
-                    target.status
-                  }>{`STATUS: ${storeContext.data[0].status.toUpperCase()}`}</div>
+                <div className={target.status}>{`STATUS: ${data.status.toUpperCase()}`}</div>
+                <div className={target.logo} onClick={() => checkNFTStatus()}>
+                  <Arrowclockwiseback size={18} stroke={'white'} />
+                </div>
               </div>
             </div>
           ) : null}

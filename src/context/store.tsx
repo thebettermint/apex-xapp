@@ -98,6 +98,7 @@ const StoreContextProvider = (props: any) => {
 
   const checkNFTStatus = async () => {
     let response = await walletService.getByAddress({ publicAddress: wallet });
+    console.log('nft status', response);
     if (!(response instanceof Error)) {
       if (response.data.response === 'address not found in database') return setData(undefined);
       console.log(response.data.response);

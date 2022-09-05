@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import Button from 'src/components/Button';
 import Spinner from 'src/components/Spinner';
 import xappService from 'src/services/xapp.service';
+import walletService from 'src/services/wallet.service';
 
 interface NFT {
   Flags: number;
@@ -25,17 +26,34 @@ const Scan: NextPage = () => {
 
   const [wallet, setWallet] = useState<undefined | string>(undefined);
   const [image, setImage] = useState<undefined | string>(undefined);
-  const [balance, setBalance] = useState<any>(undefined);
+  const [data, setData] = useState<any>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [isScanning, setIsScanning] = useState<any>(false);
   const [isConsumed, setIsConsumed] = useState<boolean>(false);
 
+  const setConsumed = async (parsed: any) => {
+    let response = await walletService.consumed({ uuid: parsed.uuid });
+    if (response instanceof Error) return;
+    console.log(response.data);
+    setData(response.data);
+    setIsConsumed(true);
+    return setIsLoading(true);
+  };
+
   const openScanner = async () => {
     setIsScanning(true);
+    setData(undefined);
+    setIsConsumed(false);
     xappService.openScanner();
-    let data = await xappService.scanStatus();
-    console.log(data);
+    let data: any = await xappService.scanStatus();
+    setIsScanning(false);
+    setIsLoading(true);
+    if (!data || data == '') return setIsLoading(false);
+    if (data.method == 'scanQR') {
+      let parsed = JSON.parse(data.qrContents);
+      return setConsumed(parsed);
+    }
   };
 
   return (
@@ -51,6 +69,7 @@ const Scan: NextPage = () => {
           <div>APEX DEVELOPER SUMMIT</div>
           <div>Scan</div>
         </div>
+
         <div className={target.wrapper}>
           {isLoading ? (
             <div className={target.inner}>
@@ -61,6 +80,22 @@ const Scan: NextPage = () => {
             <div className={target.inner}>
               <Spinner />
               <div className={target.msg}>scanning</div>
+            </div>
+          ) : isConsumed ? (
+            <div className={target.inner}>
+              <div className={target.msg}>congrats!</div>
+              <div className={target.help}>you are a good steward</div>
+              <div className={target.help}>{data}</div>
+              <div className={target.buttonContainer}>
+                <Button
+                  className={target.button}
+                  type="primary"
+                  theme="light"
+                  height={40}
+                  onClick={openScanner}>
+                  <div className={target.buttonText}>TRY AGAIN</div>
+                </Button>
+              </div>
             </div>
           ) : (
             <div className={target.inner}>
