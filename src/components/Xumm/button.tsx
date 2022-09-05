@@ -28,8 +28,6 @@ const XButton = ({ request, xumm_api_key, baseUrl, route, className, children }:
       key: xumm_api_key,
     });
 
-    console.log(qr);
-
     if (mobileDetect.isXApp()) return xAppService.openSignRequest(qr.uuid);
     if (mobileDetect.isMobile()) return window.location.assign(qr.url);
     window.open(qr.url, '_blank');

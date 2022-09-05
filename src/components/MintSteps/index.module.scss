@@ -5,7 +5,7 @@
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
   overflow-x: hidden;
-  width: 100vw;
+  width: 100vh;
   height: 100vh;
   scroll-behavior: smooth;
 
@@ -14,7 +14,11 @@
   // Height fix on mobile
   min-height: -webkit-fill-available;
   min-height: -moz-available;
+
+  flex-basis: none;
+  flex-shrink: 0;
 }
+
 .page {
   display: flex;
   flex-direction: column;
