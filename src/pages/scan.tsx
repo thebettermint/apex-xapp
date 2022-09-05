@@ -42,20 +42,24 @@ const Scan: NextPage = () => {
   };
 
   const openScanner = async () => {
-    setIsScanning(true);
-    setData(undefined);
-    setIsConsumed(false);
-    xappService.openScanner();
-    let data: any = await xappService.scanStatus();
-    setIsScanning(false);
-    setIsLoading(true);
-    console.log(data);
-    if (!data || data == '') return setIsLoading(false);
-    if (data.method == 'scanQR') {
+    try {
+      setIsScanning(true);
+      setData(undefined);
+      setIsConsumed(false);
+      xappService.openScanner();
+      let data: any = await xappService.scanStatus();
+      setIsScanning(false);
+      setIsLoading(true);
       console.log(data);
-      let parsed = JSON.parse(data.qrContents);
-      console.log(parsed);
-      return setConsumed(parsed);
+      if (!data || data == '') return setIsLoading(false);
+      if (data.method == 'scanQr') {
+        console.log(data);
+        let parsed = JSON.parse(data.qrContents);
+        console.log(parsed);
+        return setConsumed(parsed);
+      }
+    } catch (error: any) {
+      console.log(error);
     }
   };
 
