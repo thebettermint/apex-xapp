@@ -19,11 +19,13 @@ import Button from 'src/components/Button';
 import XummButton from 'src/components/Xumm/button';
 import walletService from 'src/services/wallet.service';
 import Spinner from 'src/components/Spinner';
+import useMobileDetect from 'src/hooks/useMobileDetect';
 
 const Container = () => {};
 
 const Wallet: NextPage = () => {
   const storeContext = useStoreContext();
+  const mobileDetect = useMobileDetect();
 
   const [wallet, setWallet] = useState<undefined | string>(undefined);
   const [balance, setBalance] = useState<any>(undefined);
@@ -124,9 +126,11 @@ const Wallet: NextPage = () => {
             {wallet ? (
               <>
                 <div className={target.wallet}>{wallet}</div>
-                <div className={target.logo} onClick={handleSignOut}>
-                  <InboxOut size={18} fill={'whitesmoke'} />
-                </div>
+                {mobileDetect.isXApp() ? null : (
+                  <div className={target.logo} onClick={handleSignOut}>
+                    <InboxOut size={18} fill={'whitesmoke'} />
+                  </div>
+                )}
               </>
             ) : null}
           </div>
