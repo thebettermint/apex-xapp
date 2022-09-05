@@ -109,7 +109,7 @@
     .inner {
       position: relative;
       width: 90%;
-      height: 90%;
+      height: 100%;
       max-width: 700px;
 
       border-radius: 10px;
@@ -125,7 +125,7 @@
       overflow-y: auto;
       text-overflow: ellipsis;
 
-      border: rgb(131, 131, 131) 1px solid;
+      border: rgba(131, 131, 131, 0.466) 1px solid;
 
       font-family: Montserrat;
       letter-spacing: 0.2em;
@@ -184,11 +184,21 @@
       }
 
       .msg {
-        padding: 0 20px;
+        padding: 10px 20px;
+
+        font-family: Montserrat;
+        letter-spacing: 0.2em;
+        font-size: 1em;
       }
 
       .help {
-        padding: 0 20px;
+        padding: 10px 20px;
+
+        font-family: Montserrat;
+        letter-spacing: 0.2em;
+        font-size: 0.8em;
+
+        width: 80%;
       }
 
       .buttonContainer {

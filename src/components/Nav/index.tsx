@@ -49,7 +49,7 @@ const Nav = ({ show, setShow }: Props) => {
 
   const handleTweet = () => {
     const tweet =
-      'Wow, I really enjoyed the demonstration by @whirledlabs at the Apex Developer Summit https://bettermint.io/apex-demo';
+      'Wow, I really enjoyed the demonstration by @whirledlabs at the Apex Developer Summit. Check it out here --> https://apex-xapp-six.vercel.app/';
     const hashtags = `XRPLedger,ApexDevSummit`;
     const parse = tweet.replaceAll(' ', '%20');
 
@@ -60,6 +60,11 @@ const Nav = ({ show, setShow }: Props) => {
     );
   };
 
+  const handleSignOut = () => {
+    storeContext.signout();
+    setShow(!show);
+  };
+
   useEffect(() => {
     setPage(router.pathname.split('/')[1]);
   }, [router.pathname]);
@@ -67,10 +72,9 @@ const Nav = ({ show, setShow }: Props) => {
   return (
     <>
       <div className={`${style.panel} ${show ? style.show : null}`}>
+        <div className={style.bg}></div>
         <div className={style.header}>
-          {
-            //YOUR VERY FIRST NFT WORKSHOP
-          }
+          {mobileDetect.isXApp() ? null : <div onClick={handleSignOut}>sign out</div>}
         </div>
         <div className={style.navCategories}>
           <div onClick={() => handleNavClick('')} className={page == '' ? style.active : 'null'}>

@@ -34,8 +34,6 @@ interface NFT {
   nft_serial: number;
 }
 
-const Container = () => {};
-
 const Visualizer: NextPage = () => {
   const storeContext = useStoreContext();
 
@@ -95,21 +93,6 @@ const Visualizer: NextPage = () => {
     setImage(url);
     setIsLoading(false);
     return;
-  };
-
-  const handleFund = async () => {
-    if (storeContext.wallet) {
-      let params = {
-        publicAddress: storeContext.wallet,
-        network: 'nft',
-      };
-
-      let response = await walletService.fund(params);
-      if (response instanceof Error) return;
-      storeContext.setValidated(true);
-    } else {
-      return;
-    }
   };
 
   const handleBack = () => {

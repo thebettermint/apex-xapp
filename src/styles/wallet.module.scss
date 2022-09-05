@@ -53,11 +53,12 @@
   }
 
   .inner {
-    width: 80%;
+    width: 90%;
     height: 100%;
 
     border-radius: 10px;
 
+    max-width: 700px;
     position: relative;
 
     display: flex;
@@ -71,7 +72,7 @@
     overflow-y: auto;
     text-overflow: ellipsis;
     background-color: rgba(128, 128, 128, 0);
-    border: rgb(131, 131, 131) 1px solid;
+    border: rgba(131, 131, 131, 0.466) 1px solid;
 
     font-family: Montserrat;
     letter-spacing: 0.2em;
@@ -156,17 +157,25 @@
           color: whitesmoke;
           font-family: Montserrat;
           letter-spacing: 0.2em;
-          font-size: 0.8em;
+          font-size: 0.65em;
         }
       }
     }
 
     .msg {
       padding: 0 20px;
+      color: whitesmoke;
+      font-family: Montserrat;
+      letter-spacing: 0.2em;
+      font-size: 1em;
     }
 
     .help {
       padding: 0 20px;
+      color: whitesmoke;
+      font-family: Montserrat;
+      letter-spacing: 0.2em;
+      font-size: 0.8em;
     }
 
     .buttonContainer {

@@ -99,7 +99,6 @@ const StoreContextProvider = (props: any) => {
   const checkNFTStatus = async () => {
     let response = await walletService.getByAddress({ publicAddress: wallet });
     if (!(response instanceof Error)) {
-      console.log(response);
       if (response.data.response === 'address not found in database') return setData(undefined);
       console.log(response.data.response);
       return setData(response.data.response);
@@ -112,7 +111,11 @@ const StoreContextProvider = (props: any) => {
   };
 
   useEffect(() => {
-    if (!wallet) return;
+    if (!wallet) {
+      setValidated(false);
+      return setData(undefined);
+    }
+
     checkValidity();
     checkNFTStatus();
   }, [wallet, client]);

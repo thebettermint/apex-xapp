@@ -42,19 +42,6 @@ const getTokenData = async ({ ott, tokenData }: { ott: string; tokenData?: any }
   }
 };
 
-/* const getTokenData = async ({ ott, tokenData }: { ott: string; tokenData?: any }) => {
-  if (!tokenData) {
-    try {
-      const res = await axios.get(`${apiEndPoint}/xapp/ott/${ott}`, headers({}));
-      return res.data;
-    } catch (e) {
-      throw 'Error getting Token Data';
-    }
-  } else {
-    return tokenData;
-  }
-}; */
-
 const sendCommandtoXumm = (command: ICommand | any, window: Window) => {
   try {
     if (typeof window['ReactNativeWebView'] === 'undefined') {
@@ -111,6 +98,14 @@ const openTxViewer = (tx: any, account: string) => {
   }
 };
 
+const openScanner = () => {
+  try {
+    window.sdk.scanQr();
+  } catch (e) {
+    throw e;
+  }
+};
+
 const getCuratedAssets = async ({
   curatedAssets,
   tokenData,
@@ -136,6 +131,25 @@ const getCuratedAssets = async ({
   }
 };
 
+const scanStatus = () => {
+  return new Promise((resolve: any, reject: any) => {
+    const message = (event: any) => {
+      window.removeEventListener('message', message);
+      document.removeEventListener('message', message);
+
+      const data = JSON.parse(event.data);
+      if (data.reason === 'USER_CLOSE') return resolve(data);
+      if (data.reason === 'INVALID_QR') return resolve(data);
+      if (data.reason === 'SCANNED') return resolve(data);
+      else return reject('');
+    };
+    //iOS
+    window.addEventListener('message', message);
+    //Android
+    document.addEventListener('message', message);
+  });
+};
+
 const status = () => {
   return new Promise((resolve, reject) => {
     const message = (event: any) => {
@@ -144,7 +158,7 @@ const status = () => {
 
       const data = JSON.parse(event.data);
       if (data.method !== 'payloadResolved') return reject('');
-      if (data.reason === 'SIGNED') return resolve('');
+      if (data.reason === 'payloadResolved') return resolve('');
       else return reject('');
     };
     //iOS
@@ -259,4 +273,6 @@ export default {
   payload,
   getCuratedAssets,
   openSignRequest,
+  scanStatus,
+  openScanner,
 };

@@ -87,10 +87,6 @@ const Wallet: NextPage = () => {
     }
   };
 
-  const handleSignOut = () => {
-    storeContext.signout();
-  };
-
   const handleSelect = (type: string) => {
     setIsLoading(true);
     setSelect(type);
@@ -122,18 +118,6 @@ const Wallet: NextPage = () => {
           <div>Wallet</div>
         </div>
         <div className={target.wrapper}>
-          <div className={target.top}>
-            {wallet ? (
-              <>
-                <div className={target.wallet}>{wallet}</div>
-                {mobileDetect.isXApp() ? null : (
-                  <div className={target.logo} onClick={handleSignOut}>
-                    <InboxOut size={18} fill={'whitesmoke'} />
-                  </div>
-                )}
-              </>
-            ) : null}
-          </div>
           {!wallet ? (
             <div className={target.inner}>
               <div className={target.msg}>account not found</div>

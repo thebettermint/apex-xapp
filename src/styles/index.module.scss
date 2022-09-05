@@ -235,6 +235,7 @@
         flex-direction: row;
         justify-content: flex-start;
         width: 100%;
+        margin-top: 24px;
         margin-bottom: 36px;
 
         svg {
@@ -257,7 +258,7 @@
         font-family: Montserrat;
         letter-spacing: 0.2em;
         font-size: 0.8em;
-        margin-bottom: 2em;
+        max-width: 500px;
       }
     }
 

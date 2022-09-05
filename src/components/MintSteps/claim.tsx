@@ -55,7 +55,7 @@ const Claim = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
   return (
     <>
       <div ref={ref} className={style.page}>
-        <div className={`${bg.punch}`}>
+        <div className={`${bg.fire}`}>
           <div className={`${bg.image}`}></div>
           <div className={`${bg.separator}`}></div>
         </div>
