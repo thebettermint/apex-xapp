@@ -35,10 +35,9 @@ const Scan: NextPage = () => {
   const setConsumed = async (parsed: any) => {
     let response = await walletService.consumed({ uuid: parsed.uuid });
     if (response instanceof Error) return;
-    console.log(response.data);
-    setData(response.data);
+    setData(response.data.response);
     setIsConsumed(true);
-    return setIsLoading(true);
+    return setIsLoading(false);
   };
 
   const openScanner = async () => {
@@ -53,9 +52,7 @@ const Scan: NextPage = () => {
       console.log(data);
       if (!data || data == '') return setIsLoading(false);
       if (data.method == 'scanQr') {
-        console.log(data);
         let parsed = JSON.parse(data.qrContents);
-        console.log(parsed);
         return setConsumed(parsed);
       }
     } catch (error: any) {
