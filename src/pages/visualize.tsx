@@ -49,7 +49,7 @@ const Visualizer: NextPage = () => {
   const apiEndPoint =
     process.env.NODE_ENV == 'production'
       ? 'https://apex-xapp-six.vercel.app'
-      : 'http://localhost:3002';
+      : 'http://localhost:3000';
 
   const handleSignIn = async () => {
     if (

@@ -42,11 +42,7 @@ const payload = async ({
       },
     };
 
-    const res = await axios.post(
-      url.href,
-      Object.assign(payload, opts),
-      headers({ jwt: jwt, key: key })
-    );
+    const res = await axios.post(url.href, payload, headers({ jwt: jwt, key: key }));
     return res;
   } catch (e) {
     if (e === '') throw { msg: 'closed', error: false };

@@ -26,9 +26,6 @@ const Claim = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
   const storeContext = useStoreContext();
   const mobileDetect = useMobileDetect();
 
-  const [isXApp, setIsXApp] = useState<boolean>(true);
-  const [isMobile, setIsMobile] = useState<boolean>(true);
-
   const [tx, setTx] = useState<any>(undefined);
   const [status, setStatus] = useState<any>(undefined);
   const [data, setData] = useState<any>(undefined);
@@ -36,7 +33,7 @@ const Claim = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
   const apiEndPoint =
     process.env.NODE_ENV == 'production'
       ? 'https://apex-xapp-six.vercel.app'
-      : 'http://localhost:3002';
+      : 'http://localhost:3000';
 
   const handleClick = async () => {
     if (!storeContext.wallet) return;
@@ -71,8 +68,6 @@ const Claim = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
   };
 
   useEffect(() => {
-    setIsMobile(mobileDetect.isMobile());
-    setIsXApp(mobileDetect.isXApp());
     setData(storeContext.data[0]);
     if (storeContext.data[0] && storeContext.data[0].claimedAt) setStatus(true);
   }, [storeContext.data[0]]);
@@ -129,7 +124,7 @@ const Claim = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
           )}
         </div>
       </div>
-      {tx && isXApp ? (
+      {tx && mobileDetect.isXApp() ? (
         <XApp
           request={tx}
           size={200}
@@ -141,7 +136,7 @@ const Claim = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
           showButtons={true}
           showQR={true}
         />
-      ) : tx && !isXApp ? (
+      ) : tx && !mobileDetect.isXApp() ? (
         <Xumm
           request={tx}
           size={200}
