@@ -13,7 +13,8 @@ import Button from 'src/components/Button';
 
 import { ArrowRight, ArrowLeft, Arrowright } from 'src/components/Icons';
 
-import XummButton from 'src/components/Xumm/button';
+import Xumm from 'src/components/Xumm';
+import XApp from 'src/components/XApp';
 
 import useMobileDetect from 'src/hooks/useMobileDetect';
 
@@ -21,36 +22,30 @@ interface Props {
   next: any;
 }
 
-const Claim = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
+const Mint = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
   const storeContext = useStoreContext();
   const mobileDetect = useMobileDetect();
 
+  const [tx, setTx] = useState<any>(undefined);
   const [status, setStatus] = useState<any>(undefined);
-  const [data, setData] = useState<any>(undefined);
-  const [isClaimed, setIsClaimed] = useState<boolean>(false);
 
   const apiEndPoint =
     process.env.NODE_ENV == 'production'
       ? 'https://apex-xapp-six.vercel.app'
       : 'http://localhost:3000';
 
-  const updateRecord = async () => {
-    if (storeContext.data[0].claimedAt) return;
-    let response = await walletService.claimed({ uuid: storeContext.data[0].uuid });
+  const handleClick = async () => {
+    if (!storeContext.wallet) return;
+
+    let response = await walletService.mint({ publicAddress: storeContext.wallet });
     if (response instanceof Error) return;
-    console.log(response);
-    storeContext.data[1](response.data.response);
-    return setIsClaimed(true);
+
+    return storeContext.data[1](response.data.response);
   };
 
   useEffect(() => {
-    if (storeContext.data[0] && storeContext.data[0].claimedAt) setIsClaimed(true);
+    if (storeContext.data[0] && storeContext.data[0].offerId) setStatus(true);
   }, [storeContext.data[0]]);
-
-  useEffect(() => {
-    if (status == undefined) return;
-    if (status.state == 'signed') updateRecord();
-  }, [status]);
 
   return (
     <>
@@ -60,27 +55,22 @@ const Claim = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
           <div className={`${bg.separator}`}></div>
         </div>
         <div className={style.descWrapper}>
-          <div className={style.title}>CLAIM YOUR NFT</div>
-          <div className={style.description}>claim your nft</div>
+          <div className={style.title}>MINT YOUR NFT</div>
+          <div className={style.description}>Mint your very first nft</div>
         </div>
         <div className={style.buttonContainer}>
-          {!isClaimed ? (
-            <XummButton
+          {!status ? (
+            <Button
               className={style.button}
-              request={{
-                TransactionType: 'NFTokenAcceptOffer',
-                Account: storeContext.wallet,
-                NFTokenSellOffer: storeContext.data[0].offerId,
-              }}
-              xumm_api_key={process.env.NEXT_PUBLIC_XUMM_KEY || ''}
-              baseUrl={apiEndPoint}
-              route={'api'}
-              setState={setStatus}>
-              <div className={style.buttonText}>CLAIM</div>
+              type="primary"
+              theme="light"
+              height={40}
+              onClick={handleClick}>
+              <div className={style.buttonText}>MINT</div>
               <div className={style.buttonLogo}>
                 <Arrowright size={16} />
               </div>
-            </XummButton>
+            </Button>
           ) : (
             <Button
               className={style.button}
@@ -106,4 +96,4 @@ const Claim = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
   );
 });
 
-export default Claim;
+export default Mint;

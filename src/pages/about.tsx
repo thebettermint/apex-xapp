@@ -17,7 +17,6 @@ const Contact: NextPage = () => {
   const storeContext = useStoreContext();
 
   const router = useRouter();
-  //const [isOpen, setIsOpen] = useState<boolean>(show);
 
   const handleNavClick = (page: string) => {
     router.push(`/${page}`);

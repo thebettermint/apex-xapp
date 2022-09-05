@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 
 import Fund from 'src/components/MintSteps/fund';
-import Claim from 'src/components/MintSteps/claim';
+import Claim from 'src/components/MintSteps/mint';
 import Landing from 'src/components/MintSteps/landing';
 import Steps from 'src/components/MintSteps';
 import Header from 'src/components/Header';
@@ -37,8 +37,6 @@ const XApp: NextPage = () => {
   };
 
   useEffect(() => {
-    console.log('is mobile :', mobileDetect.isMobile());
-    console.log('is style :', style);
     if (token) storeContext.init(token);
     if (typeof window !== 'undefined') {
       const { xApp } = require('xumm-xapp-sdk');
@@ -51,7 +49,6 @@ const XApp: NextPage = () => {
     let { xAppToken, xAppStyle } = router.query;
     if (typeof xAppStyle == 'object') xAppStyle = xAppStyle[0];
     if (typeof xAppToken == 'object') xAppToken = xAppToken[0];
-    console.log(xAppToken);
     setToken(xAppToken);
   });
 

@@ -52,9 +52,6 @@ export const XummQr = ({
 
   useEffect(() => {
     if (!signContext.qr || show) return;
-    console.log('attempting to open claim');
-    console.log(mobileDetect.isMobile());
-    console.log(signContext.qr);
     if (mobileDetect.isMobile()) return window.location.assign(signContext.qr.url);
     window.open(signContext.qr.url, '_blank');
   }, [signContext.qr]);

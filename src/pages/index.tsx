@@ -9,7 +9,7 @@ import Button from '../components/Button';
 import Image from 'next/image';
 
 import Fund from 'src/components/MintSteps/fund';
-import Claim from 'src/components/MintSteps/claim';
+import Claim from 'src/components/MintSteps/mint';
 import Landing from 'src/components/MintSteps/landing';
 import Steps from 'src/components/MintSteps';
 import Header from 'src/components/Header';
