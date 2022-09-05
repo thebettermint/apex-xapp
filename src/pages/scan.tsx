@@ -49,9 +49,12 @@ const Scan: NextPage = () => {
     let data: any = await xappService.scanStatus();
     setIsScanning(false);
     setIsLoading(true);
+    console.log(data);
     if (!data || data == '') return setIsLoading(false);
     if (data.method == 'scanQR') {
+      console.log(data);
       let parsed = JSON.parse(data.qrContents);
+      console.log(parsed);
       return setConsumed(parsed);
     }
   };
