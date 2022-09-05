@@ -89,7 +89,7 @@ const Scan: NextPage = () => {
             <div className={target.inner}>
               <div className={target.msg}>congrats!</div>
               <div className={target.help}>you are a good steward</div>
-              <div className={target.help}>{data}</div>
+              <div className={target.help}>{JSON.stringify(data)}</div>
               <div className={target.buttonContainer}>
                 <Button
                   className={target.button}
