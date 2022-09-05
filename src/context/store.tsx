@@ -83,6 +83,7 @@ const StoreContextProvider = (props: any) => {
     if (tokenData && !fetched) return;
     setFetched(true);
     let data = await xAppService.getTokenData({ ott: oneTimeToken });
+    console.log(data);
     setTokenData(data);
     setWallet(data.account);
     return;

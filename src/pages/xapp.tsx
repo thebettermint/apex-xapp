@@ -51,6 +51,7 @@ const XApp: NextPage = () => {
     let { xAppToken, xAppStyle } = router.query;
     if (typeof xAppStyle == 'object') xAppStyle = xAppStyle[0];
     if (typeof xAppToken == 'object') xAppToken = xAppToken[0];
+    console.log(xAppToken);
     setToken(xAppToken);
   });
 
