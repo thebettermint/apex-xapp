@@ -51,7 +51,7 @@ const Monitor: NextPage = () => {
   };
 
   useEffect(() => {
-    const ws = new WebSocket(NEXT_PUBLIC_WS_URL);
+    const ws = new WebSocket(process.env.NEXT_PUBLIC_WS_URL || '');
 
     ws.onopen = () => handleOpen(ws);
     ws.onmessage = (e: any) => handleMessage(e, ws);
