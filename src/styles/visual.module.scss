@@ -106,6 +106,53 @@
 
     padding-bottom: 20px;
 
+    .streamKey {
+      display: inline-block;
+      width: 90%;
+      height: fit-content;
+      max-width: 700px;
+
+      .unit {
+        margin-right: 70px;
+        margin-top: 10px;
+
+        display: inline-block;
+        vertical-align: center;
+
+        color: whitesmoke;
+
+        font-family: Montserrat;
+        font-variation-settings: 'wght' 500;
+        letter-spacing: 0.2em;
+        font-size: 0.5em;
+
+        width: 12px;
+        height: 12px;
+        border-radius: 8px;
+
+        .text {
+          margin-left: 24px;
+        }
+
+        &.init {
+          margin-right: 50px;
+          background-color: #240493ff;
+        }
+        &.minted {
+          background-color: #ff6819;
+        }
+        &.offered {
+          background-color: rgb(175, 175, 64);
+        }
+        &.claimed {
+          background-color: rgb(205, 45, 216);
+        }
+        &.consumed {
+          background-color: #8097ff;
+        }
+      }
+    }
+
     .inner {
       position: relative;
       width: 90%;
@@ -142,6 +189,9 @@
         overflow-y: auto;
         overflow-x: hidden;
         .unit {
+          &:hover {
+            cursor: pointer;
+          }
           &:before {
             content: '';
             display: inline-block;
@@ -169,19 +219,20 @@
           border-radius: 8px;
 
           &.init {
-            background-color: rgb(212, 0, 212);
+            margin-right: 50px;
+            background-color: #240493ff;
           }
           &.minted {
-            background-color: rgb(0, 150, 209);
+            background-color: #ff6819;
           }
           &.offered {
-            background-color: rgb(221, 125, 0);
+            background-color: rgb(175, 175, 64);
           }
           &.claimed {
-            background-color: rgb(60, 0, 199);
+            background-color: rgb(205, 45, 216);
           }
           &.consumed {
-            background-color: rgb(16, 194, 0);
+            background-color: #8097ff;
           }
         }
       }
@@ -279,6 +330,7 @@
         margin: 2em 0;
 
         .button {
+          margin: 1em 0;
           .buttonText {
             transition: flex-grow cubic-bezier(0.87, 0, 0.19, 1) 0.5s;
             flex-grow: 0;

@@ -25,8 +25,8 @@ const QR = ({ size }: Props) => {
         className={style.circleContainer}
         style={{ height: `${size - 2}px`, width: `${size - 2}px` }}>
         <Cross size={'50px'} color={'#ff8080'} />
-        <div>sign declined</div>
-        <div>refresh to try again</div>
+        <div className={style.status}>sign declined</div>
+        <div className={style.msg}>refresh to try again</div>
       </div>
     );
   }
@@ -38,8 +38,10 @@ const QR = ({ size }: Props) => {
           className={style.animatedContainer}
           style={{ height: `${size - 2}px`, width: `${size - 2}px` }}></div>
         <div className={style.absoluteContainer}>
-          <div style={{ marginTop: `${size / 2.5}px` }}>scanned</div>
-          <div>awaiting action...</div>
+          <div className={style.status} style={{ marginTop: `${size / 2.5}px` }}>
+            scanned
+          </div>
+          <div className={style.msg}>awaiting action...</div>
         </div>
       </>
     );

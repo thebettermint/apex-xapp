@@ -7,6 +7,7 @@ const ModalWrapper = (props: any) => {
       <div className={style.modalOverlay}></div>
       <div className={style.modal}>
         <div className={style.modalWrapper}>
+          <div className={style.bg}></div>
           <div className={style.banner}></div>
           {props.children}
         </div>

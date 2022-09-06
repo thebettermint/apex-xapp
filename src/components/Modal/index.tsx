@@ -8,16 +8,17 @@ interface Props {
   ref?: LegacyRef<SVGSVGElement>;
   name: string;
   title?: string;
+  data?: any;
   close: Dispatch<any>;
 }
 
-const Modal = ({ ref, title, name, close, ...rest }: Props) => {
+const Modal = ({ ref, title, name, data, close, ...rest }: Props) => {
   const ModalComponent = map[name];
 
   return Portal(
     <ModalContextProvider>
       <ModalWrapper>
-        <ModalComponent ref={ref} title={title} close={close} {...rest} />
+        <ModalComponent ref={ref} title={title} close={close} data={data} {...rest} />
       </ModalWrapper>
     </ModalContextProvider>
   );

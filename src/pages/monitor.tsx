@@ -1,12 +1,15 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
+import Modal from 'src/components/Modal';
+
 import target from '../styles/visual.module.scss';
 
 import { useStoreContext } from '../context/store';
 import { useState, useEffect, useRef } from 'react';
 
 import Spinner from 'src/components/Spinner';
+import useMobileDetect from 'src/hooks/useMobileDetect';
 
 const Monitor: NextPage = () => {
   const storeContext = useStoreContext();
@@ -15,6 +18,10 @@ const Monitor: NextPage = () => {
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [stream, setStream] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [modal, setModal] = useState<any>(undefined);
+  const [data, setData] = useState<any>(undefined);
+
+  const mobileDetect = useMobileDetect();
 
   const handleMessage = async (event: any, ws: WebSocket) => {
     if (isPaused) return;
@@ -35,6 +42,11 @@ const Monitor: NextPage = () => {
         return newStream;
       });
     }
+  };
+
+  const openModal = (item: any) => {
+    setData(item);
+    setModal('mint-status');
   };
 
   const handleOpen = (ws: WebSocket) => {
@@ -82,12 +94,32 @@ const Monitor: NextPage = () => {
           <div>Monitor</div>
         </div>
         <div className={target.wrapper}>
+          <div className={target.streamKey}>
+            <div className={`${target.unit} ${target.init}`}>
+              <div className={target.text}>init</div>
+            </div>
+            <div className={`${target.unit} ${target.minted}`}>
+              <div className={target.text}>minted</div>
+            </div>
+            <div className={`${target.unit} ${target.offered}`}>
+              <div className={target.text}>offered</div>
+            </div>
+            <div className={`${target.unit} ${target.claimed}`}>
+              <div className={target.text}>claimed</div>
+            </div>
+            <div className={`${target.unit} ${target.consumed}`}>
+              <div className={target.text}>consumed</div>
+            </div>
+          </div>
           {stream.length > 0 ? (
             <div className={target.inner}>
               <div className={target.streamWrapper}>
                 {stream.map((item: any, index: number) => {
                   return (
-                    <div key={index} className={`${target.unit} ${target[item.status]}`}>
+                    <div
+                      onClick={() => openModal(item)}
+                      key={index}
+                      className={`${target.unit} ${target[item.status]}`}>
                       {index + 1}
                     </div>
                   );
@@ -102,6 +134,9 @@ const Monitor: NextPage = () => {
           ) : null}
         </div>
       </div>
+      {modal && mobileDetect.isDesktop() ? (
+        <Modal name={modal} data={data} close={setModal} />
+      ) : null}
     </>
   );
 };

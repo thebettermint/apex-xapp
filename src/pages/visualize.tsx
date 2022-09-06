@@ -71,29 +71,37 @@ const Visualizer: NextPage = () => {
   };
 
   const getAccountNFT = async (wallet: any) => {
-    if (!storeContext.client || !storeContext.data[0]) return setBalance('error');
-    if (!wallet) return setBalance('error');
-    let response: any = await account_nft(storeContext.client, wallet);
-    if (response instanceof Error) return setBalance('error');
+    setIsLoading(true);
+    setBalance(undefined);
 
-    console.log(response.account_nfts);
-    let nft = await getTarget(response.account_nfts);
-    if (nft instanceof Error) return setBalance('error');
+    try {
+      if (!storeContext.client || !storeContext.data[0]) return setBalance('error');
+      if (!storeContext.wallet) return setBalance('error');
 
-    let uri = convertHexToString(nft.URI);
-    let cid = uri.substr(7);
-    console.log(cid);
+      let response: any = await account_nft(storeContext.client, storeContext.wallet);
+      if (response instanceof Error) return setBalance('error');
 
-    let r = await getJSONFromIPFS(cid);
-    console.log(r);
-    if (r instanceof Error) return;
-    let imageCID = r.data.response.image.substr(7);
-    let i = await getImageFromIPFS(imageCID);
-    if (i instanceof Error) return;
-    let url = URL.createObjectURL(new Blob([Buffer.from(i.data.response.data)]));
-    setImage(url);
-    setIsLoading(false);
-    return;
+      let nft = await getTarget(response.account_nfts);
+      if (nft instanceof Error) return setBalance('error');
+
+      let uri = convertHexToString(nft.URI);
+      let cid = uri.substr(7);
+
+      let r = await getJSONFromIPFS(cid);
+      if (r instanceof Error) return setBalance('error');
+
+      let imageCID = r.data.response.image.substr(7);
+
+      let i = await getImageFromIPFS(imageCID);
+      if (i instanceof Error) return setBalance('error');
+
+      let url = URL.createObjectURL(new Blob([Buffer.from(i.data.response.data)]));
+      setImage(url);
+
+      return;
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const checkNFTStatus = async () => {
@@ -103,14 +111,17 @@ const Visualizer: NextPage = () => {
     let response = await walletService.getByAddress({ publicAddress: storeContext.wallet });
     try {
       if (response instanceof Error) throw Error();
+      console.log(response);
 
-      if (response.data === 'address not found in database') return setData(undefined);
+      if (response.data === 'address not found in database') {
+        setData(undefined);
+        return setBalance('error');
+      }
       return setData(response.data);
     } catch (error) {
       setBalance('error');
-      return setData(undefined);
-    } finally {
       setIsLoading(false);
+      return setData(undefined);
     }
   };
 
@@ -124,9 +135,13 @@ const Visualizer: NextPage = () => {
   }, [signIn]);
 
   useEffect(() => {
+    if (!storeContext.wallet || !data) return;
+    getAccountNFT(storeContext.wallet);
+  }, [data]);
+
+  useEffect(() => {
     setWallet(storeContext.wallet);
     setIsLoading(true);
-    getAccountNFT(storeContext.wallet);
     setData(storeContext.data[0]);
   }, [storeContext.wallet, storeContext.client, storeContext.data[0]]);
 
@@ -171,6 +186,14 @@ const Visualizer: NextPage = () => {
                   type="primary"
                   theme="light"
                   height={40}
+                  onClick={checkNFTStatus}>
+                  <div className={target.buttonText}>TRY AGAIN</div>
+                </Button>
+                <Button
+                  className={target.button}
+                  type="primary"
+                  theme="light"
+                  height={40}
                   onClick={handleBack}>
                   <div className={target.buttonText}>BACK TO HOME</div>
                 </Button>
@@ -190,7 +213,7 @@ const Visualizer: NextPage = () => {
                   <img width={'100%'} height={'100%'} src={image} />
                 </div>
                 <div className={target.status}>{`STATUS: ${data.status.toUpperCase()}`}</div>
-                <div className={target.logo} onClick={() => checkNFTStatus()}>
+                <div className={target.logo} onClick={checkNFTStatus}>
                   <Arrowclockwiseback size={18} stroke={'white'} />
                 </div>
               </div>

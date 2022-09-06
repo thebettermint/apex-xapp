@@ -23,14 +23,14 @@ const ModalHeader = (props: any) => {
       <div className={style.titleContainer}>
         {!modalContext.back ? (
           <div className={style.buttonWrapper} onClick={handleClose}>
-            <Cross size={12} />
+            <Cross size={12} fill={'whitesmoke'} />
           </div>
         ) : (
           <div className={style.buttonWrapper} onClick={handleBack}>
             <ArrowLeft size={16} />
           </div>
         )}
-        <div className={style.title}>{props.title.toUpperCase()}</div>
+        <div className={style.title}>{props.title ? props.title.toUpperCase() : 'NFT STATUS'}</div>
       </div>
       {props.children}
     </>

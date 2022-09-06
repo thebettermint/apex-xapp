@@ -4,14 +4,12 @@ import config from 'config';
 
 import axios from 'axios';
 
-axios.defaults.baseURL = config.ipfs.gateway;
-
 const handler = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
   const { method } = req;
 
   if (method == 'POST') {
     try {
-      let response = await axios.get(req.body.cid, {
+      let response = await axios.get(`${config.ipfs.gateway}/${req.body.cid}`, {
         responseType: 'json',
         onDownloadProgress: function (progressEvent) {
           var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
