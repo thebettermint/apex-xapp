@@ -31,7 +31,7 @@ const Fund = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
   useEffect(() => {
     setIsMobile(mobileDetect.isMobile());
     setIsXApp(mobileDetect.isXApp());
-    if (storeContext.validated) setStatus(true);
+    setStatus(storeContext.validated);
   }, [storeContext.validated]);
 
   const handleClick = async () => {

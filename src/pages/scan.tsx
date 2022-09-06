@@ -1,6 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
+import logger from 'src/lib/logger';
+
 import target from '../styles/visual.module.scss';
 
 import { useStoreContext } from '../context/store';
@@ -28,13 +30,14 @@ const Scan: NextPage = () => {
   const [image, setImage] = useState<undefined | string>(undefined);
   const [data, setData] = useState<any>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
 
   const [isScanning, setIsScanning] = useState<any>(false);
   const [isConsumed, setIsConsumed] = useState<boolean>(false);
 
   const setConsumed = async (parsed: any) => {
     let response = await walletService.consumed({ uuid: parsed.uuid });
-    if (response instanceof Error) return;
+    if (response instanceof Error) return setIsError(true);
     setData(response.data.response);
     setIsConsumed(true);
     return setIsLoading(false);
@@ -45,18 +48,27 @@ const Scan: NextPage = () => {
       setIsScanning(true);
       setData(undefined);
       setIsConsumed(false);
+      setIsError(false);
+
       xappService.openScanner();
       let data: any = await xappService.scanStatus();
+
       setIsScanning(false);
       setIsLoading(true);
-      console.log(data);
-      if (!data || data == '') return setIsLoading(false);
-      if (data.method == 'scanQr') {
-        let parsed = JSON.parse(data.qrContents);
-        return setConsumed(parsed);
+
+      if (data instanceof Error) return setIsLoading(false);
+
+      switch (data.method) {
+        case 'scanQr':
+          let parsed = JSON.parse(data.qrContents);
+          return setConsumed(parsed);
+        default:
+          return;
       }
     } catch (error: any) {
-      console.log(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -90,6 +102,22 @@ const Scan: NextPage = () => {
               <div className={target.msg}>congrats!</div>
               <div className={target.help}>you are a good steward</div>
               <div className={target.help}>{JSON.stringify(data)}</div>
+              <div className={target.buttonContainer}>
+                <Button
+                  className={target.button}
+                  type="primary"
+                  theme="light"
+                  height={40}
+                  onClick={openScanner}>
+                  <div className={target.buttonText}>TRY AGAIN</div>
+                </Button>
+              </div>
+            </div>
+          ) : isError ? (
+            <div className={target.inner}>
+              <div className={target.msg}>goof!</div>
+              <div className={target.help}>something went wrong</div>
+              <div className={target.help}>maybe the ticket has already been consumed??</div>
               <div className={target.buttonContainer}>
                 <Button
                   className={target.button}

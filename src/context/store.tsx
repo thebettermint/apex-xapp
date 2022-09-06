@@ -97,12 +97,12 @@ const StoreContextProvider = (props: any) => {
   };
 
   const checkNFTStatus = async () => {
+    console.log(wallet);
     let response = await walletService.getByAddress({ publicAddress: wallet });
-    if (!(response instanceof Error)) {
-      if (response.data.response === 'address not found in database') return setData(undefined);
-      return setData(response.data.response);
-    }
-    return setData(undefined);
+    if (response instanceof Error) return setData(undefined);
+
+    if (response.data === 'address not found in database') return setData(undefined);
+    return setData(response.data);
   };
 
   const signout = async () => {

@@ -39,10 +39,19 @@ const Index = ({ page }: Props) => {
   const [wallet, setWallet] = useState<any>(undefined);
   const [validated, setValidated] = useState<any>(undefined);
 
+  const resetState = () => {
+    setWallet(undefined);
+    setValidated(undefined);
+    setData(undefined);
+    setIsOffered(false);
+    setIsClaimed(false);
+  };
+
   useEffect(() => {
     setIsMobile(mobileDetect.isMobile());
     setIsXApp(mobileDetect.isXApp());
-    console.log(storeContext.data[0]);
+    console.log('there was a change');
+    if (!storeContext.wallet) return resetState();
     if (storeContext.wallet) setWallet(storeContext.wallet);
     if (storeContext.validated) setValidated(storeContext.validated);
     if (storeContext.data[0]) {

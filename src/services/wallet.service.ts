@@ -9,7 +9,7 @@ const fund = async (params: { publicAddress: string; network: string }) => {
 
     return response;
   } catch (error: any) {
-    return Error(error);
+    return Error(error.response.data);
   }
 };
 
@@ -21,7 +21,7 @@ const mint = async (params: { publicAddress: string }) => {
 
     return response;
   } catch (error: any) {
-    return Error(error);
+    return Error(error.response.data);
   }
 };
 
@@ -33,7 +33,7 @@ const getByAddress = async (params: { publicAddress: string }) => {
 
     return response;
   } catch (error: any) {
-    return Error(error);
+    return Error(error.response.data);
   }
 };
 
@@ -45,7 +45,7 @@ const claimed = async (params: { uuid: string }) => {
 
     return response;
   } catch (error: any) {
-    return Error(error);
+    return Error(error.response.data);
   }
 };
 
@@ -57,7 +57,7 @@ const consumed = async (params: { uuid: string }) => {
 
     return response;
   } catch (error: any) {
-    return Error(error);
+    return Error(error.response.data);
   }
 };
 

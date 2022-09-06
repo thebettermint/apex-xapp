@@ -100,20 +100,17 @@ const Visualizer: NextPage = () => {
     if (!storeContext.wallet) return;
     setIsLoading(true);
 
-    console.log(wallet);
-
     let response = await walletService.getByAddress({ publicAddress: storeContext.wallet });
-    if (!(response instanceof Error)) {
-      if (response.data.response === 'address not found in database') {
-        setIsLoading(false);
-        return setData(undefined);
-      }
-      setIsLoading(false);
-      return setData(response.data.response);
-    } else {
-      setIsLoading(false);
+    try {
+      if (response instanceof Error) throw Error();
+
+      if (response.data === 'address not found in database') return setData(undefined);
+      return setData(response.data);
+    } catch (error) {
       setBalance('error');
       return setData(undefined);
+    } finally {
+      setIsLoading(false);
     }
   };
 

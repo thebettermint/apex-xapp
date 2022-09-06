@@ -141,7 +141,7 @@ const scanStatus = () => {
       if (data.reason === 'USER_CLOSE') return resolve(data);
       if (data.reason === 'INVALID_QR') return resolve(data);
       if (data.reason === 'SCANNED') return resolve(data);
-      else return reject('');
+      else return reject(Error('scan promise rejected'));
     };
     //iOS
     window.addEventListener('message', message);

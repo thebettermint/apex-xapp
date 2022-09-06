@@ -11,19 +11,23 @@ const handler = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
   const { method } = req;
 
   if (method == 'POST') {
-    let response = await axios.post(
-      '/mint/ondemand',
-      {
-        address: req.body.address,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${config.api.secret}`,
+    try {
+      let response = await axios.post(
+        '/mint/ondemand',
+        {
+          address: req.body.address,
         },
-      }
-    );
+        {
+          headers: {
+            Authorization: `Bearer ${config.api.secret}`,
+          },
+        }
+      );
 
-    return res.json({ success: true, response: response.data });
+      return res.status(200).json({ success: true, response: response.data });
+    } catch (error) {
+      return res.status(error.response.status).send(error.response.data);
+    }
   }
 
   return res.status(400).json({ success: false, message: 'Only POST requests are allowed.' });

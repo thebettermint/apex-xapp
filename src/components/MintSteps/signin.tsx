@@ -49,7 +49,7 @@ const SignIn = React.forwardRef(({ next, page }: Props, ref: Ref<any> | undefine
   }, [status]);
 
   useEffect(() => {
-    if (storeContext.wallet) setWallet(storeContext.wallet);
+    setWallet(storeContext.wallet);
   }, [storeContext.wallet]);
 
   return (
