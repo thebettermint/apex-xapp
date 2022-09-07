@@ -84,9 +84,11 @@ const StoreContextProvider = (props: any) => {
     let data = await xAppService.getTokenData({ ott: oneTimeToken });
     console.log(data);
     if (data instanceof Error) init(oneTimeToken);
-    setTokenData(data);
-    setWallet(data.account);
-    return;
+    if (!(data instanceof Error)) {
+      setTokenData(data);
+      setWallet(data.account);
+      return;
+    }
   };
 
   const checkValidity = async () => {
