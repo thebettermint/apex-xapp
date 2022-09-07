@@ -67,13 +67,14 @@ const Landing = React.forwardRef(({ start, refContainer }: Props, ref: Ref<any> 
               type="secondary"
               theme="light"
               height={40}
-              onClick={() =>
-                start.current.scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'end',
-                  inline: 'nearest',
-                })
-              }>
+              onClick={() => {
+                if (start)
+                  start.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'end',
+                    inline: 'nearest',
+                  });
+              }}>
               <div className={style.buttonText}>START</div>
             </Button>
             {isMobile && !isXApp ? (

@@ -30,9 +30,6 @@ const Index = ({ page }: Props) => {
   const viewRef = useRef<any>(null);
   const containerRef = useRef<any>(null);
 
-  const [isXApp, setIsXApp] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-
   const [data, setData] = useState<any>(undefined);
   const [isOffered, setIsOffered] = useState<any>(false);
   const [isClaimed, setIsClaimed] = useState<any>(false);
@@ -48,8 +45,6 @@ const Index = ({ page }: Props) => {
   };
 
   useEffect(() => {
-    setIsMobile(mobileDetect.isMobile());
-    setIsXApp(mobileDetect.isXApp());
     console.log('there was a change');
     if (!storeContext.wallet) return resetState();
     if (storeContext.wallet) setWallet(storeContext.wallet);
@@ -68,7 +63,7 @@ const Index = ({ page }: Props) => {
         ref={landingRef}
         start={mobileDetect.isXApp() ? fundRef : signInRef}
       />
-      {isXApp ? null : <SignIn next={fundRef} ref={signInRef} />}
+      {mobileDetect.isXApp() ? null : <SignIn next={fundRef} ref={signInRef} />}
       {!wallet ? null : <Fund next={mintRef} ref={fundRef} />}
       {!validated ? null : <Mint next={claimRef} ref={mintRef} />}
       {!isOffered ? null : <Claim next={viewRef} ref={claimRef} />}
