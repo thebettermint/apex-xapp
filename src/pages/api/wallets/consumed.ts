@@ -4,16 +4,13 @@ import config from 'config';
 
 import axios from 'axios';
 
-axios.defaults.baseURL = config.api.url;
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-
 const handler = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
   const { method } = req;
 
   if (method == 'POST') {
     try {
       let response = await axios.post(
-        `/consumed`,
+        `${config.api.url}/consumed`,
         { uuid: req.body.uuid },
         {
           headers: {

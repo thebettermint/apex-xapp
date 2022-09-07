@@ -4,14 +4,12 @@ import config from 'config';
 
 import axios from 'axios';
 
-axios.defaults.baseURL = config.api.url;
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-
 const handler = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
   const { method } = req;
+
   if (method == 'POST') {
     try {
-      let response = await axios.get(`/find/address/${req.body.address}`, {
+      let response = await axios.get(`${config.api.url}/find/address/${req.body.address}`, {
         headers: {
           Authorization: `Bearer ${config.api.secret}`,
         },
