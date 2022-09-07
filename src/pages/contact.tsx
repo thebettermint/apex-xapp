@@ -45,7 +45,7 @@ const Contact: NextPage = () => {
           </div>
           <div className={styles.content}>
             <div className={styles.contactTitle}>whirledlabs</div>
-            <p>
+            <p className={styles.para}>
               {`An ideation lab specializing in technological innovation and industry collaboration.`}
             </p>
             <div className={styles.logoContainer}>
@@ -66,7 +66,7 @@ const Contact: NextPage = () => {
               />
             </div>
             <div className={styles.contactTitle}>TheBetterMint</div>
-            <p>
+            <p className={styles.para}>
               {`An open-source B2B platform that can enable NFT functionality for your business.`}
             </p>
             <div className={styles.logoContainer}>
@@ -97,7 +97,7 @@ const Contact: NextPage = () => {
         <div className={styles.heroWrapper}>
           <div className={styles.content}>
             <div className={styles.contactTitle}>ryan molley</div>
-            <p>
+            <p className={styles.para}>
               {`Whirledlabs founder, startup innovating on XRP Ledger. Ryan was designing buildings for 10 years as a structural engineer & was inspired by the XRP ledger to build as a developer.`}
             </p>
             <div className={styles.logoContainer}>
@@ -113,7 +113,10 @@ const Contact: NextPage = () => {
               />
             </div>
             <div className={styles.contactTitle}>pablo padillo</div>
-            <p>{`Coming from a fintech background, I learned firsthand the challenges faced by businesses to execute cross-border payments. By offering an intermediary asset, the XRP Ledger solves the cross-border problem by eliminating the need for pooled capital in offshore accounts.`}</p>
+            <p
+              className={
+                styles.para
+              }>{`Coming from a fintech background, I learned firsthand the challenges faced by businesses to execute cross-border payments. By offering an intermediary asset, the XRP Ledger solves the cross-border problem by eliminating the need for pooled capital in offshore accounts.`}</p>
             <div className={styles.logoContainer}>
               <Twitter
                 size={24}

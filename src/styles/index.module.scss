@@ -260,6 +260,12 @@
         font-size: 0.8em;
         max-width: 500px;
         margin-bottom: 2em;
+
+        &.para {
+          max-width: unset;
+          width: 100%;
+          text-align: start;
+        }
       }
     }
 
