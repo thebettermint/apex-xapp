@@ -38,6 +38,7 @@
       position: relative;
       display: flex;
       flex-direction: row;
+      align-items: center;
       width: auto;
       padding: 0 18px;
       padding-bottom: 10px;
@@ -50,7 +51,7 @@
 
       .buttonWrapper {
         width: fit-content;
-        height: 24px;
+        height: 1.2em;
 
         display: flex;
         justify-content: center;
@@ -68,7 +69,7 @@
       .title {
         font-family: Montserrat;
         font-variation-settings: 'wght' 600;
-        font-size: 14px;
+        font-size: 1.2em;
         margin-left: 24px;
 
         display: flex;

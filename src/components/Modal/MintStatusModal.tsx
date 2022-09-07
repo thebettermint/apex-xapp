@@ -85,11 +85,11 @@ const MintStatusModal = (props: any) => {
             <div className={style.buttonContainer}>
               <Button
                 className={style.button}
-                type="secondary"
+                type="winner"
                 theme="light"
                 height={36}
                 onClick={handleClick}>
-                SELECT WINNNER
+                SELECT WINNER
               </Button>
             </div>
           )}

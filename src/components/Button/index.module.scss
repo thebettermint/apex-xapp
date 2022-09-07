@@ -66,6 +66,42 @@
   }
 }
 
+.winner {
+  position: relative;
+  width: 100%;
+  height: 48px;
+
+  font-size: 1em;
+
+  font-family: Montserrat;
+  font-variation-settings: 'wght' 600;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(29, 29, 29, 0.1);
+  /*   color: var(--button-secondary-accent-color); */
+  color: rgb(255, 255, 255);
+  border-style: solid;
+  /* border-color: var(--button-secondary-accent-color); */
+  border-color: rgb(94, 94, 94);
+  border-width: 1px;
+  border-radius: 6px;
+
+  user-select: none;
+
+  &:hover {
+    letter-spacing: 0.05em;
+    cursor: pointer;
+
+    color: rgb(0, 0, 0);
+    border-color: transparent;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}
+
 .complete {
   position: relative;
   width: 100%;
