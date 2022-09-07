@@ -23,7 +23,6 @@ const MintStatusModal = (props: any) => {
 
   useEffect(() => {
     if (status == undefined) return;
-    console.log(status);
     if (status.state == 'signed') setStatus(undefined);
   }, [status]);
 

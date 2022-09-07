@@ -61,9 +61,9 @@ const Index = ({ page }: Props) => {
       <Landing
         refContainer={containerRef}
         ref={landingRef}
-        start={mobileDetect.isXApp() ? fundRef : signInRef}
+        start={mobileDetect.isXApp() && wallet ? fundRef : signInRef}
       />
-      {mobileDetect.isXApp() ? null : <SignIn next={fundRef} ref={signInRef} />}
+      {mobileDetect.isXApp() && wallet ? null : <SignIn next={fundRef} ref={signInRef} />}
       {!wallet ? null : <Fund next={mintRef} ref={fundRef} />}
       {!validated ? null : <Mint next={claimRef} ref={mintRef} />}
       {!isOffered ? null : <Claim next={viewRef} ref={claimRef} />}
