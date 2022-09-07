@@ -1,7 +1,7 @@
 @import '../../styles/scss/default/variables';
 
 .modal {
-  z-index: 6;
+  z-index: 10;
   position: absolute;
   top: 0;
   left: 0;
@@ -205,10 +205,11 @@
 }
 
 .modalOverlay {
+  z-index: 9;
   position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(31, 31, 31, 0.253);
+  background-color: rgba(31, 31, 31, 0.7);
 }
