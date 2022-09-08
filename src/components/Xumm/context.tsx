@@ -102,8 +102,6 @@ const SignContextProvider = (props: any) => {
     const payload_data = await xumm.payload(data);
     data.uuid = payload_data ? payload_data.data.uuid : undefined;
     const payload_meta = await xumm.getMetadata(data);
-
-    console.log(payload_meta?.data.data);
     setMeta(payload_meta?.data.data);
 
     let qr = {

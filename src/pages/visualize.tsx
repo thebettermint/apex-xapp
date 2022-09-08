@@ -120,8 +120,9 @@ const Visualizer: NextPage = () => {
       return setData(response.data);
     } catch (error) {
       setBalance('error');
-      setIsLoading(false);
       return setData(undefined);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -134,15 +135,16 @@ const Visualizer: NextPage = () => {
     if (signIn.state == 'signed') handleSignIn();
   }, [signIn]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (!storeContext.wallet || !data) return;
     getAccountNFT(storeContext.wallet);
-  }, [data]);
+  }, [data]); */
 
   useEffect(() => {
     setWallet(storeContext.wallet);
     setIsLoading(true);
     setData(storeContext.data[0]);
+    getAccountNFT(storeContext.wallet);
   }, [storeContext.wallet, storeContext.client, storeContext.data[0]]);
 
   return (

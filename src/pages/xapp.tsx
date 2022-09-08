@@ -23,6 +23,8 @@ import useMobileDetect from 'src/hooks/useMobileDetect';
 
 import { useStoreContext } from 'src/context/store';
 
+import Splash from 'src/components/Splash';
+
 const XApp: NextPage = () => {
   const mobileDetect = useMobileDetect();
   const storeContext = useStoreContext();
@@ -31,17 +33,23 @@ const XApp: NextPage = () => {
 
   const [token, setToken] = useState<string | undefined>(undefined);
   const [style, SetStyle] = useState<string | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleSignup = () => {
     Router.push('/signup');
   };
 
+  const fetchOtt = async (token: string) => {
+    await storeContext.init(token);
+    return setIsLoading(false);
+  };
+
   useEffect(() => {
-    if (token) storeContext.init(token);
-    if (typeof window !== 'undefined') {
+    if (token && typeof window !== 'undefined' && mobileDetect.isXApp()) {
       const { xApp } = require('xumm-xapp-sdk');
       const xapp = new xApp();
       window.sdk = xapp;
+      fetchOtt(token);
     }
   }, [token]);
 
@@ -60,7 +68,7 @@ const XApp: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={styles.bg}></div>
+      {isLoading ? <Splash /> : null}
 
       <Steps />
     </>

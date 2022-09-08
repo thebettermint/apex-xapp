@@ -7,6 +7,8 @@ import React, {
   useEffect,
 } from 'react';
 
+import { wait } from 'src/lib/helpers/wait';
+
 import useLocalStorage from '../hooks/useLocalStorage';
 import Router from 'next/router';
 
@@ -80,16 +82,27 @@ const StoreContextProvider = (props: any) => {
   };
 
   const init = async (oneTimeToken: string) => {
-    if (tokenData && !fetched) return;
+    if (tokenData) return;
     setWallet(undefined);
-    let data = await xAppService.getTokenData({ ott: oneTimeToken });
-    console.log(data);
-    if (data instanceof Error) init(oneTimeToken);
-    if (!(data instanceof Error)) {
-      setTokenData(data);
-      setWallet(data.account);
-      return;
-    }
+    return new Promise(async (resolve) => {
+      let count = 0;
+      while (true) {
+        try {
+          count = ++count;
+          if (count > 6) return resolve('');
+          let data = await xAppService.getTokenData({ ott: oneTimeToken });
+          console.log(data);
+          if (!(data instanceof Error)) {
+            setTokenData(data);
+            setWallet(data.account);
+            return resolve('');
+          }
+          await wait(1500);
+        } catch (error) {
+          await wait(1500);
+        }
+      }
+    });
   };
 
   const checkValidity = async () => {

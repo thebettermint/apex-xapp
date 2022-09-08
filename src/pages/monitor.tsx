@@ -129,7 +129,7 @@ const Monitor: NextPage = () => {
           ) : isLoading ? (
             <div className={target.inner}>
               <Spinner />
-              <div className={target.msg}>loading</div>
+              <div className={target.msg}></div>
             </div>
           ) : null}
         </div>
