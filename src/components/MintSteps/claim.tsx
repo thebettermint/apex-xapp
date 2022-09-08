@@ -49,7 +49,8 @@ const Claim = React.forwardRef(({ next }: Props, ref: Ref<any> | undefined) => {
 
   useEffect(() => {
     if (status == undefined) return;
-    if (status.state == 'signed' && status.response.dispatched_result == 'tesSUCCESS')
+    console.log(status);
+    if (status.state == 'signed' && status.response.response.dispatched_result == 'tesSUCCESS')
       updateRecord();
   }, [status]);
 
