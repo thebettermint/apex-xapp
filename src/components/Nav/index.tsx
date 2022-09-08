@@ -49,7 +49,7 @@ const Nav = ({ show, setShow }: Props) => {
 
   const handleTweet = () => {
     const tweet =
-      'Wow, I really enjoyed the demonstration by @whirledlabs at the Apex Developer Summit. Check it out here --> https://apex-xapp-six.vercel.app/';
+      'Wow, I really enjoyed the demonstration by @whirledlabs at the Apex Developer Summit. Check it out here https://apex-xapp-six.vercel.app/';
     const hashtags = `XRPLedger,ApexDevSummit`;
     const parse = tweet.replaceAll(' ', '%20');
 
