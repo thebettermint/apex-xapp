@@ -45,6 +45,7 @@ const Monitor: NextPage = () => {
   };
 
   const openModal = (item: any) => {
+    if (mobileDetect.isXApp() || mobileDetect.isMobile()) return;
     setData(item);
     setModal('mint-status');
   };
