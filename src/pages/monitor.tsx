@@ -76,11 +76,6 @@ const Monitor: NextPage = () => {
     };
   }, []);
 
-  /*   useEffect(() => {
-    if (!ws.current) return;
-    ws.current.onmessage = (e: any) => handleMessage(e);
-  }, [isPaused]); */
-
   return (
     <>
       <Head>

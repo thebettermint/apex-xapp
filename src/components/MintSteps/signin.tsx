@@ -35,7 +35,7 @@ const SignIn = React.forwardRef(({ next, page }: Props, ref: Ref<any> | undefine
   const handleSignIn = async (status: any) => {
     if (
       status.response.response.environment_nodetype !== 'CUSTOM' ||
-      status.response.response.environment_nodeuri !== 'xls20-sandbox.rippletest.net:51233'
+      status.response.response.environment_nodeuri !== 'wss://xls20-sandbox.rippletest.net:51233'
     )
       return;
 
